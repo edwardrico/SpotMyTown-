@@ -1,0 +1,218 @@
+{% extends 'main/main_categorie.html' %}
+{% load static %}
+{% block content %}
+
+<style>
+
+.site-nav {
+    position: fixed;
+    z-index: 1000;
+    width: 100%;
+    background-color: rgba(0,0,0, 0.3);
+    color: black;
+    text-align: center;
+    padding: 10px 0;
+    transition: background-color 0.3s ease;
+}
+
+.site-nav a {
+    text-shadow: rgba(0, 0, 0, 0.6);
+    font-size: 25px;
+    transition: color 0.3s ease;
+}
+
+.site-nav ul:hover {
+    color: #214252;
+}
+
+.carousel {
+    position: relative;
+    margin-top: 0;
+}
+
+.scrolled-down .site-nav {
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
+.scrolled-down .site-nav a {
+    color: black;
+}
+
+.title-text {
+    color: white;
+    font-size: 2em;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.text-white {
+    font-size: 1.2em;
+    color: rgba(255, 255, 255, 0.9);
+    text-align: center;
+    line-height: 1.5;
+}
+
+.user-profile span {
+    font-weight: bold; /* Mettre en gras le message de bienvenue */
+    color: #fff; /* Couleur du texte en blanc */
+}
+
+/* Styles pour la photo de profil */
+.user-profile img {
+    border: 0.5px solid #fff;
+
+}
+@media screen and (max-width: 768px) {
+.user-profile span {
+	color:black;
+
+ }
+}
+
+.user-posts{
+    margin-top: 10px;
+    }
+.fa-star-filled {
+    color:#FFD700 ;
+
+
+}
+
+</style>
+
+
+
+
+  <div class="site-mobile-menu site-navbar-target">
+    <div class="site-mobile-menu-header">
+        <div class="site-mobile-menu-close">
+            <span class="icofont-close js-menu-toggle"></span>
+        </div>
+    </div>
+    <div class="site-mobile-menu-body"></div>
+</div>
+<nav class="site-nav">
+    <div class="container">
+        <div class="menu-bg-wrap">
+            <div class="site-navigation">
+                <div class="row g-0 align-items-center">
+                    <div class="col-2">
+                        <a href="{% url 'home'%}" class="logo m-0 float-start">Petit glouton<span class="text-primary"></span></a>
+                    </div>
+                    <div class="col-8 text-center">
+                        <ul class="js-clone-nav d-none d-lg-inline-block text-start site-menu mx-auto">
+                            <li class="active"><a href="{% url 'home'%}">Home</a></li>
+                            <li class="has-children">
+                                <a href="{% url 'home' %}">Pages</a>
+                                <ul class="dropdown">
+                                    <li><a href="blog.html">Article</a></li>
+                                    <li><a href="single.html">Evenement</a></li>
+                                    <li><a href="category.html">Culture</a></li>
+                                    <li><a href="about.html">Top posts</a></li>
+                                    <li class="has-children">
+                                        <a href="#">Categorie</a>
+                                        <ul class="dropdown">
+                                            <li><a href="{% url 'restaurant'%}">Restaurat</a></li>
+                                            <li><a href="{% url 'bar'%}">Bar</a></li>
+                                            <li><a href="{% url 'tourisme'%}">Tourisme</a></li>
+                                            <li><a href="#">Nigth clubs</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li><a href="category.html">About</a></li>
+                            <li><a href="{% url 'formPost' %}">Posts</a></li>
+							{% if user.is_authenticated %}
+							<li><a href="{% url 'logout'%}">Déconnexion</a></li>
+							<li class="user-profile end ">
+								<a href="{% url 'logout'%}"></a>
+									<a href="{% url 'view_profile' %}">
+        					<img src="{{ user.userprofile.profile_pic.url }}" alt="Photo de profil" class="rounded-circle" width="30" height="30">
+    						</a>
+								<span>{{ user.username }}</span>
+								</li>
+									{% else %}
+							<li><a href="{% url 'login'%}">Connexion</a></li>
+							{% endif %}
+
+						</ul>
+                    </div>
+                    <div class="col-2 text-end">
+							<a href="#" class="burger ms-auto float-end site-menu-toggle js-menu-toggle d-inline-block d-lg-none light">
+								<span></span>
+                            </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+  <div class="p-5 text-center bg-image"
+    style="
+      background-image: url('{% static 'image/imagine1.jpeg' %}');
+       background-size: cover;
+       background-repeat: no-repeat;
+       background-attachment: fixed;
+       height: 30em;
+    "
+  >
+      <div class="d-flex justify-content-center align-items-center h-100">
+        <div class="text-white">
+          <h1 class="mb-3">Night Clubs</h1>
+          <h4 class="mb-3">Partagez vos meilleurs moments gourmets</h4>
+          <a class="btn btn-outline-light btn-lg" href="{% url 'formPost' %}" role="button"
+          >cree un Poste</a
+          >
+        </div>
+      </div>
+    </div>
+
+
+
+
+<div class="container">
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        {% for post in posts %}
+        {% if forloop.counter0|divisibleby:3 %}
+        </div>
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            <div class="col-md-12 mt-4">
+                <hr class="my-4">
+            </div>
+        {% endif %}
+        <div class="col mb-4">
+            <div class="col-sm-6">
+                <h2 class="posts-entry-title">{{ post.title }}</h2>
+            </div>
+            <div class="blog-entry">
+                <img src="{{ post.imagen_posts.url }}" alt="{{ post.title }}" class="img-fluid border-radius 10px" width="{{ post.largeur_image }}" height="{{post.hauteur_image }}">
+
+                  <span class="date">{{ post.created_at|date:"F d, Y" }}</span>
+                    <div class ="rating">
+                    {% for i in "12345" %}
+                    {% with rating=forloop.counter %}
+                        <span class="fa fa-star{% if rating <= post.average_rating %} fa-star-filled{% endif %}"></span>
+                    {% endwith %}
+                    {% endfor %}
+                    </div>
+
+
+               <a href="{% url 'view_profile' %}">
+                <p class="user-posts">
+                    <img src="{{ post.user.userprofile.profile_pic.url }}" alt="Photo de profil" class="rounded-circle" width="30" height="30">
+                    <span class="username">{{ post.user.username }}</span>
+                </p>
+                </a>
+
+
+                <h2><a href="{% url 'post' post.id %}">{{ post.subtitle }}</a></h2>
+                <p><a href="{% url 'post' post.id %}" class="btn btn-sm btn-outline-primary">Lire</a></p>
+            </div>
+        </div>
+        {% endfor %}
+
+
+
+    </div>
+</div>
+{% endblock content %}

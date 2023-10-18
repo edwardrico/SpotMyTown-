@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+</head>
+<body>
+
+<section class="vh-100 bg-image"
+  style="background-image: url('https://mdbcdn.b-cdn.net/img/Photos/new-templates/search-box/img4.webp');">
+  <div class="mask d-flex align-items-center h-100 gradient-custom-3">
+    <div class="container h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+          <div class="card" style="border-radius: 15px;">
+            <div class="card-body p-5">
+              <h2 class="text-uppercase text-center mb-5">Create an account</h2>
+
+              <form method="post">
+                {% csrf_token %}
+                {% if form.errors%}
+                <div class="mb-4">
+                  {{form.errors}}
+                </div>
+                {% endif %}
+
+                <div class="mb-4">
+                  <input type="text" class="form-control" id="{{ form.prenom.id_for_label }}"
+                         name="{{ form.prenom.name }}" placeholder="{{ form.prenom.label }}">
+                  </div>
+
+                 <div class="mb-4">
+                  <input type="text" class="form-control" id="{{ form.nom.id_for_label }}"
+                         name="{{ form.nom.name }}" placeholder="{{ form.nom.label }}">
+                  </div>
+
+                <div class="mb-4">
+                  <input type="text" class="form-control" id="{{ form.username.id_for_label }}"
+                         name="{{ form.username.name }}" placeholder="{{ form.username.label }}">
+                </div>
+
+                <div class="mb-4">
+                  <input type="email" class="form-control" id="{{ form.email.id_for_label }}"
+                         name="{{ form.email.name }}" placeholder="{{ form.email.label }}">
+                </div>
+
+                <div class="mb-4">
+                  <input type="password" class="form-control" id="{{ form.password1.id_for_label }}"
+                         name="{{ form.password1.name }}" placeholder="{{ form.password1.label }}">
+                </div>
+
+                <div class="mb-4">
+                  <input type="password" class="form-control" id="{{ form.password2.id_for_label }}"
+                         name="{{ form.password2.name }}" placeholder="{{ form.password2.label }}">
+                </div>
+
+                <div class="mb-4 form-check d-flex justify-content-center">
+                  {{ form.agree }}
+                  <label class="form-check-label" for="{{ form.agree.id_for_label }}">{{ form.agree.label }}</label>
+                </div>
+
+                <div class="d-grid">
+                  <button type="submit" class="btn btn-success btn-lg gradient-custom-4 text-body">Register</button>
+                </div>
+
+                <p class="text-center text-muted mt-4 mb-0">Have already an account? <a href="{% url 'login' %}"
+                    class="fw-bold text-body"><u>Login here</u></a></p>
+
+              </form>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</body>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+</html>

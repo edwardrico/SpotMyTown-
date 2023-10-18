@@ -1,0 +1,504 @@
+{% extends 'main/main_posts.html' %}
+{% load static %}
+{% block content %}
+
+<style>
+ @import url(https://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
+    @import url(http://fonts.googleapis.com/css?family=Calibri:400,300,700);
+    .site-nav {
+        position: fixed;
+        z-index: 1000;
+        width: 100%;
+        background-color: rgba(0, 0, 0, 0.4);
+        color: black;
+        text-align: center;
+        padding: 10px 0;
+        transition: background-color 0.3s ease;
+    }
+
+    .site-nav a {
+        text-shadow: rgba(0, 0, 0, 0.6);
+        font-size: 25px;
+        transition: color 0.3s ease;
+    }
+
+    .site-nav ul:hover {
+        color: #214252;
+    }
+
+    .comment-list {
+        margin-top: 20px;
+    }
+
+    .user-profile span {
+    font-weight: bold; /* Mettre en gras le message de bienvenue */
+    color: #fff; /* Couleur du texte en blanc */
+}
+
+/* Styles pour la photo de profil */
+.user-profile img {
+    border: 0.5px solid #fff;
+
+}
+@media screen and (max-width: 768px) {
+.user-profile span {
+	color:black;
+
+ }
+}
+
+.rating {
+      border: none;
+      margin-right:32px;
+}
+.myratings{
+
+  font-size: 85px;
+  color: ##214252;
+}
+
+.rating > [id^="star"] { display: none; }
+.rating > label:before {
+  margin: 5px;
+  font-size: 2em;
+  font-family: FontAwesome;
+  display: inline-block;
+  content: "\f005";
+}
+
+.rating > .half:before {
+  content: "\f089";
+  position: absolute;
+}
+
+.rating > label {
+  color: #ddd;
+ float: right;
+}
+
+/***** CSS Magic to Highlight Stars on Hover *****/
+
+.rating > [id^="star"]:checked ~ label, /* show gold star when clicked */
+.rating:not(:checked) > label:hover, /* hover current star */
+.rating:not(:checked) > label:hover ~ label { color: #FFD700;  } /* hover previous stars in list */
+
+.rating > [id^="star"]:checked + label:hover, /* hover current star when changing rating */
+.rating > [id^="star"]:checked ~ label:hover,
+.rating > label:hover ~ [id^="star"]:checked ~ label, /* lighten current selection */
+.rating > [id^="star"]:checked ~ label:hover ~ label { color: #FFED85;  }
+
+.reset-option {
+display: none;
+}
+
+.reset-button {
+margin: 6px 12px;
+background-color: #214252;
+text-transform: uppercase;
+
+}
+
+
+
+.mt-100 {
+     margin-top: 100px
+ }
+
+ .card {
+     position: relative;
+     display: flex;
+     width: 400px;
+     flex-direction: column;
+     min-width: 0;
+     word-wrap: break-word;
+     background-color: #fff;
+     background-clip: border-box;
+     border: 1px solid #d2d2dc;
+     border-radius: 11px;
+     -webkit-box-shadow: 0px 0px 5px 0px rgb(249, 249, 250);
+     -moz-box-shadow: 0px 0px 5px 0px rgba(212, 182, 212, 1);
+     box-shadow: 0px 0px 5px 0px rgb(161, 163, 164)
+ }
+
+ .card .card-body {
+     padding: 1rem 1rem
+ }
+
+ .card-body {
+     flex: 1 1 auto;
+     padding: 1.25rem
+ }
+
+ p {
+     font-size: 14px
+ }
+
+ h4 {
+     margin-top: 18px
+ }
+
+ .fa-star-filled {
+    color:#FFD700 ;
+  }
+
+.votes {
+    margin-left: 20px; /* Vous pouvez ajuster la valeur pour contrôler l'espace entre les étoiles et le texte des votes */
+}
+
+
+</style>
+
+<div class="site-mobile-menu site-navbar-target">
+    <div class="site-mobile-menu-header">
+        <div class="site-mobile-menu-close">
+            <span class="icofont-close js-menu-toggle"></span>
+        </div>
+    </div>
+    <div class="site-mobile-menu-body"></div>
+</div>
+<nav class="site-nav">
+    <div class="container">
+        <div class="menu-bg-wrap">
+            <div class="site-navigation">
+                <div class="row g-0 align-items-center">
+                    <div class="col-2">
+                        <a href="{% url 'home'%}" class="logo m-0 float-start">Petit glouton<span class="text-primary"></span></a>
+                    </div>
+                    <div class="col-8 text-center">
+                        <ul class="js-clone-nav d-none d-lg-inline-block text-start site-menu mx-auto">
+                            <li class="active"><a href="{% url 'home'%}">Home</a></li>
+                            <li class="has-children">
+                                <a href="{% url 'home' %}">Pages</a>
+                                <ul class="dropdown">
+                                    <li><a href="blog.html">Article</a></li>
+                                    <li><a href="single.html">Evenement</a></li>
+                                    <li><a href="category.html">Culture</a></li>
+                                    <li><a href="about.html">Top posts</a></li>
+                                    <li class="has-children">
+                                        <a href="#">Categorie</a>
+                                        <ul class="dropdown">
+                                            <li><a href="{% url 'restaurant'%}">Restaurat</a></li>
+                                            <li><a href="{% url 'bar'%}">Bar</a></li>
+                                            <li><a href="{% url 'tourisme'%}">Tourisme</a></li>
+                                            <li><a href="#">Nigth clubs</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li><a href="category.html">About</a></li>
+                            <li><a href="{% url 'formPost' %}">Posts</a></li>
+							{% if user.is_authenticated %}
+							<li><a href="{% url 'logout'%}">Déconnexion</a></li>
+							<li class="user-profile end ">
+								<a href="{% url 'logout'%}"></a>
+									<a href="{% url 'view_profile' %}">
+        					<img src="{{ user.userprofile.profile_pic.url }}" alt="Photo de profil" class="rounded-circle" width="30" height="30">
+    						</a>
+								<span>{{ user.username }}</span>
+								</li>
+									{% else %}
+							<li><a href="{% url 'login'%}">Connexion</a></li>
+							{% endif %}
+
+						</ul>
+                    </div>
+                    <div class="col-2 text-end">
+							<a href="#" class="burger ms-auto float-end site-menu-toggle js-menu-toggle d-inline-block d-lg-none light">
+								<span></span>
+                            </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<section class="header">
+    <div class="site-cover site-cover-sm same-height overlay single-page"
+        style=
+        "background-image: url('{% static 'image/resto.jpg' %}');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        height: 30em;">
+
+        <div class="container">
+            <div class="row same-height justify-content-center">
+                <div class="col-md-4">
+                    <div class="post-entry text-center">
+                        <h1 class="mb-6">Don’t assume your user</h1>
+                        <div class="post-meta align-items-center text-center"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="section">
+    <div class="container">
+        <div class="row blog-entries element-animate">
+            <div class="col-md-12 col-lg-8 main-content">
+                <div class="post-content-body">
+                    <h1 class="text-center">{{ post.title }}</h1>
+                    <hr class="custom-separator">
+                    <h3 class="lead-sous-title">{{ post.subtitle }}</h3>
+                    <div class="row my-4">
+                        <div class="col-md-12 mb-4">
+                            <img src="{{ post.imagen_posts.url }}" alt="Posts-imagen" class="img-fluid rounded">
+                            <div class="meta">{{ post.created_at|date:"d F, Y" }}</div>
+                            <div class = "col-3 d-flex">
+                                {% for i in "12345" %}
+                                {% with rating=forloop.counter %}
+                                    <span class="fa fa-star{% if rating <= average_rating %} fa-star-filled{% endif %}"></span>
+                                {% endwith %}
+                            {% endfor %}
+                                <p class="votes">{{ rating_count }} votes</p>
+                                </div>
+                        </div>
+                        <hr class="custom-separator">
+                        <p class="lead">{{ post.description }}</p>
+                    </div>
+                    <div class="pt-5">
+                        <p>Categories: {{ post.categorie }}</p>
+
+                    </div>
+
+                    <div class="pt-5 comment-wrap">
+                        <div class="texte">
+                            <h3 class="mb-5 heading">{{ comments.count }} Comments</h3>
+                        </div>
+                        <button class="btn btn-primary" data-bs-toggle="collapse" data-bs-target="#commentList"
+                            aria-expanded="false">
+                            Voir les commentaires
+                        </button>
+                        <ul class="comment-list collapse" id="commentList">
+                            {% for comment in comments %}
+                            <li class="comment">
+                                <div class="vcard">
+                                    <img
+                                        src="{{ comment.user.userprofile.profile_pic.url }}"
+                                        alt="Image profile" class="rounded-circle" width="50" height="50">
+                                </div>
+                                <div class="comment-body">
+                                    <h3>{{ comment.user.username }}</h3>
+
+                                    <div class="meta">{{ comment.created_at|date:"F d, Y \a\t H:iA" }}</div>
+                                    <p>{{ comment.text }}</p>
+                                    <p><a href="#" class="reply rounded" data-bs-toggle="collapse" data-bs-target="#replyForm-{{ comment.id }}">Reply</a></p>
+                                    <!-- Formulaire de réponse (masqué par défaut) -->
+                                    <div class="collapse" id="replyForm-{{ comment.id }}">
+                                        <form method="post" action="{% url 'commentaire' post.id %}" class="p-5 bg-light">
+                                            {% csrf_token %}
+                                            <input type="hidden" name="parent_comment" value="{{ comment.id }}">
+                                            <div class="form-group">
+                                                <label for="reply-text-{{ comment.id }}">Reply *</label>
+                                                <textarea name="text" id="reply-text-{{ comment.id }}" cols="30" rows="5"
+                                                    class="form-control" required></textarea>
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="submit" value="Post Reply" class="btn btn-primary">
+                                            </div>
+                                        </form>
+                                    </div>
+
+                                    <ul class="comment-list">
+                                        {% for reply in comment.comment_set.all %}
+                                        <li class="comment">
+                                            <div class="vcard">
+                                                <img
+                                                    src="{{ reply.user.userprofile.profile_pic.url }}"
+                                                    alt="Image placeholder" class="rounded-circle" width="50" height="50">
+                                            </div>
+                                            <div class="comment-body">
+                                                <h3>{{ reply.user.username }}</h3>
+                                                <div
+                                                    class="meta">{{ reply.created_at|date:"F d, Y \a\t H:iA" }}</div>
+                                                <p>{{ reply.text }}</p>
+                                            </div>
+                                        </li>
+                                        {% endfor %}
+                                    </ul>
+
+                                </div>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+
+                    <div class="comment-form-wrap pt-5">
+                        <h3 class="mb-5">Leave a comment</h3>
+                        <form method="post" action="{% url 'commentaire' post.id %}" class="p-5 bg-light">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label for="comment-text">Comment</label>
+                                <textarea name="text" id="comment-text" cols="30" rows="5" class="form-control"
+                                    required></textarea>
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" value="Post Comment" class="btn btn-primary">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 col-lg-4 sidebar">
+    <div class="sidebar-box">
+        <div class="row">
+            <div class="col-3 d-flex justify-content-end">
+                {%if user.is_authenticated and user == post.user %}
+                <a href="{% url 'delete-post' post.id %}?next=/post/{{post.id}}" class="btn btn-danger btn-sm rounded px-2 py-2">Effacer</a>
+                {% endif %}
+            </div>
+            <div class="col-4 d-flex justify-content-end">
+                {% if user.is_authenticated and user == post.user %}
+                <a href="{% url 'update-post' post.id %}" class="btn btn-primary btn-sm rounded px-2 py-2">Modifier</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+                <div class="sidebar-box">
+                    <div class="bio text-center">
+                        <img src="{{ post.user.userprofile.profile_pic.url }}" alt="Image Placeholder" class="rounded-circle" width="100" height="100" >
+                        <div class="bio-body">
+                            <h2>{{ post.user.username }}</h2>
+                            <p class="mb-4">{{ post.user.userprofile.bio }}</p>
+                            <p><a href="{% url 'view_profile' %}" class="btn btn-primary btn-sm rounded px-2 py-2">Read my bio</a></p>
+                            <p class="social">
+                                <a href="#" class="p-2"><span class="fa fa-facebook"></span></a>
+                                <a href="#" class="p-2"><span class="fa fa-twitter"></span></a>
+                                <a href="#" class="p-2"><span class="fa fa-instagram"></span></a>
+                                <a href="#" class="p-2"><span class="fa fa-youtube-play"></span></a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="sidebar-box">
+                    <h3 class="heading">Categories</h3>
+                    <ul class="categories">
+                        <li><a href="{% url 'restaurant' %}">Restaurant <span>({{ category_counts.restaurant }})</span></a></li>
+                        <li><a href="{% url 'bar' %}">Bar <span>({{ category_counts.bar }})</span></a></li>
+                        <li><a href="{% url 'tourisme' %}">Tourisme <span>({{ category_counts.tourisme }})</span></a></li>
+                        <li><a href="{% url 'nightClubs' %}">Night Clubs <span>({{ category_counts.night_clubs }})</span></a></li>
+
+                    </ul>
+                </div>
+                <div class="row">
+                    <div class="card">
+                 <div class="card-body text-center">
+                  <span class="myratings">{{ average_rating|default:"0.0" }}</span>
+                <h4 class="mt-1">Evalouer posts</h4>
+                <form method="post" action="{% url 'post_rating' post.id %}" >
+                         {% csrf_token %}
+                     <fieldset class="rating">
+                         <input type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="Awesome - 5 stars"></label>
+                         <input type="radio" id="star4half" name="rating" value="4.5" /><label class="half" for="star4half" title="Pretty good - 4.5 stars"></label>
+                         <input type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4" title="Pretty good - 4 stars"></label>
+                         <input type="radio" id="star3half" name="rating" value="3.5" /><label class="half" for="star3half" title="Meh - 3.5 stars"></label>
+                         <input type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3" title="Meh - 3 stars"></label>
+                         <input type="radio" id="star2half" name="rating" value="2.5" /><label class="half" for="star2half" title="Kinda bad - 2.5 stars"></label>
+                         <input type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
+                         <input type="radio" id="star1half" name="rating" value="1.5" /><label class="half" for="star1half" title="Meh - 1.5 stars"></label>
+                         <input type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" title="Sucks big time - 1 star"></label>
+                         <input type="radio" id="starhalf" name="rating" value="0.5" /><label class="half" for="starhalf" title="Sucks big time - 0.5 stars"></label>
+                         <input type="radio" class="reset-option" name="rating" value="reset" />
+                     </fieldset>
+                    <button class = "btn btn-primary btn-sm rounded px-2 py-2">Submit Rating</button>
+                    </form>
+                 </div>
+            </div>
+        </div>
+            </div>
+    </div>
+</div>
+
+        <section class="section posts-entry posts-entry-sm bg-light">
+            <div class="container">
+                  <div class="row mb-4">
+                    <div class="col-12 text-uppercase text-black">posts relatione avec {{ post.title }}</div>
+                </div>
+                <div class="row">
+                    {% if similar_posts %}
+                    {% for related_post in similar_posts %}
+                    <div class="col-md-6 col-lg-3">
+                        <div class="blog-entry">
+                            <a href="{% url 'post' related_post.id %}" class="img-link">
+                                <img src="{{ related_post.imagen_posts.url }}" alt="Image" class="img-fluid">
+                            </a>
+                            <div class="blog-entry-text">
+                                 {% for i in "12345" %}
+                                 {% with rating=forloop.counter %}
+                                    <span class="fa fa-star{% if rating <= average_rating %} fa-star-filled{% endif %}"></span>
+                                {% endwith %}
+                                {% endfor %}
+                                </div>
+                                <h3><a href="{% url 'post' related_post.id %}">{{ related_post.title }}</a></h3>
+                                <span class="post-meta mb-2 d-block">{{ related_post.created_at|date:"F d, Y" }}</span>
+                                <p class="mb-4">{{ related_post.description }}</p>
+                                <p><a href="{% url 'post' related_post.id %}" class="btn btn-primary btn-sm">Read More</a></p>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    {% else %}
+                    <p>Pas d'articles similaires.</p>
+                    {% endif %}
+                </div>
+            </div>
+        </section>
+
+<footer class="site-footer">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-4">
+
+					<div class="widget">
+						<h3>Social</h3>
+						<ul class="list-unstyled social">
+							<li><a href="#"><span class="icon-instagram"></span></a></li>
+							<li><a href="#"><span class="icon-twitter"></span></a></li>
+							<li><a href="#"><span class="icon-facebook"></span></a></li>
+							<li><a href="#"><span class="icon-linkedin"></span></a></li>
+							<li><a href="#"><span class="icon-pinterest"></span></a></li>
+							<li><a href="#"><span class="icon-dribbble"></span></a></li>
+						</ul>
+					</div> <!-- /.widget -->
+				</div> <!-- /.col-lg-4 -->
+				<div class="col-lg-4 ps-lg-5">
+					<div class="widget">
+						<h3 class="mb-4">Company</h3>
+						<ul class="list-unstyled float-start links">
+							<li><a href="#">About us</a></li>
+							<li><a href="#">Services</a></li>
+							<li><a href="#">Vision</a></li>
+							<li><a href="#">Mission</a></li>
+							<li><a href="#">Terms</a></li>
+							<li><a href="#">Privacy</a></li>
+						</ul>
+						<ul class="list-unstyled float-start links">
+							<li><a href="#">Partners</a></li>
+							<li><a href="#">Business</a></li>
+							<li><a href="#">Careers</a></li>
+							<li><a href="#">Blog</a></li>
+							<li><a href="#">FAQ</a></li>
+							<li><a href="#">Creative</a></li>
+						</ul>
+					</div> <!-- /.widget -->
+				</div> <!-- /.col-lg-4 -->
+
+			<div class="row mt-5">
+				<div class="col-12 text-center">
+					<p>Copyright &copy;<script>document.write(new Date().getFullYear());</script>. All Rights Reserved. &mdash; Designed with love by <a href="https://untree.co">Untree.co</a>  Distributed by <a href="https://themewagon.com">ThemeWagon</a> <!-- License information: https://untree.co/license/ -->
+            </p>
+          </div>
+        </div>
+      </div>
+		</div>
+    </footer>
+    </section>
+	<div id="overlayer"></div>
+    <div class="loader">
+    	<div class="spinner-border text-primary" role="status">
+    		<span class="visually-hidden">Loading...</span>
+    	</div>
+    </div>
+{% endblock %}
