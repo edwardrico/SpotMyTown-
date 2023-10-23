@@ -145,7 +145,8 @@ text-transform: uppercase;
     margin-left: 20px;
 }
 
-
+.user
+    margin-top: -20px;
 
 
 
@@ -189,7 +190,11 @@ text-transform: uppercase;
                                 </ul>
                             </li>
                             <li><a href="category.html">About</a></li>
+                            {% if not user.is_authenticated %}
+                            <li><a href="{% url 'error_login' %}">Posts</a></li>
+                           {%else%}
                             <li><a href="{% url 'formPost' %}">Posts</a></li>
+                            {% endif %}
 							{% if user.is_authenticated %}
 							<li><a href="{% url 'logout'%}">Déconnexion</a></li>
 							<li class="user-profile end ">
@@ -237,6 +242,7 @@ text-transform: uppercase;
         </div>
     </div>
 </section>
+
 
 <section class="section">
     <div class="container">
@@ -299,7 +305,11 @@ text-transform: uppercase;
                                                     class="form-control" required></textarea>
                                             </div>
                                             <div class="form-group">
+                                                {%if not user.is_authenticated %}
+                                                <p>Vous devez être connecté pour repondre un commentaire. <a href="{% url 'login' %}">Connectez-vous ici</a>.</p>
+                                                {% else %}
                                                 <input type="submit" value="Post Reply" class="btn btn-primary">
+                                                {% endif %}
                                             </div>
                                         </form>
                                     </div>
@@ -329,6 +339,7 @@ text-transform: uppercase;
                     </div>
 
                     <div class="comment-form-wrap pt-5">
+
                         <h3 class="mb-5">Leave a comment</h3>
                         <form method="post" action="{% url 'commentaire' post.id %}" class="p-5 bg-light">
                             {% csrf_token %}
@@ -338,7 +349,11 @@ text-transform: uppercase;
                                     required></textarea>
                             </div>
                             <div class="form-group">
-                                <input type="submit" value="Post Comment" class="btn btn-primary">
+                                {% if not user.is_authenticated %}
+                                <p>Vous devez être connecté pour commenter. <a href="{% url 'login' %}">Connectez-vous ici</a>.</p>
+                                {% else %}
+                                 <input type="submit" value="Post Comment" class="btn btn-primary">
+                                {% endif %}
                             </div>
                         </form>
                     </div>
@@ -362,9 +377,9 @@ text-transform: uppercase;
 
                 <div class="sidebar-box">
                     <div class="bio text-center">
-                        <img src="{{ post.user.userprofile.profile_pic.url }}" alt="{{post.user.username}}" class="rounded-circle" width="100" height="100" >
+                        <img src="{{ post.user.userprofile.profile_pic.url }}" alt="{{post.user.username}}" class="rounded-circle" width="150" height="150" >
                         <div class="bio-body">
-                            <h2>{{ post.user.username }}</h2>
+                            <h2 class = "mb-2" style="margin-top: 20px;">{{ post.user.username }}</h2>
                             <p class="mb-4">{{ post.user.userprofile.bio }}</p>
                             <p><a href="{% url 'view_profile' %}" class="btn btn-primary btn-sm rounded px-2 py-2">Read my bio</a></p>
 
@@ -403,7 +418,11 @@ text-transform: uppercase;
                          <input type="radio" id="starhalf" name="rating" value="0.5" /><label class="half" for="starhalf" title="Sucks big time - 0.5 stars"></label>
                          <input type="radio" class="reset-option" name="rating" value="reset" />
                      </fieldset>
+                    {% if not user.is_authenticated %}
+                    <p class="mt-2">Vous devez être connecté pour evaluer un post. <a href="{% url 'login' %}">Connectez-vous ici</a>.</p>
+                    {% else %}
                     <button class = "btn btn-primary btn-sm rounded px-2 py-2">Submit Rating</button>
+                    {% endif %}
                     </form>
                  </div>
             </div>
@@ -412,6 +431,7 @@ text-transform: uppercase;
     </div>
 </div>
 
+ </section>
 
     <section class="section posts-entry posts-entry-sm bg-light">
             <div class="container">
@@ -446,7 +466,7 @@ text-transform: uppercase;
                 </div>
             </div>
         </section>
-    </section>
+
 
 <footer class="site-footer">
 		<div class="container">
@@ -496,6 +516,8 @@ text-transform: uppercase;
         </div>
       </div>
 		</div>
+
     </footer>
+
 
 {% endblock %}

@@ -4,7 +4,7 @@ from django.contrib.auth import views as auth_views
 
 urlpatterns = [
 
-    path('login/', views.custom_login, name='login'),  # URL pour la page de connexion
+    path('accounts/login/', views.custom_login, name='login'),  # URL pour la page de connexion
     path('logout/', views.custom_logout, name='logout'),  # URL pour la déconnexion
     path('password_reset/', views.CustomPasswordResetView.as_view(), name='password_reset'),
     # URL pour la réinitialisation du mot de passe

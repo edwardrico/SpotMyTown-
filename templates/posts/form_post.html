@@ -113,7 +113,7 @@
                                             <li><a href="{% url 'restaurant'%}">Restaurat</a></li>
                                             <li><a href="{% url 'bar'%}">Bar</a></li>
                                             <li><a href="{% url 'tourisme'%}">Tourisme</a></li>
-                                            <li><a href="#">Nigth clubs</a></li>
+                                            <li><a href="{% url 'nigthClubs'%}">Nigth clubs</a></li>
                                         </ul>
                                     </li>
                                 </ul>
@@ -147,6 +147,8 @@
 
 
 <div class="container">
+    {% if not user.is_authenticated %}
+    <p>Vous devez etre connecte pour affectuer cette action. <a href=" {% url 'login'% }">Connectez-vous ici</a>.</p>
   <div class="row justify-content-center">
     <div class="col-md-8">
       <div class="custom-form-container">
@@ -167,4 +169,5 @@
     </div>
   </div>
 </div>
+{% endif %}
 {% endblock content %}

@@ -1,0 +1,64 @@
+{% extends 'main/main_error.html' %}
+{% load static %}
+{% block content %}
+
+<style>
+  body{margin-top:20px;}
+.cover-background {
+    position: relative !important;
+    background-color: #ffffff; /* Changer la couleur de fond en blanc */
+    overflow: hidden !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+}
+.p-0 {
+    padding: 0!important;
+}
+section {
+    padding: 120px 0;
+    overflow: hidden;
+    background: #fff;
+}
+
+.error-page {
+    background-color: #BABABA4A;
+    -webkit-backdrop-filter: blur(9px);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(234,234,235,0.2);
+    padding: 80px 20px;
+}
+.text-center {
+    text-align: center!important;
+}
+.error-page h1 {
+    font-size: 200px;
+    line-height: 1;
+    font-weight: 600;
+}
+.text-secondary {
+    color: #15395A !important;
+}
+.mb-4 {
+    margin-bottom: 1.5rem!important;
+}
+</style>
+
+<section class="p-0 bg-img cover-background" style="background-color:#5D8AA8;">
+    <div class="container-fluid d-flex flex-column">
+        <div class="row align-items-center justify-content-center min-vh-100">
+            <div class="col-md-9 col-lg-6 my-5">
+                <div class="text-center error-page">
+                    <h1 class="mb-4 text-primary">Oups!</h1>
+                    <h2 class="mb-4 text-white">Vous devez être connecté pour réaliser cette action!</h2>
+                    <p class="w-sm-80 mx-auto mb-4 text-white">Pour realiser une action vous devrais etre connecter si vous avez pas une compte vous pouver la cree en rentren a login sino vous pouvais retourne a home </p>
+                    <div>
+                        <a href="{% url 'login' %}" class="btn btn-primary btn-lg me-sm-2 mb-2 mb-sm-0">Login</a>
+                        <a href="{% url 'home' %}" class="btn btn-primary btn-lg me-sm-2 mb-2 mb-sm-0">Home</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock content %}

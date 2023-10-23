@@ -2,7 +2,7 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-
+    path('error_login/', views.error_404_view, name='error_login'),  # URL pour la page error login
     path('post/<uuid:pk>/', views.post, name='post'),
     path('post/<uuid:pk>/rate/', views.post_rating, name='post_rating'),
     path('commentaire/<uuid:pk>/', views.commentaire, name='commentaire'),  # URL pour les commentaires

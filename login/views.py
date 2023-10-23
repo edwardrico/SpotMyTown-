@@ -14,6 +14,12 @@ def custom_login(request):
             return redirect('home')
     else:
         form = AuthenticationForm()
+
+    if not request.user.is_authenticated:
+        message = "Vous devez être connecté pour accéder à cette page."
+    else:
+        message = None
+
     return render(request, 'register/login.html', {'form': form})
 
 

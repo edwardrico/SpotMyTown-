@@ -8,6 +8,11 @@ from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 
 
+# Create vieux de page 404
+def error_404_view(request):
+    return render(request, '404/error_login.html')
+
+
 # Vue pour afficher une publication individuelle
 def post(request, pk, ):
     try:
@@ -73,7 +78,7 @@ def post(request, pk, ):
     return render(request, 'posts/posts.html', context)
 
 
-@login_required(login_url='/not-logged-in/')
+@login_required
 def post_rating(request, pk):
     post = get_object_or_404(Posts, id=pk)
     if request.method == 'POST':
@@ -92,7 +97,7 @@ def post_rating(request, pk):
 
 
 # Vues pour les commentaries
-@login_required(login_url='/not-logged-in/')
+@login_required
 def commentaire(request, pk):
     post = Posts.objects.get(id=pk)
 
@@ -112,8 +117,12 @@ def commentaire(request, pk):
 
 
 # Vue pour afficher un formulate de creation de publication
-@login_required(login_url='/not-logged-in/')
+@login_required
 def formulaire(request):
+    if not request.user.is_authenticated:
+        # Si l'utilisateur n'est pas connecté, redirigez-le vers la page de connexion
+        return redirect('login')
+
     if request.method == 'POST':
         form = PostForm(request.POST, request.FILES)
         if form.is_valid():
@@ -132,7 +141,7 @@ def formulaire(request):
 
 
 # Vue pour supprimer une publication
-@login_required(login_url='/not-logged-in/')
+@login_required
 def deletePost(request, pk):
     post = Posts.objects.get(id=pk)
 
@@ -150,7 +159,7 @@ def deletePost(request, pk):
 
 
 # Vue pour mettre à jour une publication existante
-@login_required(login_url='/not-logged-in/')
+@login_required
 def updatePost(request, pk):
     post = Posts.objects.get(id=pk)
     category = post.categorie
