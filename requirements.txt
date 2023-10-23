@@ -73,3 +73,8 @@ virtualenv==20.24.4
 wcwidth==0.2.6
 whitenoise==6.5.0
 wrapt==1.14.1
+
+pip~=22.3.1
+decouple~=0.0.7
+PyYAML~=6.0.1
+Jinja2~=3.1.2

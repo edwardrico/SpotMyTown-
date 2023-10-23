@@ -1,6 +1,8 @@
 {% extends 'main/main_categorie.html' %}
 {% load static %}
 {% block content %}
+
+
 <style>
   .custom-form-container {
     background: linear-gradient(45deg, #E0E0E0, #F0F0F0);
@@ -77,8 +79,6 @@
 
  }
 }
-
-
 </style>
 
 <div class="site-mobile-menu site-navbar-target">
@@ -132,8 +132,7 @@
 									{% else %}
 							<li><a href="{% url 'login'%}">Connexion</a></li>
 							{% endif %}
-
-						</ul>
+                        </ul>
                     </div>
                     <div class="col-2 text-end">
 							<a href="#" class="burger ms-auto float-end site-menu-toggle js-menu-toggle d-inline-block d-lg-none light">
@@ -145,6 +144,7 @@
         </div>
     </div>
 </nav>
+
 
 <div class="container">
   <div class="row justify-content-center">
@@ -158,13 +158,10 @@
               <div class="form-group">
                   <label for="{{ field.id_for_label }}">{{ field.label_tag }}</label>
                 {{ field }}
-
               </div>
             </div>
           {% endfor %}
-
-
-          <button type="submit" class="btn btn-primary custom-button">Créer le post</button>
+            <button type="submit" class="btn btn-primary custom-button">Créer le post</button>
         </form>
       </div>
     </div>

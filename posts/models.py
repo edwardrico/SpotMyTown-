@@ -1,43 +1,31 @@
 import uuid
+from PIL import Image
 from django.db import models
 from django.contrib.auth.models import User
+from django.template.defaultfilters import slugify
 from django.urls import reverse
-
-
-# Modèle pour stocker les informations de profil utilisateur
-class UserProfile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)  # Relation un à un avec le modèle User
-    profile_pic = models.ImageField(upload_to='profile_picture', blank=True, null=True, default="user_icon.jpeg")
-    bio = models.TextField(blank=True, null=True)  # Champ pour la biographie de l'utilisateur
-    location = models.CharField(max_length=100, blank=False, null=True)  # Champ pour la localisation de l'utilisateur
-
-    def __str__(self):
-        return f"UserProfile de {self.user}"  # Représentation textuelle de l'objet (nom d'utilisateur)
-
-
-# Modèle pour gérer les abonnements des utilisateurs
-class Subscription(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)  # Relation plusieurs à un avec le modèle User
-    active = models.BooleanField(default=False)  # Indique si l'abonnement est actif
-    first_name = models.CharField(max_length=30, blank=False, null=True)  # Champ pour le prénom de l'utilisateur
-    last_name = models.CharField(max_length=30, blank=False, null=True)  # Champ pour le nom de l'utilisateur
-
-    def __str__(self):
-        return f"Abonnement de {self.user} - {self.first_name} {self.last_name}"
+from user_profile.models import UserProfile
 
 
 # Modèle pour stocker les publications
+
 class Posts(models.Model):
     title = models.CharField(max_length=30, blank=False)  # Titre de la publication
     subtitle = models.CharField(max_length=100, blank=False, null=True)  # Sous-titre de la publication (optionnel)
-    description = models.TextField(max_length=700, blank=False, null=True)  # Description de la publication (optionnelle)
+    description = models.TextField(max_length=700, blank=False,
+                                   null=True)  # Description de la publication (optionnelle)
     imagen_posts = models.ImageField(blank=True, null=True,
                                      default="default_image.png")  # Image associée à la publication
-    largeur_image = models.PositiveIntegerField(default=450)  # Largeur de l'image par défaut
-    hauteur_image = models.PositiveIntegerField(default=350)  # Hauteur de l'image par défaut
+    image_width = models.PositiveIntegerField(default=350)  # Largeur souhaitée de l'image
+    image_height = models.PositiveIntegerField(default=320)  # Hauteur souhaitée de l'image
     id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)  # ID unique
     created_at = models.DateTimeField(auto_now_add=True)  # Date de création de la publication
     address = models.CharField(max_length=200, blank=True, null=True)
+
+    # Ajoutez ces champs
+    slug = models.SlugField(unique=True, max_length=255, blank=True, null=True)
+    meta_description = models.CharField(max_length=255, blank=True, null=True)
+    keywords = models.CharField(max_length=255, blank=True, null=True)
 
     # Choix de catégorie pour les publications
     CATEGORIE_CHOICES = [
@@ -57,8 +45,39 @@ class Posts(models.Model):
                                      related_name='post_rating')  # Relation plusieurs à plusieurs avec les évaluations associées
     objects = models.Manager()
 
+    def save(self, *args, **kwargs):
+        if not self.title:
+            # Si le champ title est vide, remplir avec un titre automatique en fonction du contenu.
+            self.title = "Titre automatique en fonction du contenu de la publication"
+
+        if not self.description:
+            # Si le champ description est vide, remplir avec une description automatique en fonction du contenu.
+            self.description = "Description automatique en fonction du contenu de la publication"
+
+        if not self.keywords:
+            # Si le champ keywords est vide, remplir avec des mots-clés automatiques en fonction du contenu.
+            self.keywords = "Mots-clés automatiques en fonction du contenu de la publication"
+
+        if not self.slug:
+            # Si le champ slug est vide, générer un slug à partir du titre.
+            self.slug = slugify(self.title)
+
+        if not self.meta_description:
+            # Si le champ meta_description est vide, remplir avec la description de la publication.
+            self.meta_description = self.description
+
+        if self.imagen_posts:
+            image = Image.open(self.imagen_posts)
+            image = image.resize((self.image_width, self.image_height), Image.ANTIALIAS)
+            image.save(self.imagen_posts.path, 'JPEG', quality=90, optimize=True)
+
+        if not self.slug:
+            self.slug = slugify(self.title)
+
+        super(Posts, self).save(*args, **kwargs)
+
     def __str__(self):
-        return self.title  # Représentation textuelle de l'objet (titre de la publication)
+        return self.title
 
 
 # Modèle pour stocker les commentaires

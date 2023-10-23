@@ -1,8 +1,6 @@
 # Importations requises
-from django.contrib.auth.models import User
 from django import forms
-from .models import Posts, UserProfile, Comment
-from django.contrib.auth.forms import UserCreationForm
+from .models import Posts, Comment
 
 
 # Formulaire pour la création de publication
@@ -17,23 +15,6 @@ class PostForm(forms.ModelForm):
             'imagen_posts': 'Image',  # Étiquette personnalisée pour le champ "imagen_posts"
             'categorie': 'Catégorie',  # Étiquette personnalisée pour le champ "categorie"
         }
-
-
-# Formulaire personnalisé d'inscription
-class CustomRegistrationForm(UserCreationForm):
-    prenom = forms.CharField(max_length=30, required=True, help_text='Optional.')
-    nom = forms.CharField(max_length=30, required=True, help_text='Optional.')
-
-    class Meta:
-        model = User
-        fields = ['prenom', 'nom', 'username', 'email', 'password1', 'password2']
-
-
-# Formulaire pour le profil d'utilisateur
-class UserProfileForm(forms.ModelForm):
-    class Meta:
-        model = UserProfile
-        fields = ['profile_pic', 'bio', 'location']
 
 
 # Formulaire pour les commentaires

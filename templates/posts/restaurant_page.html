@@ -5,7 +5,7 @@
 <style>
 
 .site-nav {
-    position: fixed;
+    position: fixed ;
     z-index: 1000;
     width: 100%;
     background-color: rgba(0,0,0, 0.3);
@@ -62,6 +62,7 @@
     border: 0.5px solid #fff;
 
 }
+
 @media screen and (max-width: 768px) {
 .user-profile span {
 	color:black;
@@ -74,10 +75,7 @@
     }
 .fa-star-filled {
     color:#FFD700 ;
-
-
 }
-
 </style>
 
 
@@ -115,7 +113,7 @@
                                             <li><a href="{% url 'restaurant'%}">Restaurat</a></li>
                                             <li><a href="{% url 'bar'%}">Bar</a></li>
                                             <li><a href="{% url 'tourisme'%}">Tourisme</a></li>
-                                            <li><a href="#">Nigth clubs</a></li>
+                                            <li><a href="{% url 'nightClubs'%}">Nigth clubs</a></li>
                                         </ul>
                                     </li>
                                 </ul>
@@ -185,7 +183,7 @@
                 <h2 class="posts-entry-title">{{ post.title }}</h2>
             </div>
             <div class="blog-entry">
-                <img src="{{ post.imagen_posts.url }}" alt="{{ post.title }}" class="img-fluid border-radius 10px" width="{{ post.largeur_image }}" height="{{post.hauteur_image }}">
+                <img src="{{ post.imagen_posts.url }}" width="{{ post.image_width }}" height="{{ post.image_height }}" alt="{{ post.title }}"style="border-radius: 10px">
 
                   <span class="date">{{ post.created_at|date:"F d, Y" }}</span>
                     <div class ="rating">
@@ -203,16 +201,13 @@
                     <span class="username">{{ post.user.username }}</span>
                 </p>
                 </a>
-
-
                 <h2><a href="{% url 'post' post.id %}">{{ post.subtitle }}</a></h2>
                 <p><a href="{% url 'post' post.id %}" class="btn btn-sm btn-outline-primary">Lire</a></p>
             </div>
+            <div class="col mb-4"></div>
         </div>
         {% endfor %}
-
-
-
     </div>
+
 </div>
 {% endblock content %}

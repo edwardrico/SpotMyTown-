@@ -31,8 +31,8 @@
     }
 
     .user-profile span {
-    font-weight: bold; /* Mettre en gras le message de bienvenue */
-    color: #fff; /* Couleur du texte en blanc */
+    font-weight: bold;
+    color: #fff;
 }
 
 /* Styles pour la photo de profil */
@@ -142,8 +142,11 @@ text-transform: uppercase;
   }
 
 .votes {
-    margin-left: 20px; /* Vous pouvez ajuster la valeur pour contrôler l'espace entre les étoiles et le texte des votes */
+    margin-left: 20px;
 }
+
+
+
 
 
 </style>
@@ -192,7 +195,7 @@ text-transform: uppercase;
 							<li class="user-profile end ">
 								<a href="{% url 'logout'%}"></a>
 									<a href="{% url 'view_profile' %}">
-        					<img src="{{ user.userprofile.profile_pic.url }}" alt="Photo de profil" class="rounded-circle" width="30" height="30">
+        					<img src="{{ user.userprofile.profile_pic.url }}" alt="{{ post.user.username }}" class="rounded-circle" width="30" height="30">
     						</a>
 								<span>{{ user.username }}</span>
 								</li>
@@ -234,17 +237,18 @@ text-transform: uppercase;
         </div>
     </div>
 </section>
+
 <section class="section">
     <div class="container">
         <div class="row blog-entries element-animate">
             <div class="col-md-12 col-lg-8 main-content">
                 <div class="post-content-body">
-                    <h1 class="text-center">{{ post.title }}</h1>
+                    <h1 class="text-center text-uppercase">{{ post.title }}</h1>
                     <hr class="custom-separator">
                     <h3 class="lead-sous-title">{{ post.subtitle }}</h3>
                     <div class="row my-4">
                         <div class="col-md-12 mb-4">
-                            <img src="{{ post.imagen_posts.url }}" alt="Posts-imagen" class="img-fluid rounded">
+                            <img src="{{ post.imagen_posts.url }}" width="550" height="400" alt="{{ post.title }}" style="border-radius: 20px" class="img-fluid rounded">
                             <div class="meta">{{ post.created_at|date:"d F, Y" }}</div>
                             <div class = "col-3 d-flex">
                                 {% for i in "12345" %}
@@ -253,14 +257,13 @@ text-transform: uppercase;
                                 {% endwith %}
                             {% endfor %}
                                 <p class="votes">{{ rating_count }} votes</p>
-                                </div>
+                            </div>
                         </div>
                         <hr class="custom-separator">
                         <p class="lead">{{ post.description }}</p>
                     </div>
                     <div class="pt-5">
                         <p>Categories: {{ post.categorie }}</p>
-
                     </div>
 
                     <div class="pt-5 comment-wrap">
@@ -277,7 +280,7 @@ text-transform: uppercase;
                                 <div class="vcard">
                                     <img
                                         src="{{ comment.user.userprofile.profile_pic.url }}"
-                                        alt="Image profile" class="rounded-circle" width="50" height="50">
+                                        alt="{{ post.user.username }}" class="rounded-circle" width="50" height="50">
                                 </div>
                                 <div class="comment-body">
                                     <h3>{{ comment.user.username }}</h3>
@@ -307,7 +310,7 @@ text-transform: uppercase;
                                             <div class="vcard">
                                                 <img
                                                     src="{{ reply.user.userprofile.profile_pic.url }}"
-                                                    alt="Image placeholder" class="rounded-circle" width="50" height="50">
+                                                    alt="{{ post.user.username }}" class="rounded-circle" width="50" height="50">
                                             </div>
                                             <div class="comment-body">
                                                 <h3>{{ reply.user.username }}</h3>
@@ -341,7 +344,7 @@ text-transform: uppercase;
                     </div>
                 </div>
             </div>
-            <div class="col-md-12 col-lg-4 sidebar">
+ <div class="col-md-12 col-lg-4 sidebar">
     <div class="sidebar-box">
         <div class="row">
             <div class="col-3 d-flex justify-content-end">
@@ -359,21 +362,17 @@ text-transform: uppercase;
 
                 <div class="sidebar-box">
                     <div class="bio text-center">
-                        <img src="{{ post.user.userprofile.profile_pic.url }}" alt="Image Placeholder" class="rounded-circle" width="100" height="100" >
+                        <img src="{{ post.user.userprofile.profile_pic.url }}" alt="{{post.user.username}}" class="rounded-circle" width="100" height="100" >
                         <div class="bio-body">
                             <h2>{{ post.user.username }}</h2>
                             <p class="mb-4">{{ post.user.userprofile.bio }}</p>
                             <p><a href="{% url 'view_profile' %}" class="btn btn-primary btn-sm rounded px-2 py-2">Read my bio</a></p>
-                            <p class="social">
-                                <a href="#" class="p-2"><span class="fa fa-facebook"></span></a>
-                                <a href="#" class="p-2"><span class="fa fa-twitter"></span></a>
-                                <a href="#" class="p-2"><span class="fa fa-instagram"></span></a>
-                                <a href="#" class="p-2"><span class="fa fa-youtube-play"></span></a>
-                            </p>
+
                         </div>
                     </div>
                 </div>
-                <div class="sidebar-box">
+
+               <div class="sidebar-box">
                     <h3 class="heading">Categories</h3>
                     <ul class="categories">
                         <li><a href="{% url 'restaurant' %}">Restaurant <span>({{ category_counts.restaurant }})</span></a></li>
@@ -383,6 +382,7 @@ text-transform: uppercase;
 
                     </ul>
                 </div>
+
                 <div class="row">
                     <div class="card">
                  <div class="card-body text-center">
@@ -412,7 +412,8 @@ text-transform: uppercase;
     </div>
 </div>
 
-        <section class="section posts-entry posts-entry-sm bg-light">
+
+    <section class="section posts-entry posts-entry-sm bg-light">
             <div class="container">
                   <div class="row mb-4">
                     <div class="col-12 text-uppercase text-black">posts relatione avec {{ post.title }}</div>
@@ -423,7 +424,7 @@ text-transform: uppercase;
                     <div class="col-md-6 col-lg-3">
                         <div class="blog-entry">
                             <a href="{% url 'post' related_post.id %}" class="img-link">
-                                <img src="{{ related_post.imagen_posts.url }}" alt="Image" class="img-fluid">
+                                <img src="{{ related_post.imagen_posts.url }}" alt="{{ related_post.title }}" class="img-fluid">
                             </a>
                             <div class="blog-entry-text">
                                  {% for i in "12345" %}
@@ -432,9 +433,9 @@ text-transform: uppercase;
                                 {% endwith %}
                                 {% endfor %}
                                 </div>
-                                <h3><a href="{% url 'post' related_post.id %}">{{ related_post.title }}</a></h3>
+                                <h4 class = "text-uppercase text-black"><a href="{% url 'post' related_post.id %}">{{ related_post.title }}</a></h4>
                                 <span class="post-meta mb-2 d-block">{{ related_post.created_at|date:"F d, Y" }}</span>
-                                <p class="mb-4">{{ related_post.description }}</p>
+                                <h5 class="mb-4">{{ related_post.subtitle }}</h5>
                                 <p><a href="{% url 'post' related_post.id %}" class="btn btn-primary btn-sm">Read More</a></p>
                         </div>
                     </div>
@@ -445,6 +446,7 @@ text-transform: uppercase;
                 </div>
             </div>
         </section>
+    </section>
 
 <footer class="site-footer">
 		<div class="container">
@@ -459,10 +461,11 @@ text-transform: uppercase;
 							<li><a href="#"><span class="icon-facebook"></span></a></li>
 							<li><a href="#"><span class="icon-linkedin"></span></a></li>
 							<li><a href="#"><span class="icon-pinterest"></span></a></li>
-							<li><a href="#"><span class="icon-dribbble"></span></a></li>
+
 						</ul>
 					</div> <!-- /.widget -->
-				</div> <!-- /.col-lg-4 -->
+
+                </div> <!-- /.col-lg-4 -->
 				<div class="col-lg-4 ps-lg-5">
 					<div class="widget">
 						<h3 class="mb-4">Company</h3>
@@ -494,11 +497,5 @@ text-transform: uppercase;
       </div>
 		</div>
     </footer>
-    </section>
-	<div id="overlayer"></div>
-    <div class="loader">
-    	<div class="spinner-border text-primary" role="status">
-    		<span class="visually-hidden">Loading...</span>
-    	</div>
-    </div>
+
 {% endblock %}

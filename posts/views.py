@@ -1,29 +1,18 @@
-from django.db.models import Q, Avg
+from django.core.exceptions import ObjectDoesNotExist
+from django.db.models import Avg
 from django.http import HttpResponseForbidden, Http404
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Posts, UserProfile, Comment, Rating
-from .forms import PostForm, UserProfileForm, CustomRegistrationForm, CommentForm, PostRatingForm
+from .models import Posts, Comment, Rating
+from .forms import PostForm, CommentForm, PostRatingForm
 from django.urls import reverse
-from django.contrib.auth import login, logout
-from django.contrib.auth.models import User
-from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth.views import PasswordResetView
 from django.contrib.auth.decorators import login_required
 
 
-# Vue pour la page d'accueil
-def home(request):
-    # Récupérer toutes les publications triées par date de création décroissante
-    posts = Posts.objects.all().order_by('-created_at')
-    context = {'posts': posts}
-    return render(request, 'home/home.html', context)
-
-
 # Vue pour afficher une publication individuelle
-def post(request, pk):
+def post(request, pk, ):
     try:
         post = Posts.objects.get(pk=pk)
-    except Posts.DoesNotExist:
+    except ObjectDoesNotExist:
         raise Http404("La publication n'existe pas")
 
     comments = Comment.objects.filter(post=post).order_by('-created_at')
@@ -35,7 +24,7 @@ def post(request, pk):
 
     average_rating = max(scale_min, min(scale_max, average_rating or scale_min))
     average_star = int(average_rating)
-    stars_css_class = "fa-star-checked" if average_star >= 1 else ""
+    stars_css_class = "fa-star-checked" if average_star >= 0.5 else ""
 
     similar_posts = Posts.objects.filter(categorie=post.categorie).exclude(id=pk)[:4]
 
@@ -79,11 +68,12 @@ def post(request, pk):
         'average_rating': average_rating,
         'stars_css_class': stars_css_class,
         'rating_count': rating_count,
+
     }
     return render(request, 'posts/posts.html', context)
 
 
-@login_required
+@login_required(login_url='/not-logged-in/')
 def post_rating(request, pk):
     post = get_object_or_404(Posts, id=pk)
     if request.method == 'POST':
@@ -101,8 +91,8 @@ def post_rating(request, pk):
     return redirect('post', pk=pk, )
 
 
-# Vues pour les commentaires
-@login_required
+# Vues pour les commentaries
+@login_required(login_url='/not-logged-in/')
 def commentaire(request, pk):
     post = Posts.objects.get(id=pk)
 
@@ -121,8 +111,8 @@ def commentaire(request, pk):
     return redirect('post', pk=pk)
 
 
-# Vue pour afficher un formulaire de création de publication
-@login_required
+# Vue pour afficher un formulate de creation de publication
+@login_required(login_url='/not-logged-in/')
 def formulaire(request):
     if request.method == 'POST':
         form = PostForm(request.POST, request.FILES)
@@ -142,7 +132,7 @@ def formulaire(request):
 
 
 # Vue pour supprimer une publication
-@login_required
+@login_required(login_url='/not-logged-in/')
 def deletePost(request, pk):
     post = Posts.objects.get(id=pk)
 
@@ -160,9 +150,10 @@ def deletePost(request, pk):
 
 
 # Vue pour mettre à jour une publication existante
-@login_required
+@login_required(login_url='/not-logged-in/')
 def updatePost(request, pk):
     post = Posts.objects.get(id=pk)
+    category = post.categorie
     form = PostForm(instance=post)
     context = {'form': form}
 
@@ -174,6 +165,8 @@ def updatePost(request, pk):
         form = PostForm(request.POST, request.FILES, instance=post)
         if form.is_valid():
             form.save()
+
+            return redirect(reverse(category))
 
     return render(request, 'posts/form_post.html', context)
 
@@ -218,92 +211,4 @@ def nightClubs(request):
     context = {'posts': posts}
     return render(request, 'posts/night_clubs.html', context)
 
-
 # Vue pour l'inscription d'un nouvel utilisateur
-def register(request):
-    if request.method == 'POST':
-        form = CustomRegistrationForm(request.POST)
-        if form.is_valid():
-            prenom = form.cleaned_data['prenom']
-            nom = form.cleaned_data['nom']
-            username = form.cleaned_data['username']
-            email = form.cleaned_data['email']
-            password = form.cleaned_data['password1']
-            user = User.objects.create_user(first_name=prenom, last_name=nom, username=username, email=email,
-                                            password=password)
-            # Créer un profil pour l'utilisateur
-            user_profile = UserProfile.objects.create(user=user)
-            login(request, user)
-            return redirect('home')  # Redirigez l'utilisateur vers la page d'accueil après l'inscription réussie
-
-    else:
-        form = CustomRegistrationForm()
-    return render(request, 'register/register.html', {'form': form})
-
-
-# Vue pour la connexion de l'utilisateur
-def custom_login(request):
-    if request.method == "POST":
-        form = AuthenticationForm(data=request.POST)
-        if form.is_valid():
-            user = form.get_user()
-            login(request, user)
-            return redirect('home')
-    else:
-        form = AuthenticationForm()
-    return render(request, 'register/login.html', {'form': form})
-
-
-# Vue pour la déconnexion de l'utilisateur
-def custom_logout(request):
-    logout(request)
-    return redirect('home')
-
-
-# Classe pour la vue personnalisée de réinitialisation du mot de passe
-class CustomPasswordResetView(PasswordResetView):
-    # Spécifie le modèle de la page de réinitialisation du mot de passe
-    template_name = 'registration/password_reset_form.html'
-
-    # Spécifie le modèle de l'e-mail envoyé pour réinitialiser le mot de passe
-    email_template_name = 'registration/password_reset_email.html'
-
-    # Spécifie le modèle de l'objet (sujet) de l'e-mail
-    subject_template_name = 'registration/password_reset_subject.txt'
-
-    # URL de redirection après une réinitialisation de mot de passe réussie
-    success_url = '/password_reset/done/'
-
-
-# Vue pour afficher le profil de l'utilisateur
-def view_profile(request):
-    # Récupère le profil de l'utilisateur actuellement connecté
-    user_profile = UserProfile.objects.get(user=request.user)
-    if request.method == 'POST':
-        # Si le formulaire est soumis en tant que POST
-        form = UserProfileForm(request.POST, request.FILES, instance=user_profile)
-        if form.is_valid():
-            # Si le formulaire est valide, enregistre les données dans le profil
-            form.save()
-            return redirect('view_profile')  # Redirige l'utilisateur vers sa page de profil
-    else:
-        # Si la méthode est GET ou le formulaire est invalide, initialise le formulaire avec les données du profil
-        form = UserProfileForm(instance=user_profile)
-    return render(request, 'profile/profile.html', {'user_profile': user_profile, 'form': form})
-
-
-# Vue pour éditer le profil de l'utilisateur
-def edit_profile(request):
-    # Récupère le profil de l'utilisateur actuellement connecté
-    user_profile = UserProfile.objects.get(user=request.user)
-    if request.method == 'POST':
-        # Si le formulaire est soumis en tant que POST
-        form = UserProfileForm(request.POST, request.FILES, instance=user_profile)
-        if form.is_valid():
-            # Si le formulaire est valide, enregistre les données mises à jour dans le profil
-            form.save()
-            return redirect('view_profile')  # Redirige l'utilisateur vers sa page de profil
-    else:
-        # Si la méthode est GET ou le formulaire est invalide, initialise le formulaire avec les données du profil
-        form = UserProfileForm(instance=user_profile)
-    return render(request, 'profile/edit_profile.html', {'form': form})

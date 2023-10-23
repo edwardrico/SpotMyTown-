@@ -1,6 +1,8 @@
 {% extends 'main/main_categorie.html' %}
 {% load static %}
 {% block content %}
+
+
 <style>
   .card-title { /* Ajout du point pour indiquer une classe CSS */
     font-size: 1.25rem;
@@ -13,11 +15,13 @@
     text-align: center;
   }
 </style>
+
+
 <div class="d-flex justify-content-center align-items-center" style="min-height: 90vh; background-color: rgba(255, 0, 0, 0.1);">
   <div class="card border-danger mb-3" style="max-width: 800px;">
     <div class="row g-0">
       <div class="col-md-4">
-        <img src="{{ post.imagen_posts.url }}" class="img-fluid rounded-start" alt="image_post">
+        <img src="{{ post.imagen_posts.url }}" class="img-fluid rounded-start" alt="{{post.title}}">
       </div>
       <div class="col-md-8">
         <div class="card-body">

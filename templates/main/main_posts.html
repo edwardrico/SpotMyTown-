@@ -3,7 +3,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Posts</title>
+    <title>{{ post.title }}</title>
+    <meta name="keywords" content="{{ post.keywords }}">
+    <meta name="description" content="{{ post.description }}">
+
     <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
     <link rel="shortcut icon" href="{% static 'favicon.png'%}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -16,15 +19,16 @@
     <link rel="stylesheet" href="{% static 'css/aos.css'%}">
     <link rel="stylesheet" href="{% static 'css/glightbox.min.css'%}">
     <link rel="stylesheet" href="{% static 'css/style.css'%}">
-    <link rel="stylesheet" href="{% static 'rateyo/jquery.rateyo.min.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
-
 </head>
+
 <body>
+
+
     {% block content %}
     {% endblock content %}
-
+</body>
     <script src="{%static 'js/bootstrap.bundle.min.js'%}"></script>
     <script src="{% static 'js/tiny-slider.js'%}"></script>
     <script src="{% static 'js/flatpickr.min.js'%}"></script>
@@ -33,9 +37,7 @@
     <script src="{% static 'js/navbar.js'%}"></script>
     <script src="{%static 'js/counter.js'%}"></script>
     <script src="{% static 'js/custom.js'%}"></script>
-    <script src="{% static 'rateyo/jquery.rateyo.min.js' %}"></script>
-    <script src="{% static 'star_ratings/rating.js' %}"></script>
-    <script src="{% static 'star_ratings/rest.js' %}"></script>
-    <script src="{% static 'star_ratings/utils.js' %}"></script>
-</body>
+
+
+
 </html>

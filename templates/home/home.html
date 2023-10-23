@@ -108,7 +108,7 @@
 							<li class="user-profile end ">
 								<a href="{% url 'logout'%}"></a>
 									<a href="{% url 'view_profile' %}">
-        					<img src="{{ user.userprofile.profile_pic.url }}" alt="Photo de profil" class="rounded-circle" width="30" height="30">
+        					<img src="{{ user.userprofile.profile_pic.url }}" alt="{{ post.user.username }}" class="rounded-circle" width="30" height="30">
     						</a>
 								<span>{{ user.username }}</span>
 								</li>

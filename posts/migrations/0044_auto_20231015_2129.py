@@ -2,8 +2,6 @@
 
 from django.db import migrations
 
-from posts import models
-
 
 class Migration(migrations.Migration):
 
