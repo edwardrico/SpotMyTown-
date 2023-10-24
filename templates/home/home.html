@@ -7,21 +7,30 @@
 .site-nav {
     position: fixed;
     z-index: 1000;
-    width: 100%;
-    background-color: rgba(0, 0, 0, 0.4);
+    background-color: rgba(47,79,79, 0.4);
     color:black;
     text-align:center ;
-    padding: 10px 0;
-    transition: background-color 0.3s ease;
+	transition: background-color 0.3s ease;
+    margin: 0 20px;
+    width: calc(100% - 40px);
+
 }
+
+
+
+.nav-link:hover {
+    color: #214252;
+    background-color: #2F4F4F;
+    border-color: #214252;
+    border-radius: 40px;
+}
+
 .site-nav a {
     text-shadow: rgba(0, 0, 0, 0.6);
     font-size: 25px;
     transition: color 0.3s ease;
 }
-.site-nav ul:hover {
- color: #214252;
- }
+
 
 .header-carousel {
     background-color: rgba(0, 0, 0, 0.5);
@@ -43,8 +52,8 @@
     line-height: 1.5;
   }
   .user-profile span {
-    font-weight: bold; /* Mettre en gras le message de bienvenue */
-    color: #fff; /* Couleur du texte en blanc */
+    font-weight: bold;
+    color: #fff;
 }
 
 /* Styles pour la photo de profil */
@@ -53,10 +62,16 @@
 
 }
 .carousel-item img {
-    max-height: 800px; /* Vous pouvez ajuster la hauteur maximale selon vos besoins */
+    max-height: 800px;
     width: auto;
-    margin: 0 auto; /* Centrer l'image horizontalement */
+    margin: 0 auto;
   }
+
+.carousel-container {
+	margin: 0 20px;
+}
+
+
 
 @media screen and (max-width: 768px) {
 .user-profile span {
@@ -84,9 +99,9 @@
                     </div>
                     <div class="col-8 text-center">
                         <ul class="js-clone-nav d-none d-lg-inline-block text-start site-menu mx-auto">
-                            <li class="active"><a href="{% url 'home'%}">Home</a></li>
+                            <li class="active"><a href="{% url 'home'%}"class="nav-link">Home</a></li>
                             <li class="has-children">
-                                <a href="{% url 'home' %}">Pages</a>
+                                <a href="{% url 'home' %}"class="nav-link">Pages</a>
                                 <ul class="dropdown">
                                     <li><a href="blog.html">Article</a></li>
                                     <li><a href="single.html">Evenement</a></li>
@@ -104,15 +119,14 @@
                                     </li>
                                 </ul>
                             </li>
-                            <li><a href="category.html">About</a></li>
-                             <li><a href="category.html">About</a></li>
+                            <li><a href="#"class="nav-link">About</a></li>
                             {% if not user.is_authenticated %}
-                            <li><a href="{% url 'error_login' %}">Posts</a></li>
+                            <li><a href="{% url 'error_login' %}"class="nav-link">Posts</a></li>
                            {%else%}
-                            <li><a href="{% url 'formPost' %}">Posts</a></li>
+                            <li><a href="{% url 'formPost' %}"class="nav-link">Posts</a></li>
                             {% endif %}
 							{% if user.is_authenticated %}
-							<li><a href="{% url 'logout'%}">Déconnexion</a></li>
+							<li><a href="{% url 'logout'%}"class="nav-link" >Déconnexion</a></li>
 							<li class="user-profile end ">
 								<a href="{% url 'logout'%}"></a>
 									<a href="{% url 'view_profile' %}">
@@ -121,7 +135,7 @@
 								<span>{{ user.username }}</span>
 								</li>
 									{% else %}
-							<li><a href="{% url 'login'%}">Connexion</a></li>
+							<li><a href="{% url 'login'%}"class="nav-link">Connexion</a></li>
 							{% endif %}
 
 						</ul>
@@ -135,7 +149,9 @@
             </div>
         </div>
     </div>
+
 </nav>
+<div class="carousel-container">
 <div id="carouselExampleFade" class="carousel slide carousel-fade header-carousel" data-bs-ride="carousel">
   <div class="carousel-inner">
     <div class="carousel-item active">
@@ -169,7 +185,7 @@
     <span class="visually-hidden">Next</span>
   </button>
 </div>
-
+</div>
 
 	<section class="section bg-light">
 
@@ -353,6 +369,8 @@
     background-repeat: no-repeat;
     background-attachment: fixed;
     height: 30em;
+    margin: 0 20px;
+
 
   ">
   <div class="text-center">
@@ -657,7 +675,7 @@
 			</div>
 		</div>
 	</div>
-	<footer class="site-footer" style="background-color:#5D8AA8";>
+	<footer class="site-footer" style="background-color:#2F4F4F";>
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-4">

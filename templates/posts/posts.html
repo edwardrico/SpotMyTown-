@@ -148,16 +148,7 @@ text-transform: uppercase;
 .user
     margin-top: -20px;
 
-@media screen and (max-width: 768px) {
-        .card {
-            justify-content: center;
-        }
 
-        .rating {
-            border: none;
-            margin-right:32px;
-}
-    }
 
 </style>
 
@@ -281,29 +272,26 @@ text-transform: uppercase;
                         <p>Categories: {{ post.categorie }}</p>
                     </div>
 
-                    <div class="pt-5 comment-wrap">
+                   <div class="pt-5 comment-wrap">
                         <div class="texte">
                             <h3 class="mb-5 heading">{{ comments.count }} Comments</h3>
                         </div>
-                        <button class="btn btn-primary" data-bs-toggle="collapse" data-bs-target="#commentList"
-                            aria-expanded="false">
+                        <button class="btn btn-primary" data-bs-toggle="collapse" data-bs-target="#commentList" aria-expanded="false">
                             Voir les commentaires
                         </button>
                         <ul class="comment-list collapse" id="commentList">
                             {% for comment in comments %}
                             <li class="comment">
                                 <div class="vcard">
-                                    <img
-                                        src="{{ comment.user.userprofile.profile_pic.url }}"
+                                    <img src="{{ comment.user.userprofile.profile_pic.url }}"
                                         alt="{{ post.user.username }}" class="rounded-circle" width="50" height="50">
                                 </div>
                                 <div class="comment-body">
                                     <h3>{{ comment.user.username }}</h3>
-
                                     <div class="meta">{{ comment.created_at|date:"F d, Y \a\t H:iA" }}</div>
                                     <p>{{ comment.text }}</p>
                                     <p><a href="#" class="reply rounded" data-bs-toggle="collapse" data-bs-target="#replyForm-{{ comment.id }}">Reply</a></p>
-                                    <!-- Formulaire de réponse (masqué par défaut) -->
+                                    <!-- Formulario de respuesta (oculto por defecto) -->
                                     <div class="collapse" id="replyForm-{{ comment.id }}">
                                         <form method="post" action="{% url 'commentaire' post.id %}" class="p-5 bg-light">
                                             {% csrf_token %}
@@ -314,8 +302,8 @@ text-transform: uppercase;
                                                     class="form-control" required></textarea>
                                             </div>
                                             <div class="form-group">
-                                                {%if not user.is_authenticated %}
-                                                <p>Vous devez être connecté pour repondre un commentaire. <a href="{% url 'login' %}">Connectez-vous ici</a>.</p>
+                                                {% if not user.is_authenticated %}
+                                                <p>Vous devez être connecté pour répondre à un commentaire. <a href="{% url 'login' %}">Connectez-vous ici</a>.</p>
                                                 {% else %}
                                                 <input type="submit" value="Post Reply" class="btn btn-primary">
                                                 {% endif %}
@@ -323,52 +311,50 @@ text-transform: uppercase;
                                         </form>
                                     </div>
 
-                                    <ul class="comment-list">
-                                        {% for reply in comment.comment_set.all %}
-                                        <li class="comment">
-                                            <div class="vcard">
-                                                <img
-                                                    src="{{ reply.user.userprofile.profile_pic.url }}"
-                                                    alt="{{ post.user.username }}" class="rounded-circle" width="50" height="50">
-                                            </div>
-                                            <div class="comment-body">
-                                                <h3>{{ reply.user.username }}</h3>
-                                                <div
-                                                    class="meta">{{ reply.created_at|date:"F d, Y \a\t H:iA" }}</div>
-                                                <p>{{ reply.text }}</p>
-                                            </div>
-                                        </li>
-                                        {% endfor %}
-                                    </ul>
+                <!-- Mostrar las respuestas para este comentario -->
+                <ul class="comment-list">
+                    {% for reply in comment.comment_set.all %}
+                    <li class="comment">
+                        <div class="vcard">
+                            <img src="{{ reply.user.userprofile.profile_pic.url }}"
+                                alt="{{ post.user.username }}" class="rounded-circle" width="50" height="50">
+                        </div>
+                        <div class="comment-body">
+                            <h3>{{ reply.user.username }}</h3>
+                            <div class="meta">{{ reply.created_at|date:"F d, Y \a\t H:iA" }}</div>
+                            <p>{{ reply.text }}</p>
+                        </div>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
 
-                                </div>
-                            </li>
-                            {% endfor %}
-                        </ul>
-                    </div>
-
+<!-- Formulario para dejar un comentario -->
                     <div class="comment-form-wrap pt-5">
-
                         <h3 class="mb-5">Leave a comment</h3>
                         <form method="post" action="{% url 'commentaire' post.id %}" class="p-5 bg-light">
                             {% csrf_token %}
                             <div class="form-group">
-                                <label for="comment-text">Comment</label>
-                                <textarea name="text" id="comment-text" cols="30" rows="5" class="form-control"
-                                    required></textarea>
+                                <label for ="comment-text">Comment</label>
+                                <textarea name="text" id="comment-text" cols="30" rows="5" class="form-control" required></textarea>
                             </div>
                             <div class="form-group">
                                 {% if not user.is_authenticated %}
                                 <p>Vous devez être connecté pour commenter. <a href="{% url 'login' %}">Connectez-vous ici</a>.</p>
                                 {% else %}
-                                 <input type="submit" value="Post Comment" class="btn btn-primary">
+                                <input type="submit" value="Post Comment" class="btn btn-primary">
                                 {% endif %}
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
- <div class="col-md-12 col-lg-4 sidebar">
+
+            <div class="col-md-12 col-lg-4 sidebar">
     <div class="sidebar-box">
         <div class="row">
             <div class="col-3 d-flex justify-content-end">

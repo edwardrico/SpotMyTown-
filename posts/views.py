@@ -8,7 +8,7 @@ from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 
 
-# Create vieux de page 404
+
 
 
 # Vue pour afficher une publication individuelle
@@ -18,7 +18,7 @@ def post(request, pk, ):
     except ObjectDoesNotExist:
         raise Http404("La publication n'existe pas")
 
-    comments = Comment.objects.filter(post=post).order_by('-created_at')
+    comments = Comment.objects.filter(post=post, parent_comment=None).order_by('-created_at')
     ratings = Rating.objects.filter(post=post)
     average_rating = ratings.aggregate(Avg('rating'))['rating__avg']
     rating_count = ratings.count()
