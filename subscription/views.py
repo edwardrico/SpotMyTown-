@@ -6,6 +6,11 @@ from subscription.forms import CustomRegistrationForm
 
 
 # Create your views here.
+# views confirmation de l'inscription
+def register_success(request):
+    return render(request, 'register/register_success.html')
+
+
 def register(request):
     if request.method == 'POST':
         form = CustomRegistrationForm(request.POST)
@@ -18,9 +23,10 @@ def register(request):
             user = User.objects.create_user(first_name=prenom, last_name=nom, username=username, email=email,
                                             password=password)
             # Créer un profil pour l'utilisateur
+
             user_profile = UserProfile.objects.create(user=user)
             login(request, user)
-            return redirect('home')  # Redirigez l'utilisateur vers la page d'accueil après l'inscription réussie
+            return redirect('register_success')
 
     else:
         form = CustomRegistrationForm()

@@ -148,7 +148,16 @@ text-transform: uppercase;
 .user
     margin-top: -20px;
 
+@media screen and (max-width: 768px) {
+        .card {
+            justify-content: center;
+        }
 
+        .rating {
+            border: none;
+            margin-right:32px;
+}
+    }
 
 </style>
 
@@ -184,7 +193,7 @@ text-transform: uppercase;
                                             <li><a href="{% url 'restaurant'%}">Restaurat</a></li>
                                             <li><a href="{% url 'bar'%}">Bar</a></li>
                                             <li><a href="{% url 'tourisme'%}">Tourisme</a></li>
-                                            <li><a href="#">Nigth clubs</a></li>
+                                            <li><a href="{% url 'nightClubs'%}">Nigth clubs</a></li>
                                         </ul>
                                     </li>
                                 </ul>
@@ -427,10 +436,9 @@ text-transform: uppercase;
                  </div>
             </div>
         </div>
-            </div>
+        </div>
     </div>
 </div>
-
  </section>
 
     <section class="section posts-entry posts-entry-sm bg-light">

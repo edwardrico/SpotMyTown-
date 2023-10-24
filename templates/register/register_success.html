@@ -1,4 +1,4 @@
-{% extends 'main/main_error_login.html' %}
+{% extends 'main/main_register.html' %}
 {% load static %}
 {% block content %}
 
@@ -20,7 +20,7 @@ section {
     background: #fff;
 }
 
-.error-page {
+.success {
     background-color: #fff;
     -webkit-backdrop-filter: blur(9px);
     backdrop-filter: blur(15px);
@@ -30,8 +30,8 @@ section {
 .text-center {
     text-align: center!important;
 }
-.error-page h1 {
-    font-size: 200px;
+.success h1 {
+    font-size: 65px;
     line-height: 1;
     font-weight: 600;
 }
@@ -42,24 +42,24 @@ section {
     margin-bottom: 1.5rem!important;
 }
 
-@media (max-width: 768px) {
-    .error-page h1 {
-      font-size: 5em; /* Réduisez la taille de la police pour les écrans plus petits */
+ @media (max-width: 768px) {
+    .success h1 {
+      font-size: 3.5em; /* Ajustez la taille de la police pour les écrans plus petits */
     }
   }
 </style>
 
-<section class="p-0  cover-background" >
-    <div class="container-fluid d-flex flex-column">
-        <div class="row align-items-center justify-content-center min-vh-100">
-            <div class="col-md-9 col-lg-6 my-5">
-                <div class="text-center error-page">
-                    <h1 class="mb-4 text-primary">Oups!</h1>
-                    <h2 class="mb-4 text-grey ">Vous devez être connecté pour réaliser cette action!</h2>
-                    <p class="w-sm-80 mx-auto mb-4 text-black">Pour realiser une action vous devrais etre connecter si vous n'avez pas une compte vous pouver la cree en rentren a login sino vous pouvais retourne a home </p>
+<section class="p-0 bg-img cover-background">
+    <div class="container-fluid d-flex flex-column ">
+        <div class="row align-items-center  justify-content-center min-vh-100">
+            <div class="col-md-9 col-lg-6 my-5 ">
+                <div class="text-center success">
+                    <h1 class = "mb-4 text-primary fa fa-thumbs-up"></h1>
+                    <h1 class="mb-4 text-primary">Felicitations</h1>
+                    <h2 class="mb-4 text-grey ">Vous êtes désormais enregistré.</h2>
+                    <p class="w-sm-80 mx-auto mb-4 text-black">Nous vous souhaitons la bienvenue dans la communauté de Petit Glouton. Vous pouvez vous connecter et commencer votre expérience. N'oubliez pas de partager vos publications pour guider les autres visiteurs vers une expérience gastronomique inoubliable dans la ville de Nantes  </p>
                     <div>
                         <a href="{% url 'login' %}" class="btn btn-primary btn-lg me-sm-2 mb-2 mb-sm-0">Login</a>
-                        <a href="{% url 'home' %}" class="btn btn-primary btn-lg me-sm-2 mb-2 mb-sm-0">Home</a>
                     </div>
                 </div>
             </div>

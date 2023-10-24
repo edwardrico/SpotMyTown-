@@ -4,6 +4,10 @@ from django.contrib.auth.views import PasswordResetView
 from django.shortcuts import render, redirect
 
 
+def error_login(request):
+    return render(request, '404/error_login.html')
+
+
 # Vue pour la connexion de l'utilisateur
 def custom_login(request):
     if request.method == "POST":
@@ -20,7 +24,7 @@ def custom_login(request):
     else:
         message = None
 
-    return render(request, 'register/login.html', {'form': form})
+    return render(request, 'login/login.html', {'form': form})
 
 
 # Vue pour la déconnexion de l'utilisateur
@@ -32,13 +36,13 @@ def custom_logout(request):
 # Classe pour la vue personnalisée de réinitialisation du mot de passe
 class CustomPasswordResetView(PasswordResetView):
     # Spécifie le modèle de la page de réinitialisation du mot de passe
-    template_name = 'registration/password_reset_form.html'
+    template_name = 'login/password_reset_form.html'
 
     # Spécifie le modèle de l'e-mail envoyé pour réinitialiser le mot de passe
-    email_template_name = 'registration/password_reset_email.html'
+    email_template_name = 'login/password_reset_email.html'
 
     # Spécifie le modèle de l'objet (sujet) de l'e-mail
-    subject_template_name = 'registration/password_reset_subject.txt'
+    subject_template_name = 'login/password_reset_subject.txt'
 
     # URL de redirection après une réinitialisation de mot de passe réussie
     success_url = '/password_reset/done/'

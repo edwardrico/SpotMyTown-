@@ -9,8 +9,6 @@ from django.contrib.auth.decorators import login_required
 
 
 # Create vieux de page 404
-def error_404_view(request):
-    return render(request, '404/error_login.html')
 
 
 # Vue pour afficher une publication individuelle

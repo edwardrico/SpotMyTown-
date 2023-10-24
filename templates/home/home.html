@@ -27,10 +27,6 @@
     background-color: rgba(0, 0, 0, 0.5);
 }
 
-
-
-
-
 .title-text {
 	color: white;
   	text-shadow: rgba(255, 255, 255, 0.7);
@@ -56,6 +52,12 @@
     border: 0.5px solid #fff;
 
 }
+.carousel-item img {
+    max-height: 800px; /* Vous pouvez ajuster la hauteur maximale selon vos besoins */
+    width: auto;
+    margin: 0 auto; /* Centrer l'image horizontalement */
+  }
+
 @media screen and (max-width: 768px) {
 .user-profile span {
 	color:black;
@@ -96,7 +98,8 @@
                                             <li><a href="{% url 'restaurant'%}">Restaurat</a></li>
                                             <li><a href="{% url 'bar'%}">Bar</a></li>
                                             <li><a href="{% url 'tourisme'%}">Tourisme</a></li>
-                                            <li><a href="{% url 'nightClubs'%}">Night Clubs</a></li>
+                                            <li><a href="{% url 'nightClubs'%}">Nigth clubs</a></li>
+
                                         </ul>
                                     </li>
                                 </ul>
@@ -654,14 +657,11 @@
 			</div>
 		</div>
 	</div>
-	<footer class="site-footer">
+	<footer class="site-footer" style="background-color:#5D8AA8";>
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-4">
-					<div class="widget">
-						<h3 class="mb-4">About</h3>
-						<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-					</div> <!-- /.widget -->
+
 					<div class="widget">
 						<h3>Social</h3>
 						<ul class="list-unstyled social">
