@@ -8,9 +8,6 @@ from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 
 
-
-
-
 # Vue pour afficher une publication individuelle
 def post(request, pk, ):
     try:

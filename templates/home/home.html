@@ -4,72 +4,119 @@
 
 <style>
 
-.site-nav {
-    position: fixed;
-    z-index: 1000;
-    background-color: rgba(47,79,79, 0.4);
-    color:black;
-    text-align:center ;
-	transition: background-color 0.3s ease;
-    margin: 0 20px;
-    width: calc(100% - 40px);
+#mainNavigation a {
+      font-family: 'Cabin', sans-serif;
+      font-size:14px;
+      text-transform:uppercase;
+      letter-spacing:2px;
+      text-shadow:1px 1px 2px rgba(0,0,0,0.6)
+
+    }
+
+    .dropdown-menu {
+      background:#03727d
+    }
+    a.dropdown-toggle {
+      color:#dfdfdf !important
+    }
+    a.dropdown-item:hover {
+      color:#03727d !important
+    }
+    .nav-item a{
+      color:#dfdfdf;
+    }
+    .nav-item a:hover {
+      color:#fff
+    }
+    .nav-item{
+      min-width:12vw;
+    }
+    #mainNavigation {
+      position:fixed;
+      top:0;
+      left:0;
+      width:100%;
+      z-index:123;
+      padding-bottom:120px;
+
+
+      /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#000000+0,000000+100&0.65+0,0+100;Neutral+Density */
+    background: -moz-linear-gradient(top,  rgba(0,0,0,0.65) 0%, rgba(0,0,0,0) 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top,  rgba(0,0,0,0.65) 0%,rgba(0,0,0,0) 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom,  rgba(0,0,0,0.65) 0%,rgba(0,0,0,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a6000000', endColorstr='#00000000',GradientType=0 ); /* IE6-9 */
+    }
+    #navbarNavDropdown.collapsing .navbar-nav,
+    #navbarNavDropdown.show .navbar-nav{
+      background:#037582;
+      padding:12px;
+    }
 
 }
 
+           .user-profile span {
+            font-family: 'Cabin', sans-serif;
+            letter-spacing:2px;
+             font-weight: bold;
+             margin-top: 10px;
+             color: #fff;
+
+           }
+
+           .user-profile {
+             position: absolute;
+             top: 0;
+             right: 0;
+             margin-right: 32px;
+             margin-top: 32px;
+             display: flex;
+             align-items: center;
+             justify-content: center;
+             flex-direction: column;
+             text-align: center;
+             cursor: pointer;
+           }
+
+           .user-profile span {
+            font-family: 'Cabin', sans-serif;
+            letter-spacing:1px;
+            margin-top: 5px;
+            color: #fff;
+
+           }
+
+           .user-profile img {
+             border: 0.5px solid ;
+           }
 
 
-.nav-link:hover {
-    color: #214252;
-    background-color: #2F4F4F;
-    border-color: #214252;
-    border-radius: 40px;
-}
 
-.site-nav a {
-    text-shadow: rgba(0, 0, 0, 0.6);
-    font-size: 25px;
-    transition: color 0.3s ease;
-}
-
-
-.header-carousel {
-    background-color: rgba(0, 0, 0, 0.5);
-}
-
-.title-text {
-	color: white;
-  	text-shadow: rgba(255, 255, 255, 0.7);
-    font-size: 2.5em;
-    font-weight: bold;
-    margin-bottom: 20px;
-  }
-
-  .text-content {
-    font-size: 1.3em;
-    color: white;
-  	text-shadow: (255, 255, 255, 0.5);
-    text-align: center;
-    line-height: 1.5;
-  }
-  .user-profile span {
-    font-weight: bold;
-    color: #fff;
-}
-
-/* Styles pour la photo de profil */
-.user-profile img {
-    border: 0.5px solid #fff;
-
-}
 .carousel-item img {
     max-height: 800px;
     width: auto;
     margin: 0 auto;
+    background-color: rgba(0, 0, 0, 0.3);
+
   }
 
-.carousel-container {
-	margin: 0 20px;
+
+
+.social-icons {
+    list-style: none;
+    padding: 0;
+    }
+
+.social-icons li {
+    display: inline-block;
+    margin-right: 20px;
 }
+
+.social-icons i {
+    border: 1px solid ;
+    padding: 5px;
+    border-radius: 25%;
+}
+
 
 
 
@@ -81,77 +128,66 @@
 }
 </style>
 
-<div class="site-mobile-menu site-navbar-target">
-    <div class="site-mobile-menu-header">
-        <div class="site-mobile-menu-close">
-            <span class="icofont-close js-menu-toggle"></span>
+<div id="mainNavigation">
+      <nav role="navigation">
+        <div class="py-3 text-center border-bottom">
+          <img src="/static_files/images/logos/logo_3_white_2.png" alt="" class="invert">
+            <h1 class="text-white">Petit Glouton</h1>
         </div>
-    </div>
-    <div class="site-mobile-menu-body"></div>
-</div>
-<nav class="site-nav">
-    <div class="container">
-        <div class="menu-bg-wrap">
-            <div class="site-navigation">
-                <div class="row g-0 align-items-center">
-                    <div class="col-2">
-                        <a href="{% url 'home'%}" class="logo m-0 float-start">Petit glouton<span class="text-primary"></span></a>
-                    </div>
-                    <div class="col-8 text-center">
-                        <ul class="js-clone-nav d-none d-lg-inline-block text-start site-menu mx-auto">
-                            <li class="active"><a href="{% url 'home'%}"class="nav-link">Home</a></li>
-                            <li class="has-children">
-                                <a href="{% url 'home' %}"class="nav-link">Pages</a>
-                                <ul class="dropdown">
-                                    <li><a href="blog.html">Article</a></li>
-                                    <li><a href="single.html">Evenement</a></li>
-                                    <li><a href="category.html">Culture</a></li>
-                                    <li><a href="about.html">Top posts</a></li>
-                                    <li class="has-children">
-                                        <a href="#">Categorie</a>
-                                        <ul class="dropdown">
-                                            <li><a href="{% url 'restaurant'%}">Restaurat</a></li>
-                                            <li><a href="{% url 'bar'%}">Bar</a></li>
-                                            <li><a href="{% url 'tourisme'%}">Tourisme</a></li>
-                                            <li><a href="{% url 'nightClubs'%}">Nigth clubs</a></li>
-
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li><a href="#"class="nav-link">About</a></li>
-                            {% if not user.is_authenticated %}
-                            <li><a href="{% url 'error_login' %}"class="nav-link">Posts</a></li>
-                           {%else%}
-                            <li><a href="{% url 'formPost' %}"class="nav-link">Posts</a></li>
-                            {% endif %}
-							{% if user.is_authenticated %}
-							<li><a href="{% url 'logout'%}"class="nav-link" >Déconnexion</a></li>
-							<li class="user-profile end ">
+      </nav>
+      <div class="navbar-expand-md">
+        <div class="navbar-dark text-center my-2">
+          <button class="navbar-toggler w-75" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span> <span class="align-middle">Menu</span>
+          </button>
+        </div>
+        <div class="text-center mt-3 collapse navbar-collapse" id="navbarNavDropdown">
+          <ul class="navbar-nav mx-auto ">
+            <li class="nav-item">
+              <a class="nav-link " aria-current="page" href="{% url 'home'%}">Home</a>
+            </li>
+               <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Categories
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <li><a class="dropdown-item" href="{% url 'restaurant' %}">Restaurant</a></li>
+                <li><a class="dropdown-item" href="{% url 'bar'%}">Bar</a></li>
+                <li><a class="dropdown-item" href="{% url 'tourisme' %}">Tourisme</a></li>
+                <li><a class="dropdown-item" href="{% url 'nightClubs'%}">Nigh Clubs</a></li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">About</a>
+            </li>
+            <li class="nav-item">
+                {% if not user.is_authenticated %}
+              <a class="nav-link" href="{% url 'error_login' %}">Créer un post</a>
+                 {%else%}
+              <a class="nav-link" href="{% url 'formPost' %}">Créer un post</a>
+                {% endif %}
+            </li>
+            <li class="nav-item">
+                {% if user.is_authenticated %}
+              <a class="nav-link" href="{% url 'logout'%}">Déconnexion</a>
+                <li class="user-profile end ">
 								<a href="{% url 'logout'%}"></a>
 									<a href="{% url 'view_profile' %}">
-        					<img src="{{ user.userprofile.profile_pic.url }}" alt="{{ post.user.username }}" class="rounded-circle" width="30" height="30">
+        					<img src="{{ user.userprofile.profile_pic.url }}" alt="Photo de profil" class="rounded-circle" width="30" height="30">
     						</a>
 								<span>{{ user.username }}</span>
-								</li>
-									{% else %}
-							<li><a href="{% url 'login'%}"class="nav-link">Connexion</a></li>
-							{% endif %}
 
-						</ul>
-                    </div>
-                    <div class="col-2 text-end">
-							<a href="#" class="burger ms-auto float-end site-menu-toggle js-menu-toggle d-inline-block d-lg-none light">
-								<span></span>
-                            </a>
-                    </div>
-                </div>
-            </div>
+                {% else %}
+              <a class="nav-link" href="{% url 'login'%}">Connexion</a>
+                {% endif %}
+            </li>
+          </ul>
         </div>
+      </div>
     </div>
 
-</nav>
-<div class="carousel-container">
+
+<div class="carousel-container border-radius-30px">
 <div id="carouselExampleFade" class="carousel slide carousel-fade header-carousel" data-bs-ride="carousel">
   <div class="carousel-inner">
     <div class="carousel-item active">
@@ -370,7 +406,7 @@
     background-attachment: fixed;
     height: 30em;
     margin: 0 20px;
-
+	border-radius: 20px;
 
   ">
   <div class="text-center">
@@ -675,23 +711,17 @@
 			</div>
 		</div>
 	</div>
-	<footer class="site-footer" style="background-color:#2F4F4F";>
+	<footer class="site-footer" style="background-color:#2F4F4F">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-4">
-
-					<div class="widget">
-						<h3>Social</h3>
-						<ul class="list-unstyled social">
-							<li><a href="#"><span class="icon-instagram"></span></a></li>
-							<li><a href="#"><span class="icon-twitter"></span></a></li>
-							<li><a href="#"><span class="icon-facebook"></span></a></li>
-							<li><a href="#"><span class="icon-linkedin"></span></a></li>
-							<li><a href="#"><span class="icon-pinterest"></span></a></li>
-							<li><a href="#"><span class="icon-dribbble"></span></a></li>
-						</ul>
-					</div> <!-- /.widget -->
-				</div> <!-- /.col-lg-4 -->
+					<h5>Red social</h5>
+                        <ul class="list-unstyled social-icons">
+							<li><a href="#"><i class="fab fa-instagram fa-3x"></i></a></li>
+							<li><a href="#"><i class="fab fa-twitter fa-3x"></i></a></li>
+							<li><a href="#"><i class="fab fa-facebook fa-3x"></i></a></li>
+                        </ul>
+					</div>
 				<div class="col-lg-4 ps-lg-5">
 					<div class="widget">
 						<h3 class="mb-4">Company</h3>
@@ -716,7 +746,7 @@
 
 			<div class="row mt-5">
 				<div class="col-12 text-center">
-					<p>Copyright &copy;<script>document.write(new Date().getFullYear());</script>. All Rights Reserved. &mdash; Designed with love by <a href="https://untree.co">Untree.co</a>  Distributed by <a href="https://themewagon.com">ThemeWagon</a> <!-- License information: https://untree.co/license/ -->
+					<p>Copyright &copy;<script>document.write(new Date().getFullYear());</script>. All Rights Reserved.
             </p>
           </div>
         </div>

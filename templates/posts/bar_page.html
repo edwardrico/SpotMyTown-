@@ -4,173 +4,244 @@
 
 <style>
 
-.site-nav {
-    position: fixed ;
-    z-index: 1000;
-    width: 100%;
-    background-color: rgba(0,0,0, 0.3);
-    color: black;
-    text-align: center;
-    padding: 10px 0;
-    transition: background-color 0.3s ease;
-}
+#mainNavigation a {
+      font-family: 'Cabin', sans-serif;
+      font-size:14px;
+      text-transform:uppercase;
+      letter-spacing:2px;
+      text-shadow:1px 1px 2px rgba(0,0,0,0.6)
 
-.site-nav a {
-    text-shadow: rgba(0, 0, 0, 0.6);
-    font-size: 25px;
-    transition: color 0.3s ease;
-}
-
-.site-nav ul:hover {
-    color: #214252;
-}
-
-.carousel {
-    position: relative;
-    margin-top: 0;
-}
-
-.scrolled-down .site-nav {
-    background-color: rgba(255, 255, 255, 0.9);
-}
-
-.scrolled-down .site-nav a {
-    color: black;
-}
-
-.title-text {
-    color: white;
-    font-size: 2em;
-    font-weight: bold;
-    margin-bottom: 20px;
-}
-
-.text-white {
-    font-size: 1.2em;
-    color: rgba(255, 255, 255, 0.9);
-    text-align: center;
-    line-height: 1.5;
-}
-
-.user-profile span {
-    font-weight: bold; /* Mettre en gras le message de bienvenue */
-    color: #fff; /* Couleur du texte en blanc */
-}
-
-/* Styles pour la photo de profil */
-.user-profile img {
-    border: 0.5px solid #fff;
-
-}
-
-@media screen and (max-width: 768px) {
-.user-profile span {
-	color:black;
-
- }
-}
-
-.user-posts{
-    margin-top: 10px;
     }
-.fa-star-filled {
-    color:#FFD700 ;
+
+    .dropdown-menu {
+      background:#03727d
+    }
+    a.dropdown-toggle {
+      color:#dfdfdf !important
+    }
+    a.dropdown-item:hover {
+      color:#03727d !important
+    }
+    .nav-item a{
+      color:#dfdfdf;
+    }
+    .nav-item a:hover {
+      color:#fff
+    }
+    .nav-item{
+      min-width:12vw;
+    }
+    #mainNavigation {
+      position:fixed;
+      top:0;
+      left:0;
+      width:100%;
+      z-index:123;
+      padding-bottom:120px;
+
+
+      /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#000000+0,000000+100&0.65+0,0+100;Neutral+Density */
+    background: -moz-linear-gradient(top,  rgba(0,0,0,0.65) 0%, rgba(0,0,0,0) 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top,  rgba(0,0,0,0.65) 0%,rgba(0,0,0,0) 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom,  rgba(0,0,0,0.65) 0%,rgba(0,0,0,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a6000000', endColorstr='#00000000',GradientType=0 ); /* IE6-9 */
+    }
+    #navbarNavDropdown.collapsing .navbar-nav,
+    #navbarNavDropdown.show .navbar-nav{
+      background:#037582;
+      padding:12px;
+    }
+
 }
+
+           .user-profile span {
+            font-family: 'Cabin', sans-serif;
+            letter-spacing:2px;
+             font-weight: bold;
+             margin-top: 10px;
+             color: #fff;
+
+           }
+
+           .user-profile {
+             position: absolute;
+             top: 0;
+             right: 0;
+             margin-right: 32px;
+             margin-top: 32px;
+             display: flex;
+             align-items: center;
+             justify-content: center;
+             flex-direction: column;
+             text-align: center;
+             cursor: pointer;
+           }
+
+           .user-profile span {
+            font-family: 'Cabin', sans-serif;
+            letter-spacing:1px;
+            margin-top: 5px;
+            color: #fff;
+
+           }
+
+           .user-profile img {
+             border: 0.5px solid ;
+           }
+
+          .user-posts{
+            margin-top: 10px;
+         }
+         .fa-star-filled {
+            color:#FFD700 ;
+         }
+
+        .search{
+           position: relative;
+           box-shadow: 0 0 40px rgba(51, 51, 51, .4);
+           width:200%;
+           background:white;
+           border-radius: 10px;
+           right: 50%;
+
+
+       }
+
+       .search input{
+            height: 60px;
+            text-indent: 40px;
+            border: 1px solid #d6d4d4;
+            border-radius: 10px;
+        }
+
+      .search .fa-search{
+            position: absolute;
+            top: 23px;
+            left: 16px;
+            color: #d6d4d4;
+
+       }
+
+       .search button{
+            position: absolute;
+            top: 5px;
+            right: 4px;
+            height: 50px;
+            width: 100px;
+            border-radius:  10px ;
+            color: white;
+            border: none;
+        }
+
+@media (max-width: 768px) {
+    .search {
+         width: 195%;
+        right: 48%;
+    }
+    .search button {
+        width:auto;
+    }
+
+    .user-profile span {
+            color:black;
+    }
+}
+
 </style>
 
 
 
 
-  <div class="site-mobile-menu site-navbar-target">
-    <div class="site-mobile-menu-header">
-        <div class="site-mobile-menu-close">
-            <span class="icofont-close js-menu-toggle"></span>
+  <div id="mainNavigation">
+      <nav role="navigation">
+        <div class="py-3 text-center border-bottom">
+          <img src="/static_files/images/logos/logo_3_white_2.png" alt="" class="invert">
+            <h1 class="text-white">Petit Glouton</h1>
         </div>
-    </div>
-    <div class="site-mobile-menu-body"></div>
-</div>
-<nav class="site-nav">
-    <div class="container">
-        <div class="menu-bg-wrap">
-            <div class="site-navigation">
-                <div class="row g-0 align-items-center">
-                    <div class="col-2">
-                        <a href="{% url 'home'%}" class="logo m-0 float-start">Petit glouton<span class="text-primary"></span></a>
-                    </div>
-                    <div class="col-8 text-center">
-                        <ul class="js-clone-nav d-none d-lg-inline-block text-start site-menu mx-auto">
-                            <li class="active"><a href="{% url 'home'%}">Home</a></li>
-                            <li class="has-children">
-                                <a href="{% url 'home' %}">Pages</a>
-                                <ul class="dropdown">
-                                    <li><a href="blog.html">Article</a></li>
-                                    <li><a href="single.html">Evenement</a></li>
-                                    <li><a href="category.html">Culture</a></li>
-                                    <li><a href="about.html">Top posts</a></li>
-                                    <li class="has-children">
-                                        <a href="#">Categorie</a>
-                                        <ul class="dropdown">
-                                            <li><a href="{% url 'restaurant'%}">Restaurat</a></li>
-                                            <li><a href="{% url 'bar'%}">Bar</a></li>
-                                            <li><a href="{% url 'tourisme'%}">Tourisme</a></li>
-                                            <li><a href="{% url 'nightClubs'%}">Nigth clubs</a></li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li><a href="category.html">About</a></li>
-                              <li><a href="category.html">About</a></li>
-                            {% if not user.is_authenticated %}
-                            <li><a href="{% url 'error_login' %}">Posts</a></li>
-                           {%else%}
-                            <li><a href="{% url 'formPost' %}">Posts</a></li>
-                            {% endif %}
-							{% if user.is_authenticated %}
-							<li><a href="{% url 'logout'%}">Déconnexion</a></li>
-							<li class="user-profile end ">
+      </nav>
+      <div class="navbar-expand-md">
+        <div class="navbar-dark text-center my-2">
+          <button class="navbar-toggler w-75" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span> <span class="align-middle">Menu</span>
+          </button>
+        </div>
+        <div class="text-center mt-3 collapse navbar-collapse" id="navbarNavDropdown">
+          <ul class="navbar-nav mx-auto ">
+            <li class="nav-item">
+              <a class="nav-link " aria-current="page" href="{% url 'home'%}">Home</a>
+            </li>
+               <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Categories
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <li><a class="dropdown-item" href="{% url 'restaurant' %}">Restaurant</a></li>
+                <li><a class="dropdown-item" href="{% url 'bar'%}">Bar</a></li>
+                <li><a class="dropdown-item" href="{% url 'tourisme' %}">Tourisme</a></li>
+                <li><a class="dropdown-item" href="{% url 'nightClubs'%}">Nigh Clubs</a></li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">About</a>
+            </li>
+            <li class="nav-item">
+                {% if not user.is_authenticated %}
+              <a class="nav-link" href="{% url 'error_login' %}">Créer un post</a>
+                 {%else%}
+              <a class="nav-link" href="{% url 'formPost' %}">Créer un post</a>
+                {% endif %}
+            </li>
+            <li class="nav-item">
+                {% if user.is_authenticated %}
+              <a class="nav-link" href="{% url 'logout'%}">Déconnexion</a>
+                <li class="user-profile end ">
 								<a href="{% url 'logout'%}"></a>
 									<a href="{% url 'view_profile' %}">
-        					<img src="{{ user.userprofile.profile_pic.url }}" alt="{{ post.user.username }}" class="rounded-circle" width="30" height="30">
+        					<img src="{{ user.userprofile.profile_pic.url }}" alt="Photo de profil" class="rounded-circle" width="30" height="30">
     						</a>
 								<span>{{ user.username }}</span>
-								</li>
-									{% else %}
-							<li><a href="{% url 'login'%}">Connexion</a></li>
-							{% endif %}
 
-						</ul>
-                    </div>
-                    <div class="col-2 text-end">
-							<a href="#" class="burger ms-auto float-end site-menu-toggle js-menu-toggle d-inline-block d-lg-none light">
-								<span></span>
-                            </a>
-                    </div>
-                </div>
-            </div>
+                {% else %}
+              <a class="nav-link" href="{% url 'login'%}">Connexion</a>
+                {% endif %}
+            </li>
+          </ul>
         </div>
+      </div>
     </div>
-</nav>
+
   <div class="p-5 text-center bg-image"
     style="
       background-image: url('{% static 'image/imagine1.jpeg' %}');
        background-size: cover;
        background-repeat: no-repeat;
        background-attachment: fixed;
-       height: 30em;
+       height: 40em;
+
     "
   >
-      <div class="d-flex justify-content-center align-items-center h-100">
-        <div class="text-white">
-          <h1 class="mb-3">Restaurant</h1>
-          <h4 class="mb-3">Partagez vos meilleurs moments gourmets</h4>
-          <a class="btn btn-outline-light btn-lg" href="{% url 'formPost' %}" role="button"
-          >cree un Poste</a
-          >
-        </div>
-      </div>
+     <div class="d-flex justify-content-center align-items-center h-100">
+    <div class="text-white">
+        <h1 class="mb-3">Tourisme</h1>
+        <h4 class="mb-3">Partagez vos meilleurs moments gourmets</h4>
+        <div class="container d-flex justify-content-center">
+            <div class="container">
+                    <div class="row height d-flex justify-content-center align-items-center">
+                        <div class="col-md-8">
+                            <div class="search">
+                          <i class="fa fa-search"></i>
+                          <input type="text" class="form-control" placeholder="Trouvez les mieux lieux">
+                          <button class="btn btn-primary">Search</button>
+                        </div>
+
+                      </div>
+
+                    </div>
+                </div>
     </div>
-
-
+</div>
+  </div>
+</div>
 
 
 <div class="container">
@@ -202,7 +273,7 @@
 
                <a href="{% url 'view_profile' %}">
                 <p class="user-posts">
-                    <img src="{{ post.user.userprofile.profile_pic.url }}" alt="{{ post.user.username }}" class="rounded-circle" width="30" height="30">
+                    <img src="{{ post.user.userprofile.profile_pic.url }}" alt="Photo de profil" class="rounded-circle" width="30" height="30">
                     <span class="username">{{ post.user.username }}</span>
                 </p>
                 </a>
