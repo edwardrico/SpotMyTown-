@@ -40,7 +40,7 @@
       padding-bottom:120px;
 
 
-      /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#000000+0,000000+100&0.65+0,0+100;Neutral+Density */
+
     background: -moz-linear-gradient(top,  rgba(0,0,0,0.65) 0%, rgba(0,0,0,0) 100%); /* FF3.6-15 */
     background: -webkit-linear-gradient(top,  rgba(0,0,0,0.65) 0%,rgba(0,0,0,0) 100%); /* Chrome10-25,Safari5.1-6 */
     background: linear-gradient(to bottom,  rgba(0,0,0,0.65) 0%,rgba(0,0,0,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
@@ -54,7 +54,39 @@
 
 }
 
-           .user-profile span {
+.user-profile span {
+            font-family: 'Cabin', sans-serif;
+            letter-spacing:2px;
+             font-weight: bold;
+             margin-top: 10px;
+             color: #fff;
+
+           }
+
+
+.title-text {
+	color: white;
+	 background-color: rgba(47,79,79, 0.3);
+  	text-shadow: rgba(255, 255, 255, 0.7);
+    font-size: 2.5em;
+    font-weight: bold;
+    margin-bottom: 30px;
+  }
+
+  .text-content {
+    font-size: 1.3em;
+    color: white;
+    background-color: rgba(47,79,79, 0.4);
+  	text-shadow: (255, 255, 255, 0.7);
+    text-align: center;
+    line-height: 1.5;
+  }
+  .user-profile span {
+    font-weight: bold;
+    color: #fff;
+}
+
+ .user-profile span {
             font-family: 'Cabin', sans-serif;
             letter-spacing:2px;
              font-weight: bold;
@@ -89,16 +121,11 @@
              border: 0.5px solid ;
            }
 
-
-
 .carousel-item img {
     max-height: 800px;
     width: auto;
     margin: 0 auto;
-    background-color: rgba(0, 0, 0, 0.3);
-
   }
-
 
 
 .social-icons {
@@ -131,9 +158,8 @@
 <div id="mainNavigation">
       <nav role="navigation">
         <div class="py-3 text-center border-bottom">
-          <img src="/static_files/images/logos/logo_3_white_2.png" alt="" class="invert">
-            <h1 class="text-white">Petit Glouton</h1>
-        </div>
+          <img src="{% static 'image/spotmytown.png' %}" alt="" class="invert" style="width:200px;">
+		</div>
       </nav>
       <div class="navbar-expand-md">
         <div class="navbar-dark text-center my-2">
@@ -186,8 +212,7 @@
       </div>
     </div>
 
-
-<div class="carousel-container border-radius-30px">
+<div class="carousel-container">
 <div id="carouselExampleFade" class="carousel slide carousel-fade header-carousel" data-bs-ride="carousel">
   <div class="carousel-inner">
     <div class="carousel-item active">
@@ -721,7 +746,7 @@
 							<li><a href="#"><i class="fab fa-twitter fa-3x"></i></a></li>
 							<li><a href="#"><i class="fab fa-facebook fa-3x"></i></a></li>
                         </ul>
-					</div>
+					</div> <!-- /.widget -->
 				<div class="col-lg-4 ps-lg-5">
 					<div class="widget">
 						<h3 class="mb-4">Company</h3>
@@ -746,7 +771,7 @@
 
 			<div class="row mt-5">
 				<div class="col-12 text-center">
-					<p>Copyright &copy;<script>document.write(new Date().getFullYear());</script>. All Rights Reserved.
+					<p>Copyright &copy;<script>document.write(new Date().getFullYear());</script>. All Rights Reserved. &mdash; Designed with love by <a href="https://untree.co">Untree.co</a>  Distributed by <a href="https://themewagon.com">ThemeWagon</a> <!-- License information: https://untree.co/license/ -->
             </p>
           </div>
         </div>
