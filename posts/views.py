@@ -1,7 +1,8 @@
 from django.core.exceptions import ObjectDoesNotExist
-from django.db.models import Avg
+from django.db.models import Avg, Q
 from django.http import HttpResponseForbidden, Http404
 from django.shortcuts import render, redirect, get_object_or_404
+from django.template.defaultfilters import slugify, title
 from .models import Posts, Comment, Rating
 from .forms import PostForm, CommentForm, PostRatingForm
 from django.urls import reverse
@@ -91,6 +92,42 @@ def post_rating(request, pk):
     return redirect('post', pk=pk, )
 
 
+def search_posts(request):
+    query = request.GET.get('q')
+    category = request.GET.get('category')
+    title = ""
+
+    if query and category:
+        results = Posts.objects.filter(
+            Q(title__iexact=query) & Q(categorie=category))
+        title = f"Résultats pour '{query}' dans la catégorie '{category}'"
+
+    elif query:
+        results = Posts.objects.filter(
+            Q(title__iexact=query))
+        title = f"Resultats pour {query}"
+
+    elif category:
+        results = Posts.objects.filter(
+            Q(categorie=category))
+        title = f"Résultats dans {category}"
+
+    else:
+        results = Posts.objects.all()
+
+    for post in results:
+        post.average_rating = Rating.objects.filter(post=post).aggregate(Avg('rating'))['rating__avg'] or 0
+        post.rating_count = Rating.objects.filter(post=post).count()
+
+    context = {
+        'results': results,
+        'title': title,
+
+    }
+
+    return render(request, 'search/search_results.html', {'results': results, 'query': query, 'category': category, 'title': title})
+
+
 # Vues pour les commentaries
 @login_required
 def commentaire(request, pk):
@@ -122,7 +159,8 @@ def formulaire(request):
         form = PostForm(request.POST, request.FILES)
         if form.is_valid():
             post = form.save(commit=False)
-            post.user = request.user  # Ajouter l'utilisateur actuel au post
+            post.user = request.user
+            post.slug = generate_unique_slug(post.title, Posts)
             categorie = post.categorie
             post.save()
             # Rediriger l'utilisateur vers la page de la catégorie appropriée
@@ -133,6 +171,16 @@ def formulaire(request):
 
     context = {'form': form}
     return render(request, 'posts/form_post.html', context)
+
+
+def generate_unique_slug(title, model):
+    slug = slugify(title)
+    unique_slug = slug
+    counter = 1
+    while model.objects.filter(slug=unique_slug).exists():
+        unique_slug = f"{slug}-{counter}"
+        counter += 1
+    return unique_slug
 
 
 # Vue pour supprimer une publication
@@ -215,4 +263,4 @@ def nightClubs(request):
     context = {'posts': posts}
     return render(request, 'posts/night_clubs.html', context)
 
-# Vue pour l'inscription d'un nouvel utilisateur
+

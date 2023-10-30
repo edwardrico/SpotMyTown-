@@ -13,5 +13,5 @@ urlpatterns = [
     path('bar/', views.bar, name='bar'),  # URL pour afficher des publications dans la catégorie bar
     path('tourisme/', views.tourisme, name='tourisme'),  # URL pour afficher des publications dans la catégorie tourisme
     path('nightClubs/', views.nightClubs, name='nightClubs'),  # URL pour afficher des publications dans la catégorie nightClubs
-
+    path('search_posts/', views.search_posts, name='search_posts'),  # URL pour la recherche de publications
     ]
