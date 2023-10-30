@@ -13,36 +13,36 @@
       letter-spacing:2px;
       text-shadow:1px 1px 2px rgba(0,0,0,0.6)
 
-    }
+}
 
-    .dropdown-menu {
-      background:#03727d
-    }
-    a.dropdown-toggle {
-      color:#dfdfdf !important
-    }
-    a.dropdown-item:hover {
-      color:#03727d !important
-    }
-    .nav-item a{
-      color:#dfdfdf;
-    }
-    .nav-item a:hover {
-      color:#fff
-    }
-    .nav-item{
-      min-width:12vw;
-    }
-    #mainNavigation {
-      position:fixed;
-      top:0;
-      left:0;
-      width:100%;
-      z-index:123;
-      padding-bottom:120px;
+.dropdown-menu {
+   background:#03727d
+}
+a.dropdown-toggle {
+   color:#dfdfdf !important
+}
+a.dropdown-item:hover {
+   color:#03727d !important
+}
+.nav-item a{
+   color:#dfdfdf;
+}
+.nav-item a:hover {
+   color:#fff
+}
+.nav-item{
+   min-width:12vw;
+}
+#mainNavigation {
+   position:fixed;
+   top:0;
+   left:0;
+   width:100%;
+   z-index:123;
+   padding-bottom:120px;
 
 
-
+      /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#000000+0,000000+100&0.65+0,0+100;Neutral+Density */
     background: -moz-linear-gradient(top,  rgba(0,0,0,0.65) 0%, rgba(0,0,0,0) 100%); /* FF3.6-15 */
     background: -webkit-linear-gradient(top,  rgba(0,0,0,0.65) 0%,rgba(0,0,0,0) 100%); /* Chrome10-25,Safari5.1-6 */
     background: linear-gradient(to bottom,  rgba(0,0,0,0.65) 0%,rgba(0,0,0,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
@@ -56,46 +56,48 @@
 
 }
 
-           .user-profile span {
-            font-family: 'Cabin', sans-serif;
-            letter-spacing:2px;
-             font-weight: bold;
-             color: #fff;
+.user-profile span {
+   font-family: 'Cabin', sans-serif;
+   letter-spacing:2px;
+   font-weight: bold;
+   margin-top: 10px;
+   color: #fff;
 
-           }
+}
 
-           .user-profile {
-             position: absolute;
-             top: 0;
-             right: 0;
-             margin-right: 30px;
-             margin-top: 30px;
-             display: flex;
-             align-items: center;
-             justify-content: center;
-             flex-direction: column;
-             text-align: center;
-             cursor: pointer;
-           }
+.user-profile {
+   position: absolute;
+   top: 0;
+   right: 0;
+   margin-right: 32px;
+   margin-top: 20px;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   flex-direction: column;
+   text-align: center;
+   cursor: pointer;
+}
 
-           .user-profile span {
-            font-family: 'Cabin', sans-serif;
-            letter-spacing:1px;
-             color: #fff;
+.user-profile span {
+    font-family: 'Cabin', sans-serif;
+    letter-spacing:1px;
+    margin-top: 5px;
+    color: #fff;
 
-           }
+}
 
-           .user-profile img {
-             border: 0.5px solid #fff;
-           }
+.user-profile img {
+   border: 0.5px solid ;
+}
 
-          .user-posts{
-            margin-top: 10px;
-         }
+.user-posts{
+   margin-top: 10px;
+}
 
 .comment-list {
    margin-top: 20px;
-    }
+}
 
 .rating {
       border: none;
@@ -213,6 +215,12 @@ text-transform: uppercase;
     border: 1px solid ;
     padding: 5px;
     border-radius: 25%;
+    color:#CB6CE6;
+}
+
+.social-icons i:hover {
+	color: #fff;
+	background-color: #CB6CE6;
 }
 
 .with-border {
@@ -226,19 +234,80 @@ text-transform: uppercase;
     color: white;
 }
 
+.footer-basic {
+  padding:40px 0;
+  background-color:#072D60;
+  color:#4b4c4d;
+}
+
+.footer-basic ul {
+  padding:0;
+  list-style:none;
+  text-align:center;
+  font-size:18px;
+  line-height:1.6;
+  margin-bottom:0;
+}
+
+.footer-basic li {
+  padding:0 10px;
+}
+
+.footer-basic ul a {
+  color:white;
+  text-decoration:none;
+  opacity:0.8;
+}
+
+.footer-basic ul a:hover {
+  opacity:3;
+}
+
+.footer-basic .social {
+  text-align:center;
+  padding-bottom:25px;
+}
+
+.footer-basic .social > a {
+  font-size:24px;
+  width:40px;
+  height:40px;
+  line-height:40px;
+  display:inline-block;
+  text-align:center;
+  border-radius:50%;
+  border:1px solid #ccc;
+  margin:0 8px;
+  color:inherit;
+  opacity:0.75;
+}
+
+.footer-basic .social > a:hover {
+  opacity:0.9;
+}
+
+.footer-basic .copyright {
+  margin-top:15px;
+  text-align:center;
+  font-size:13px;
+  color:#CB6CE6;
+  margin-bottom:0;
+}
+
+
 </style>
 
 <div id="mainNavigation">
       <nav role="navigation">
         <div class="py-3 text-center border-bottom">
-          <img src="/static_files/images/logos/logo_3_white_2.png" alt="" class="invert">
-            <h1 class="text-white">Petit Glouton</h1>
+           <img src="{% static 'logo/spotmytown.png' %}" alt="" class="invert" style="width:250px;">
+
         </div>
       </nav>
       <div class="navbar-expand-md">
         <div class="navbar-dark text-center my-2">
           <button class="navbar-toggler w-75" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span> <span class="align-middle">Menu</span>
+            <span class="navbar-toggler-icon"></span><span class="align-middle">Menu</span>
           </button>
         </div>
         <div class="text-center mt-3 collapse navbar-collapse" id="navbarNavDropdown">
@@ -319,7 +388,7 @@ text-transform: uppercase;
                     <h3 class="lead-sous-title">{{ post.subtitle }}</h3>
                     <div class="row my-4">
                         <div class="col-md-12 mb-4">
-                            <img src="{{ post.imagen_posts.url }}" width="550" height="400" alt="{{ post.title }}" style="border-radius: 20px" class="img-fluid rounded">
+                            <img src="{{ post.imagen_posts.url }}" width="450" height="550" alt="{{ post.title }}" style="border-radius: 20px" class="img-fluid rounded">
                             <div class="meta">{{ post.created_at|date:"d F, Y" }}</div>
                             <div class = "col-3 d-flex">
                                 {% for i in "12345" %}
@@ -339,7 +408,7 @@ text-transform: uppercase;
 
                    <div class="pt-5 comment-wrap">
                         <div class="texte">
-                            <h3 class="mb-5 heading">{{ comments.count }} Comments</h3>
+                            <h3 class="mb-5 heading">{{ comments.count }} Commentaire</h3>
                         </div>
                         <button class="btn btn-primary" data-bs-toggle="collapse" data-bs-target="#commentList" aria-expanded="false">
                             Voir les commentaires
@@ -364,7 +433,7 @@ text-transform: uppercase;
                                             {% csrf_token %}
                                             <input type="hidden" name="parent_comment" value="{{ comment.id }}">
                                             <div class="form-group">
-                                                <label for="reply-text-{{ comment.id }}">Reply *</label>
+                                                <label for="reply-text-{{ comment.id }}">Repondre</label>
                                                 <textarea name="text" id="reply-text-{{ comment.id }}" cols="30" rows="5"
                                                     class="form-control" required></textarea>
                                             </div>
@@ -372,7 +441,7 @@ text-transform: uppercase;
                                                 {% if not user.is_authenticated %}
                                                 <p>Vous devez être connecté pour répondre à un commentaire. <a href="{% url 'login' %}">Connectez-vous ici</a>.</p>
                                                 {% else %}
-                                                <input type="submit" value="Post Reply" class="btn btn-primary">
+                                                <input type="submit" value="Poste une réponse" class="btn btn-primary">
                                                 {% endif %}
                                             </div>
                                         </form>
@@ -406,14 +475,14 @@ text-transform: uppercase;
                         <form method="post" action="{% url 'commentaire' post.id %}" class="p-5 bg-light">
                             {% csrf_token %}
                             <div class="form-group">
-                                <label for ="comment-text">Comment</label>
+                                <label for ="comment-text">Commentaire</label>
                                 <textarea name="text" id="comment-text" cols="30" rows="5" class="form-control" required></textarea>
                             </div>
                             <div class="form-group">
                                 {% if not user.is_authenticated %}
                                 <p>Vous devez être connecté pour commenter. <a href="{% url 'login' %}">Connectez-vous ici</a>.</p>
                                 {% else %}
-                                <input type="submit" value="Post Comment" class="btn btn-primary">
+                                <input type="submit" value="poster un commentaire" class="btn btn-primary">
                                 {% endif %}
                             </div>
                         </form>
@@ -505,7 +574,7 @@ text-transform: uppercase;
                     <div class="col-md-6 col-lg-3">
                         <div class="blog-entry">
                             <a href="{% url 'post' related_post.id %}" class="img-link">
-                                <img src="{{ related_post.imagen_posts.url }}" alt="{{ related_post.title }}" class="img-fluid">
+                                <img src="{{ related_post.imagen_posts.url }}" alt="{{ related_post.title }}" class="img-fluid" style="width: 300px; height: 250px;">
                             </a>
                             <div class="blog-entry-text">
                                  {% for i in "12345" %}
@@ -529,49 +598,37 @@ text-transform: uppercase;
         </section>
 
 
-<footer class="site-footer">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-4">
-                    <h5>Red social</h5>
-                        <ul class="list-unstyled social-icons">
-							<li><a href="#"><i class="fab fa-instagram fa-3x"></i></a></li>
-							<li><a href="#"><i class="fab fa-twitter fa-3x"></i></a></li>
-							<li><a href="#"><i class="fab fa-facebook fa-3x"></i></a></li>
-                        </ul>
-                </div>
-				<div class="col-lg-4 ps-lg-5">
-					<div class="widget">
-						<h3 class="mb-4">Company</h3>
-						<ul class="list-unstyled float-start links">
-							<li><a href="#">About us</a></li>
-							<li><a href="#">Services</a></li>
-							<li><a href="#">Vision</a></li>
-							<li><a href="#">Mission</a></li>
-							<li><a href="#">Terms</a></li>
-							<li><a href="#">Privacy</a></li>
-						</ul>
-						<ul class="list-unstyled float-start links">
-							<li><a href="#">Partners</a></li>
-							<li><a href="#">Business</a></li>
-							<li><a href="#">Careers</a></li>
-							<li><a href="#">Blog</a></li>
-							<li><a href="#">FAQ</a></li>
-							<li><a href="#">Creative</a></li>
-						</ul>
-					</div>
-				</div>
+<footer class="site-footer" style="background-color: #072D60">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4">
+                <h5>Red social</h5>
+                <ul class="list-unstyled social-icons">
+                    <li><a href="#"><i class="fab fa-instagram fa-3x"></i></a></li>
+                    <li><a href="#"><i class="fab fa-twitter fa-3x"></i></a></li>
+                    <li><a href="#"><i class="fab fa-facebook fa-3x"></i></a></li>
+                </ul>
+            </div> <!-- /.col-lg-4 -->
 
-			<div class="row mt-5">
-				<div class="col-12 text-center">
-					<p>&copy; Copyright <script>document.write(new Date().getFullYear());</script> Tous droits réservés
-            </p>
-          </div>
+            <div class="col-12 text-center">
+                <img src="{% static 'logo/spotmytown1.png' %}" alt="Logo" style="max-width: 300px;">
+            </div>
+        </div> <!-- /.row -->
+
+        <div class="footer-basic">
+            <ul class="list-inline">
+                <li class="list-inline-item"><a href="{% url 'home'%}">Home</a></li>
+                <li class="list-inline-item"><a href="#">Services</a></li>
+                <li class="list-inline-item"><a href="#">About</a></li>
+                <li class="list-inline-item"><a href="#">Terms</a></li>
+                <li class="list-inline-item"><a href="#">Privacy Policy</a></li>
+            </ul>
+
+            <p class="copyright">Spotmytown© 2023</p>
         </div>
-      </div>
-		</div>
+    </div> <!-- /.container -->
+</footer> <!-- /.site-footer -->
 
-    </footer>
 
 
 {% endblock %}

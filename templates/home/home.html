@@ -29,7 +29,7 @@
       color:#fff
     }
     .nav-item{
-      min-width:12vw;
+      min-width:15vw;
     }
     #mainNavigation {
       position:fixed;
@@ -54,14 +54,6 @@
 
 }
 
-.user-profile span {
-            font-family: 'Cabin', sans-serif;
-            letter-spacing:2px;
-             font-weight: bold;
-             margin-top: 10px;
-             color: #fff;
-
-           }
 
 
 .title-text {
@@ -81,26 +73,13 @@
     text-align: center;
     line-height: 1.5;
   }
-  .user-profile span {
-    font-weight: bold;
-    color: #fff;
-}
-
- .user-profile span {
-            font-family: 'Cabin', sans-serif;
-            letter-spacing:2px;
-             font-weight: bold;
-             margin-top: 10px;
-             color: #fff;
-
-           }
 
            .user-profile {
              position: absolute;
              top: 0;
              right: 0;
              margin-right: 32px;
-             margin-top: 32px;
+             margin-top: 20px;
              display: flex;
              align-items: center;
              justify-content: center;
@@ -112,7 +91,7 @@
            .user-profile span {
             font-family: 'Cabin', sans-serif;
             letter-spacing:1px;
-            margin-top: 5px;
+            margin-top: 3px;
             color: #fff;
 
            }
@@ -122,7 +101,7 @@
            }
 
 .carousel-item img {
-    max-height: 800px;
+    max-height: 750px;
     width: auto;
     margin: 0 auto;
   }
@@ -142,10 +121,73 @@
     border: 1px solid ;
     padding: 5px;
     border-radius: 25%;
+     color:#CB6CE6;
 }
 
+.social-icons i:hover {
+	color: #fff;
+	background-color: #CB6CE6;
+}
 
+.footer-basic {
+  padding:40px 0;
+  background-color: #072D60;
+  color:#4b4c4d;
+}
 
+.footer-basic ul {
+  padding:0;
+  list-style:none;
+  text-align:center;
+  font-size:18px;
+  line-height:1.6;
+  margin-bottom:0;
+}
+
+.footer-basic li {
+  padding:0 10px;
+}
+
+.footer-basic ul a {
+  color:white;
+  text-decoration:none;
+  opacity:0.8;
+}
+
+.footer-basic ul a:hover {
+  opacity:3;
+}
+
+.footer-basic .social {
+  text-align:center;
+  padding-bottom:25px;
+}
+
+.footer-basic .social > a {
+  font-size:24px;
+  width:40px;
+  height:40px;
+  line-height:40px;
+  display:inline-block;
+  text-align:center;
+  border-radius:50%;
+  border:1px solid #ccc;
+  margin:0 8px;
+  color:inherit;
+  opacity:0.75;
+}
+
+.footer-basic .social > a:hover {
+  opacity:0.9;
+}
+
+.footer-basic .copyright {
+  margin-top:15px;
+  text-align:center;
+  font-size:13px;
+  color:#CB6CE6;
+  margin-bottom:0;
+}
 
 @media screen and (max-width: 768px) {
 .user-profile span {
@@ -158,7 +200,7 @@
 <div id="mainNavigation">
       <nav role="navigation">
         <div class="py-3 text-center border-bottom">
-          <img src="{% static 'image/spotmytown.png' %}" alt="" class="invert" style="width:200px;">
+          <img src="{% static 'image/spotmytown.png' %}" alt="" class="invert" style="width:250px;">
 		</div>
       </nav>
       <div class="navbar-expand-md">
@@ -736,52 +778,36 @@
 			</div>
 		</div>
 	</div>
-	<footer class="site-footer" style="background-color:#2F4F4F">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-4">
-					<h5>Red social</h5>
-                        <ul class="list-unstyled social-icons">
-							<li><a href="#"><i class="fab fa-instagram fa-3x"></i></a></li>
-							<li><a href="#"><i class="fab fa-twitter fa-3x"></i></a></li>
-							<li><a href="#"><i class="fab fa-facebook fa-3x"></i></a></li>
-                        </ul>
-					</div> <!-- /.widget -->
-				<div class="col-lg-4 ps-lg-5">
-					<div class="widget">
-						<h3 class="mb-4">Company</h3>
-						<ul class="list-unstyled float-start links">
-							<li><a href="#">About us</a></li>
-							<li><a href="#">Services</a></li>
-							<li><a href="#">Vision</a></li>
-							<li><a href="#">Mission</a></li>
-							<li><a href="#">Terms</a></li>
-							<li><a href="#">Privacy</a></li>
-						</ul>
-						<ul class="list-unstyled float-start links">
-							<li><a href="#">Partners</a></li>
-							<li><a href="#">Business</a></li>
-							<li><a href="#">Careers</a></li>
-							<li><a href="#">Blog</a></li>
-							<li><a href="#">FAQ</a></li>
-							<li><a href="#">Creative</a></li>
-						</ul>
-					</div> <!-- /.widget -->
-				</div> <!-- /.col-lg-4 -->
+	<footer class="site-footer" style="background-color:  #072D60">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4">
+                <h5>Red social</h5>
+                <ul class="list-unstyled social-icons">
+                    <li><a href="#"><i class="fab fa-instagram fa-3x"></i></a></li>
+                    <li><a href="#"><i class="fab fa-twitter fa-3x"></i></a></li>
+                    <li><a href="#"><i class="fab fa-facebook fa-3x"></i></a></li>
+                </ul>
+            </div> <!-- /.col-lg-4 -->
 
-			<div class="row mt-5">
-				<div class="col-12 text-center">
-					<p>Copyright &copy;<script>document.write(new Date().getFullYear());</script>. All Rights Reserved. &mdash; Designed with love by <a href="https://untree.co">Untree.co</a>  Distributed by <a href="https://themewagon.com">ThemeWagon</a> <!-- License information: https://untree.co/license/ -->
-            </p>
-          </div>
+            <div class="col-12 text-center">
+                <img src="{% static 'image/spotmytown1.png' %}" alt="Logo" style="max-width: 300px;">
+            </div>
+        </div> <!-- /.row -->
+
+        <div class="footer-basic">
+            <ul class="list-inline">
+                <li class="list-inline-item"><a href="#">Home</a></li>
+                <li class="list-inline-item"><a href="#">Services</a></li>
+                <li class="list-inline-item"><a href="#">About</a></li>
+                <li class="list-inline-item"><a href="#">Terms</a></li>
+                <li class="list-inline-item"><a href="#">Privacy Policy</a></li>
+            </ul>
+
+            <p class="copyright">Spotmytown© 2023</p>
         </div>
-      </div>
-		</div>
-    </footer>
-	<div id="overlayer"></div>
-    <div class="loader">
-    	<div class="spinner-border text-primary" role="status">
-    		<span class="visually-hidden">Loading...</span>
-    	</div>
-    </div>
+    </div> <!-- /.container -->
+</footer> <!-- /.site-footer -->
+
+
 {% endblock content %}

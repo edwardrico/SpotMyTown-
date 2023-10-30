@@ -5,39 +5,38 @@
 <style>
 
 #mainNavigation a {
-      font-family: 'Cabin', sans-serif;
-      font-size:14px;
-      text-transform:uppercase;
-      letter-spacing:2px;
-      text-shadow:1px 1px 2px rgba(0,0,0,0.6)
+    font-family: 'Cabin', sans-serif;
+    font-size:14px;
+    text-transform:uppercase;
+    letter-spacing:2px;
+    text-shadow:1px 1px 2px rgba(0,0,0,0.6)
+}
 
-    }
-
-    .dropdown-menu {
-      background:#03727d
-    }
-    a.dropdown-toggle {
-      color:#dfdfdf !important
-    }
-    a.dropdown-item:hover {
-      color:#03727d !important
-    }
-    .nav-item a{
-      color:#dfdfdf;
-    }
-    .nav-item a:hover {
-      color:#fff
-    }
-    .nav-item{
-      min-width:12vw;
-    }
-    #mainNavigation {
-      position:fixed;
-      top:0;
-      left:0;
-      width:100%;
-      z-index:123;
-      padding-bottom:120px;
+.dropdown-menu {
+    background:#03727d
+}
+a.dropdown-toggle {
+    color:#dfdfdf !important
+}
+a.dropdown-item:hover {
+    color:#03727d !important
+}
+.nav-item a{
+    color:#dfdfdf;
+}
+.nav-item a:hover {
+    color:#fff
+}
+.nav-item{
+    min-width:12vw;
+}
+#mainNavigation {
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    z-index:123;
+    padding-bottom:120px;
 
 
       /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#000000+0,000000+100&0.65+0,0+100;Neutral+Density */
@@ -54,84 +53,91 @@
 
 }
 
-           .user-profile span {
-            font-family: 'Cabin', sans-serif;
-            letter-spacing:2px;
-             font-weight: bold;
-             margin-top: 10px;
-             color: #fff;
+.user-profile span {
+    font-family: 'Cabin', sans-serif;
+    letter-spacing:2px;
+    font-weight: bold;
+    margin-top: 10px;
+    color: #fff;
+}
 
-           }
+.user-profile {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin-right: 32px;
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    cursor: pointer;
+}
 
-           .user-profile {
-             position: absolute;
-             top: 0;
-             right: 0;
-             margin-right: 32px;
-             margin-top: 32px;
-             display: flex;
-             align-items: center;
-             justify-content: center;
-             flex-direction: column;
-             text-align: center;
-             cursor: pointer;
-           }
+.user-profile span {
+    font-family: 'Cabin', sans-serif;
+    letter-spacing:1px;
+    margin-top: 5px;
+    color: #fff;
 
-           .user-profile span {
-            font-family: 'Cabin', sans-serif;
-            letter-spacing:1px;
-            margin-top: 5px;
-            color: #fff;
+}
+.user-profile img {
+    border: 0.5px solid ;
+}
+.user-posts{
+    margin-top: 10px;
+}
+.fa-star-filled {
+    color:#FFD700 ;
+}
 
-           }
+.search{
+    position: relative;
+    box-shadow: 0 0 40px rgba(51, 51, 51, .4);
+    width:200%;
+    background:white;
+    border-radius: 10px;
+    right: 50%;
+}
 
-           .user-profile img {
-             border: 0.5px solid ;
-           }
+.search input{
+    height: 60px;
+    text-indent: 40px;
+    border: 1px solid #d6d4d4;
+    border-radius: 10px;
+}
 
-          .user-posts{
-            margin-top: 10px;
-         }
-         .fa-star-filled {
-            color:#FFD700 ;
-         }
+.search .fa-search{
+     position: absolute;
+     top: 23px;
+     left: 16px;
+     color: #d6d4d4;
 
-        .search{
-           position: relative;
-           box-shadow: 0 0 40px rgba(51, 51, 51, .4);
-           width:200%;
-           background:white;
-           border-radius: 10px;
-           right: 50%;
+}
 
+.search button{
+    position: absolute;
+    top: 5px;
+    right: 4px;
+    height: 50px;
+    width: 100px;
+    border-radius:  10px ;
+    color: white;
+    border: none;
+}
 
-       }
+.mon-bouton {
+    background-color: #072D60;
+    color: white;
+    transition: background-color 0.3s;
+}
 
-       .search input{
-            height: 60px;
-            text-indent: 40px;
-            border: 1px solid #d6d4d4;
-            border-radius: 10px;
-        }
+.mon-bouton:hover {
+    background-color: #CB6CE6;
+    color: white;
+}
 
-      .search .fa-search{
-            position: absolute;
-            top: 23px;
-            left: 16px;
-            color: #d6d4d4;
-
-       }
-
-       .search button{
-            position: absolute;
-            top: 5px;
-            right: 4px;
-            height: 50px;
-            width: 100px;
-            border-radius:  10px ;
-            color: white;
-            border: none;
-        }
 
 @media (max-width: 768px) {
     .search {
@@ -155,7 +161,7 @@
   <div id="mainNavigation">
       <nav role="navigation">
         <div class="py-3 text-center border-bottom">
-         <img src="{% static 'image/spotmytown.png' %}" alt="" class="invert">
+         <img src="{% static 'logo/spotmytown.png' %}" alt="" class="invert" style="width:250px;">
 
         </div>
       </nav>
@@ -222,7 +228,7 @@
   >
      <div class="d-flex justify-content-center align-items-center h-100">
     <div class="text-white">
-        <h1 class="mb-3">Tourisme</h1>
+        <h1 class="mb-3" style="color:white;">Restaurant</h1>
         <h4 class="mb-3">Partagez vos meilleurs moments gourmets</h4>
         <div class="container d-flex justify-content-center">
             <div class="container">
@@ -231,7 +237,7 @@
                             <div class="search">
                           <i class="fa fa-search"></i>
                           <input type="text" class="form-control" placeholder="Trouvez les mieux lieux">
-                          <button style="background-color: #072D60; color: white;">Search</button>
+                         <button class="mon-bouton" >Search</button>
                         </div>
 
                       </div>
@@ -284,6 +290,36 @@
         </div>
         {% endfor %}
     </div>
-
 </div>
+
+<footer class="site-footer" style="background-color: #072D60">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4">
+                <h5>Red social</h5>
+                <ul class="list-unstyled social-icons">
+                    <li><a href="#"><i class="fab fa-instagram fa-3x"></i></a></li>
+                    <li><a href="#"><i class="fab fa-twitter fa-3x"></i></a></li>
+                    <li><a href="#"><i class="fab fa-facebook fa-3x"></i></a></li>
+                </ul>
+            </div> <!-- /.col-lg-4 -->
+
+            <div class="col-12 text-center">
+                <img src="{% static 'logo/spotmytown1.png' %}" alt="Logo" style="max-width: 300px;">
+            </div>
+        </div> <!-- /.row -->
+
+        <div class="footer-basic">
+            <ul class="list-inline">
+                <li class="list-inline-item"><a href="{% url 'home'%}">Home</a></li>
+                <li class="list-inline-item"><a href="#">Services</a></li>
+                <li class="list-inline-item"><a href="#">About</a></li>
+                <li class="list-inline-item"><a href="#">Terms</a></li>
+                <li class="list-inline-item"><a href="#">Privacy Policy</a></li>
+            </ul>
+
+            <p class="copyright">Spotmytown© 2023</p>
+        </div>
+    </div> <!-- /.container -->
+</footer> <!-- /.site-footer -->
 {% endblock content %}
