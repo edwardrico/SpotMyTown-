@@ -4,7 +4,7 @@
 
 
 <style>
-  .card-title { /* Ajout du point pour indiquer une classe CSS */
+  .card-title {
     font-size: 1.25rem;
     text-align: center;
     padding-bottom: 5px;
@@ -35,7 +35,7 @@
         {% csrf_token %}
         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
           <input class ="btn btn-danger" type="submit" value="Supprimer">
-          <a type="button" class="btn btn-secondary" href="{{request.GET.next}}">Annuler</a>
+          <a type="button" class="btn btn-secondary" href="javascript:history.back()">Annuler</a>
         </div>
       </form>
     </div>

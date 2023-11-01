@@ -42,7 +42,6 @@ INSTALLED_APPS = [
     'subscription.apps.SubscriptionConfig',
     'user_profile.apps.UserProfileConfig',
     'login.apps.LoginConfig',
-    #'search.apps.SearchConfig',
     'embed_video',
 ]
 

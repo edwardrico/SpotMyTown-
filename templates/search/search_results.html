@@ -273,7 +273,7 @@ a.dropdown-item:hover {
   <div class="d-flex justify-content-center align-items-center h-100">
     <div class="text-white">
 
-            <h1 class="mb-3" style="color: white; text-shadow: 0 0 15px rgba(255, 255, 255, 0.9);">{{ title|upper }}</h1>
+            <h1 class="mb-3" style="color: white; text-shadow: 0 0 15px rgba(255, 255, 255, 0.9);">RESULTATS {{ title|upper }}</h1>
             <h4 class="mb-3" style="color: white; text-shadow: 0 0 15px rgba(255, 255, 255, 0.9);">Partagez vos meilleurs moments gourmets</h4>
 
     </div>
@@ -281,10 +281,26 @@ a.dropdown-item:hover {
 </div>
 
 
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 mt-4">
+            <div class="title">
+            <h3 class="text-start" style="color:#072D60; ">{{category|upper}} {{query|upper}}</h3>
+                <h4 class="text-start"></h4>
+                <h5 class="text-start">Total des évaluations : {{ total_ratings }}</h5>
+                <p>{{ results_count }} publications</p>
+            </div>
+           </div>
+        </div>
+    </div>
+
+
 
 <div class="container">
+
     <div class="row row-cols-1 row-cols-md-3 g-4">
-         {% for result in results %}
+        {%if results %}
+        {% for result in results %}
         {% if forloop.counter0|divisibleby:3 %}
         </div>
         <div class="row row-cols-1 row-cols-md-3 g-4">
@@ -297,9 +313,7 @@ a.dropdown-item:hover {
                 <h2 class="posts-entry-title">{{ result.title }}</h2>
             </div>
             <div class="blog-entry">
-                {% if result.imagen_posts %}
                     <img src="{{ result.imagen_posts.url }}" width="{{ result.image_width }}" height="{{ result.image_height }}" alt="{{ result.title }}" style="border-radius: 10px">
-                {% endif %}
                   <span class="date">{{ result.created_at|date:"F d, Y" }}</span>
                     <div class ="rating">
                     {% for i in "12345" %}
@@ -321,12 +335,44 @@ a.dropdown-item:hover {
 
 
            </div>
-            <div class="col mb-5"></div>
+    <div class="col mb-5"></div>
         </div>
         {% endfor %}
+     {% else %}
+        <div class="col-md-10 mt-4">
+            <hr class="my-4">
+        </div>
+     <div class="container">
+        <div class="d-flex justify-content-center align-items-center" style="min-height: 70vh; ">
+
+            <div class="col-md-14" style="max-width: 80vh;" >
+        <div class="card mb-2 text-center" >
+            <div class="card-body">
+            <div class=" text-center">
+                <h1 class="mb-4 text-my-button ">Aucun résultat pour {{title}} </h1>
+            </div>
+            <div class="blog-entry ">
+              <h5>Faite un publication sur {{ query }} pour le référencier  <i class="far fa-smile "></i> .</h5>
+            </div>
+            {% if user.is_authenticated %}
+            <a href="{% url 'formPost' %}" class="btn btn my-button">Créer une publication</a>
+            {% else %}
+            <p class="text-center">Vous devez être connecté pour créer une publication</p>
+            <a href ="{% url 'login' %}" class="btn btn my-button">Conectez-vous </a>
+            {% endif %}
+                </div>
+            </div>
+                </div>
+
+        </div>
+            {% endif %}
+            <div class="col mb-5"></div>
+        </div>
     </div>
 
 </div>
+
+
 
 <footer class="site-footer" style="background-color: #072D60">
     <div class="container">
@@ -358,5 +404,5 @@ a.dropdown-item:hover {
         </div>
     </div>
 </footer>
-
 {%endblock content%}
+

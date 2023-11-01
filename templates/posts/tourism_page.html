@@ -122,20 +122,162 @@ a.dropdown-item:hover {
     right: 4px;
     height: 50px;
     width: 100px;
-    border-radius:  10px ;
+    border-radius:10px ;
     color: white;
     border: none;
 }
 
-.mon-bouton {
-    background-color: #072D60;
+
+
+.my-button {
+    background-color:#072D60;
     color: white;
     transition: background-color 0.3s;
+    font-size: 0.8rem;
+    transition: transform 0.2s;
+
 }
 
-.mon-bouton:hover {
+.my-button:hover {
     background-color: #CB6CE6;
     color: white;
+    transform: scale(0.9);
+}
+
+.the-button{
+    background-color:#072D60;
+    color: white;
+    transition: background-color 0.3s;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: transform 0.2s;
+    position: relative;
+
+
+}
+
+.my-button::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 0;
+            left: 0;
+            bottom: 0;
+            background-color: #007bff;
+            transition: height 0.2s;
+        }
+
+.the-button:hover {
+    background-color: #CB6CE6;
+    color: white;
+    transform: scale(0.9);
+    animation: bounce 0.9s infinite;
+}
+
+@keyframes bounce {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+.custom-border {
+    border: 1px solid #072D60;
+    border-radius: 15px;
+    background-color: #F5F5F5; /* Couleur de fond pour un contraste visuel */
+    padding: 0px; /* Espace interne pour aérer le contenu */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    width: 70%;
+
+
+}
+
+.footer-basic {
+  padding:40px 0;
+  background-color:#072D60;
+  color:#4b4c4d;
+}
+
+.footer-basic ul {
+  padding:0;
+  list-style:none;
+  text-align:center;
+  font-size:18px;
+  line-height:1.6;
+  margin-bottom:0;
+}
+
+.footer-basic li {
+  padding:0 10px;
+}
+
+.footer-basic ul a {
+  color:white;
+  text-decoration:none;
+  opacity:0.8;
+}
+
+.footer-basic ul a:hover {
+  opacity:3;
+}
+
+.footer-basic .social {
+  text-align:center;
+  padding-bottom:25px;
+}
+
+.footer-basic .social > a {
+  font-size:24px;
+  width:40px;
+  height:40px;
+  line-height:40px;
+  display:inline-block;
+  text-align:center;
+  border-radius:50%;
+  border:1px solid #ccc;
+  margin:0 8px;
+  color:inherit;
+  opacity:0.75;
+}
+
+.footer-basic .social > a:hover {
+  opacity:0.9;
+}
+
+.footer-basic .copyright {
+  margin-top:15px;
+  text-align:center;
+  font-size:13px;
+  color:#CB6CE6;
+  margin-bottom:0;
+}
+
+.social-icons {
+    list-style: none;
+    padding: 0;
+
+    }
+
+.social-icons li {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+.social-icons i {
+    border: 1px solid ;
+    padding: 5px;
+    border-radius: 25%;
+     color:#CB6CE6;
+}
+
+.social-icons i:hover {
+	color: #fff;
+	background-color: #CB6CE6;
 }
 
 
@@ -154,7 +296,6 @@ a.dropdown-item:hover {
 }
 
 </style>
-
 
 
 
@@ -226,29 +367,41 @@ a.dropdown-item:hover {
 
     "
   >
-     <div class="d-flex justify-content-center align-items-center h-100">
+  <div class="d-flex justify-content-center align-items-center h-100">
     <div class="text-white">
         <h1 class="mb-3" style="color:white;">Restaurant</h1>
         <h4 class="mb-3">Partagez vos meilleurs moments gourmets</h4>
-        <div class="container d-flex justify-content-center">
-            <div class="container">
+        <form method="get" action="{% url 'search_posts' %}">
+            {% csrf_token %}
+            <div class="container d-flex justify-content-center">
+                <div class="container">
                     <div class="row height d-flex justify-content-center align-items-center">
                         <div class="col-md-8">
                             <div class="search">
-                          <i class="fa fa-search"></i>
-                          <input type="text" class="form-control" placeholder="Trouvez les mieux lieux">
-                         <button class="mon-bouton" >Search</button>
+                                <i class="fa fa-search"></i>
+                                <input type="text" name="q" class="form-control" placeholder="Trouvez votre restaurant">
+                                <input type="hidden" name="category" value="tourisme">
+                                <button class="my-button">Recherche</button>
+                           </div>
                         </div>
-
-                      </div>
-
                     </div>
                 </div>
+            </div>
+        </form>
     </div>
 </div>
   </div>
-</div>
-
+{% if category_count > 0 %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 mt-4">
+            <div class="title">
+            <h3 class="text-start" style="color:#072D60; ">Categorie Restaurants</h3>
+                <p>{{ category_count }} publications</p>
+                </div>
+           </div>
+        </div>
+    </div>
 
 <div class="container">
     <div class="row row-cols-1 row-cols-md-3 g-4">
@@ -284,11 +437,32 @@ a.dropdown-item:hover {
                 </p>
                 </a>
                 <h2><a href="{% url 'post' post.id %}">{{ post.subtitle }}</a></h2>
-                <p><a href="{% url 'post' post.id %}" class="btn btn-sm btn-outline-primary">Lire</a></p>
+                <p><a href="{% url 'post' post.id %}" class="btn btn-sm btn-outline my-button">Lire</a></p>
             </div>
-            <div class="col mb-4"></div>
+            <div class="col mb-5"></div>
         </div>
         {% endfor %}
+            {% else %}
+        <div class="container text-center mt-5 mb-5 custom-border">
+            <div class="row">
+                <div class="col-md-12 mt-4 d-flex flex-column align-items-center justify-content-center" style="min-height: 70vh;">
+                    <div class="title">
+                        <h1 class="mb-3 text-center smile-icon fa fa-frown" style="color:#CB6CE6; font-size: 6rem;"></h1>
+                        <h1 class="text" style="color:#072D60; font-size: 2rem;">Pas de publications dans cette catégorie</h1>
+                        <h3 class="mb-4 text-grey" style="font-size: 1.5rem;">Laissez votre publication de restaurant</h3>
+                        {% if not user.is_authenticated %}
+                        <p class="w-sm-80 mx-auto mb-4 text-black">Pour realiser cette action vous devrais etre connecter.</p>
+                        <a id="changeSmileyButton" href="{% url 'login' %}" class="btn btn the-button" style="font-size: 0.8rem;">Conectez-vous</a>
+                        {%else%}
+                        <a id="changeSmileyButton" href="{% url 'formPost' %}" class="btn btn the-button" style="font-size: 0.8rem;">Créer une publication</a>
+                        {% endif %}
+                        <p class="mt-3" style="font-size: 1rem;">{{ category_count }} publications</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+{% endif %}
     </div>
 </div>
 
@@ -320,6 +494,7 @@ a.dropdown-item:hover {
 
             <p class="copyright">Spotmytown© 2023</p>
         </div>
-    </div> <!-- /.container -->
-</footer> <!-- /.site-footer -->
+    </div>
+</footer>
+
 {% endblock content %}

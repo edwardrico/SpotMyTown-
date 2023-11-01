@@ -1,5 +1,5 @@
 from django.core.exceptions import ObjectDoesNotExist
-from django.db.models import Avg, Q
+from django.db.models import Avg, Q, Sum
 from django.http import HttpResponseForbidden, Http404
 from django.shortcuts import render, redirect, get_object_or_404
 from django.template.defaultfilters import slugify, title
@@ -86,6 +86,9 @@ def post_rating(request, pk):
                 user_rating.update(rating=rating)
             else:
                 Rating.objects.create(user=request.user, post=post, rating=rating)
+
+            post.average_rating = Rating.objects.filter(post=post).aggregate(Avg('rating'))['rating__avg']
+            post.save()
             return redirect('post', pk=pk)
     else:
         form = PostRatingForm()
@@ -95,12 +98,14 @@ def post_rating(request, pk):
 def search_posts(request):
     query = request.GET.get('q')
     category = request.GET.get('category')
+
     title = ""
+    results_count = 0
 
     if query and category:
         results = Posts.objects.filter(
             Q(title__iexact=query) & Q(categorie=category))
-        title = f"Résultats pour '{query}' dans la catégorie '{category}'"
+        title = f"Résultats pour {query} dans la catégorie {category}"
 
     elif query:
         results = Posts.objects.filter(
@@ -115,17 +120,32 @@ def search_posts(request):
     else:
         results = Posts.objects.all()
 
+    results_count = results.count()
+
     for post in results:
         post.average_rating = Rating.objects.filter(post=post).aggregate(Avg('rating'))['rating__avg'] or 0
         post.rating_count = Rating.objects.filter(post=post).count()
 
+    total_ratings = results.aggregate(Sum('rating__rating'))['rating__rating__sum'] or 0
+
+    ratings_count = Rating.objects.filter(post__in=results).count()
+
+    percentage = 0
+
     context = {
         'results': results,
         'title': title,
+        'query': query,
+        'category': category,
+        'results_count': results_count,
+        'total_ratings': total_ratings,
+        'ratings_count': ratings_count,
+        'percentage': percentage,
 
     }
 
-    return render(request, 'search/search_results.html', {'results': results, 'query': query, 'category': category, 'title': title})
+    print(f'context: {context}')
+    return render(request, 'search/search_results.html', context)
 
 
 # Vues pour les commentaries
@@ -225,42 +245,88 @@ def updatePost(request, pk):
 
 # Vues pour afficher des publications dans différentes catégories
 def restaurant(request):
+    category = 'restaurant'
+    category_param = request.GET.get('category')
+
+    if category_param:
+        category = category_param
+
     posts = Posts.objects.filter(categorie='restaurant').order_by('-created_at')
+    category_count = Posts.objects.filter(categorie='restaurant').count()
+
     for post in posts:
         post.average_rating = Rating.objects.filter(post=post).aggregate(Avg('rating'))['rating__avg'] or 0
         post.rating_count = Rating.objects.filter(post=post).count()
 
-    context = {'posts': posts}
+    context = {
+        'category': category,
+        'posts': posts,
+        'category_count': category_count,
+    }
     return render(request, 'posts/restaurant_page.html', context)
 
 
 def bar(request):
+    category = 'bar'
+    category_param = request.GET.get('category')
+
+    if category_param:
+        category = category_param
+
     posts = Posts.objects.filter(categorie='bar').order_by('-created_at')
+    category_count = Posts.objects.filter(categorie='bar').count()
+
     for post in posts:
         post.average_rating = Rating.objects.filter(post=post).aggregate(Avg('rating'))['rating__avg'] or 0
         post.rating_count = Rating.objects.filter(post=post).count()
 
-    context = {'posts': posts}
+    context = {
+        'category': category,
+        'posts': posts,
+        'category_count': category_count,
+    }
     return render(request, 'posts/bar_page.html', context)
 
 
 def tourisme(request):
+    category = 'tourisme'
+    category_param = request.GET.get('category')
+
+    if category_param:
+        category = category_param
+
     posts = Posts.objects.filter(categorie='tourisme').order_by('-created_at')
+    category_count = Posts.objects.filter(categorie='tourisme').count()
+
     for post in posts:
         post.average_rating = Rating.objects.filter(post=post).aggregate(Avg('rating'))['rating__avg'] or 0
         post.rating_count = Rating.objects.filter(post=post).count()
 
-    context = {'posts': posts}
+    context = {
+        'category': category,
+        'posts': posts,
+        'category_count': category_count,
+    }
     return render(request, 'posts/tourism_page.html', context)
 
 
 def nightClubs(request):
+    category = 'nigthClubs'
+    category_param = request.GET.get('category')
+
+    if category_param:
+        category = category_param
+
     posts = Posts.objects.filter(categorie='nightClubs').order_by('-created_at')
+    category_count = Posts.objects.filter(categorie='nightClubs').count()
+
     for post in posts:
         post.average_rating = Rating.objects.filter(post=post).aggregate(Avg('rating'))['rating__avg'] or 0
         post.rating_count = Rating.objects.filter(post=post).count()
 
-    context = {'posts': posts}
+    context = {
+        'category': category,
+        'posts': posts,
+        'category_count': category_count,
+    }
     return render(request, 'posts/night_clubs.html', context)
-
-
