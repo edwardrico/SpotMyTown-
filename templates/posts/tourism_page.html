@@ -144,18 +144,6 @@ a.dropdown-item:hover {
     transform: scale(0.9);
 }
 
-.the-button{
-    background-color:#072D60;
-    color: white;
-    transition: background-color 0.3s;
-    font-size: 0.8rem;
-    cursor: pointer;
-    transition: transform 0.2s;
-    position: relative;
-
-
-}
-
 .my-button::after {
             content: '';
             position: absolute;
@@ -165,7 +153,17 @@ a.dropdown-item:hover {
             bottom: 0;
             background-color: #007bff;
             transition: height 0.2s;
-        }
+}
+
+.the-button{
+    background-color:#072D60;
+    color: white;
+    transition: background-color 0.3s;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: transform 0.2s;
+    position: relative;
+}
 
 .the-button:hover {
     background-color: #CB6CE6;
@@ -186,15 +184,25 @@ a.dropdown-item:hover {
     }
 }
 
+@keyframes borderGlow {
+    0% {
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    }
+    50% {
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+    }
+    100% {
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    }
+}
+
 .custom-border {
     border: 1px solid #072D60;
     border-radius: 15px;
-    background-color: #F5F5F5; /* Couleur de fond pour un contraste visuel */
-    padding: 0px; /* Espace interne pour aérer le contenu */
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    background-color: #F5F5F5;
     width: 70%;
-
-
+    animation: borderGlow 2s infinite;
+    }
 }
 
 .footer-basic {
@@ -369,7 +377,7 @@ a.dropdown-item:hover {
   >
   <div class="d-flex justify-content-center align-items-center h-100">
     <div class="text-white">
-        <h1 class="mb-3" style="color:white;">Restaurant</h1>
+        <h1 class="mb-3" style="color:white;">{{category|upper}}</h1>
         <h4 class="mb-3">Partagez vos meilleurs moments gourmets</h4>
         <form method="get" action="{% url 'search_posts' %}">
             {% csrf_token %}
@@ -379,8 +387,8 @@ a.dropdown-item:hover {
                         <div class="col-md-8">
                             <div class="search">
                                 <i class="fa fa-search"></i>
-                                <input type="text" name="q" class="form-control" placeholder="Trouvez votre restaurant">
-                                <input type="hidden" name="category" value="tourisme">
+                                <input type="text" name="q" class="form-control" placeholder="Trouvez votre {{category}}">
+                                <input type="hidden" name="category" value="tourime">
                                 <button class="my-button">Recherche</button>
                            </div>
                         </div>
@@ -396,7 +404,7 @@ a.dropdown-item:hover {
     <div class="row">
         <div class="col-md-12 mt-4">
             <div class="title">
-            <h3 class="text-start" style="color:#072D60; ">Categorie Restaurants</h3>
+            <h3 class="text-start" style="color:#072D60; ">CATEGORIE : {{category|upper}}</h3>
                 <p>{{ category_count }} publications</p>
                 </div>
            </div>

@@ -6,7 +6,7 @@
   body{margin-top:0px;}
 .cover-background {
     position: relative !important;
-    background-color: #5D8AA8; /* Changer la couleur de fond en blanc */
+    background-color: #072D60;
     overflow: hidden !important;
     background-position: center !important;
     background-repeat: no-repeat !important;
@@ -42,6 +42,61 @@ section {
     margin-bottom: 1.5rem!important;
 }
 
+.my-button {
+    background-color:#072D60;
+    color: white;
+    transition: background-color 0.3s;
+    font-size: 0.8rem;
+    transition: transform 0.2s;
+
+}
+
+.my-button:hover {
+    background-color: #CB6CE6;
+    color: white;
+    transform: scale(0.9);
+}
+
+.my-button::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 0;
+            left: 0;
+            bottom: 0;
+            background-color: #007bff;
+            transition: height 0.2s;
+}
+
+.the-button{
+    background-color:#072D60;
+    color: white;
+    transition: background-color 0.3s;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: transform 0.2s;
+    position: relative;
+}
+
+.the-button:hover {
+    background-color: #CB6CE6;
+    color: white;
+    transform: scale(0.9);
+    animation: bounce 0.9s infinite;
+}
+
+@keyframes bounce {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
 @media (max-width: 768px) {
     .error-page h1 {
       font-size: 5em; /* Réduisez la taille de la police pour les écrans plus petits */
@@ -54,13 +109,13 @@ section {
         <div class="row align-items-center justify-content-center min-vh-100">
             <div class="col-md-9 col-lg-6 my-3">
                 <div class="text-center error-page">
-                    <h1 class = "mb-0 text-primary smile-icon fa fa-frown"></h1>
-                    <h1 class="mb-4 text-primary">Oups!</h1>
+                    <h1 class = "mb-0 smile-icon fa fa-frown" style="color:#CB6CE6;"></h1>
+                    <h1 class="mb-4" style="color:#072D60;">Oups!</h1>
                     <h2 class="mb-4 text-grey ">Vous devez être connecté pour réaliser cette action!</h2>
                     <p class="w-sm-80 mx-auto mb-4 text-black">Pour realiser une action vous devrais etre connecter si vous n'avez pas une compte vous pouver la cree en rentren a login sino vous pouvais retourne a home </p>
                     <div>
-                        <a id="changeSmileyButton" href="{% url 'login' %}" class="btn btn-primary btn-lg me-sm-2 mb-2 mb-sm-0">Login</a>
-                        <a href="{% url 'home' %}" class="btn btn-primary btn-lg me-sm-2 mb-2 mb-sm-0">Home</a>
+                        <a id="changeSmileyButton" href="{% url 'login' %}" class="btn the-button btn-lg me-sm-2 mb-2 mb-sm-0">Login</a>
+                        <a href="{% url 'home' %}" class="btn my-button btn-lg me-sm-2 mb-2 mb-sm-0">Home</a>
                     </div>
                 </div>
             </div>

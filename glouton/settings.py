@@ -131,6 +131,14 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'static/image')
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
-API_BASE = config('API_BASE', default='http://localhost:8000/api/')
-API_SEARCH = API_BASE + 'search'
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+
+# COFIGURATION DE EMAIL
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587  # Puerto para SMTP de Gmail (587 es el puerto TLS estándar)
+EMAIL_USE_TLS = True  # Usar TLS para cifrar la conexión
+EMAIL_HOST_USER = 'spotmytown@gmail.com'  # Tu dirección de correo electrónico de Gmail
+EMAIL_HOST_PASSWORD = 'tlnh wjlr zhww lsbp'  # La contraseña de tu cuenta de Gmail
+

@@ -101,6 +101,63 @@ a.dropdown-item:hover {
     color: white;
 }
 
+.the-button{
+    background-color:#072D60;
+    color: white;
+    transition: background-color 0.3s;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: transform 0.2s;
+    position: relative;
+
+
+}
+
+
+.the-button:hover {
+    background-color: #CB6CE6;
+    color: white;
+    transform: scale(0.9);
+    animation: bounce 0.9s infinite;
+}
+
+@keyframes bounce {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+@keyframes borderGlow {
+    0% {
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    }
+    50% {
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+    }
+    100% {
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    }
+}
+
+.custom-border {
+    border: 1px solid #072D60;
+    border-radius: 15px;
+    background-color: #F5F5F5; /* Couleur de fond pour un contraste visuel */
+    padding: 0px; /* Espace interne pour aérer le contenu */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    width: 70%;
+
+
+    }
+}
+
+
 .footer-basic {
   padding:40px 0;
   background-color:#072D60;
@@ -273,7 +330,7 @@ a.dropdown-item:hover {
   <div class="d-flex justify-content-center align-items-center h-100">
     <div class="text-white">
 
-            <h1 class="mb-3" style="color: white; text-shadow: 0 0 15px rgba(255, 255, 255, 0.9);">RESULTATS {{ title|upper }}</h1>
+            <h1 class="mb-3" style="color: white; text-shadow: 0 0 15px rgba(255, 255, 255, 0.9);"> {{ title|upper }}</h1>
             <h4 class="mb-3" style="color: white; text-shadow: 0 0 15px rgba(255, 255, 255, 0.9);">Partagez vos meilleurs moments gourmets</h4>
 
     </div>
@@ -339,35 +396,31 @@ a.dropdown-item:hover {
         </div>
         {% endfor %}
      {% else %}
-        <div class="col-md-10 mt-4">
+        <div class="col-md-12 mt-3">
             <hr class="my-4">
         </div>
-     <div class="container">
-        <div class="d-flex justify-content-center align-items-center" style="min-height: 70vh; ">
 
-            <div class="col-md-14" style="max-width: 80vh;" >
-        <div class="card mb-2 text-center" >
-            <div class="card-body">
-            <div class=" text-center">
-                <h1 class="mb-4 text-my-button ">Aucun résultat pour {{title}} </h1>
-            </div>
-            <div class="blog-entry ">
-              <h5>Faite un publication sur {{ query }} pour le référencier  <i class="far fa-smile "></i> .</h5>
-            </div>
-            {% if user.is_authenticated %}
-            <a href="{% url 'formPost' %}" class="btn btn my-button">Créer une publication</a>
-            {% else %}
-            <p class="text-center">Vous devez être connecté pour créer une publication</p>
-            <a href ="{% url 'login' %}" class="btn btn my-button">Conectez-vous </a>
-            {% endif %}
+     <div class="container text-center mt-5 mb-5 custom-border">
+       <div class="row">
+                <div class="col-md-12 mt-4 d-flex flex-column align-items-center justify-content-center" style="min-height: 70vh;">
+                    <div class="title">
+                        <h1 class="mb-3 text-center smile-icon fa fa-frown" style="color:#CB6CE6; font-size: 6rem;"></h1>
+                        <h1 class="text" style="color:#072D60; font-size: 2rem;">Aucun {{title}}</h1>
+                        <h3 class="mb-2 text-grey" style="font-size: 1.5rem;">Laissez votre publication de {{category}}</h3>
+                        <h5>Faite un publication sur {{ query }} pour le référencier .</h5>
+                        {% if user.is_authenticated %}
+                        <a id="changeSmileyButton" href="{% url 'formPost' %}" class="btn btn the-button">Créer une publication</a>
+                        {% else %}
+                        <p class="text-center">Vous devez être connecté pour créer une publication</p>
+                        <a id="changeSmileyButton" href ="{% url 'login' %}" class="btn btn the-button">Conectez-vous </a>
+                        {% endif %}
+                    </div>
                 </div>
             </div>
-                </div>
-
         </div>
             {% endif %}
             <div class="col mb-5"></div>
-        </div>
+
     </div>
 
 </div>

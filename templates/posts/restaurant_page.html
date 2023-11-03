@@ -295,6 +295,7 @@ a.dropdown-item:hover {
     }
 }
 
+
 </style>
 
 
@@ -369,7 +370,7 @@ a.dropdown-item:hover {
   >
   <div class="d-flex justify-content-center align-items-center h-100">
     <div class="text-white">
-        <h1 class="mb-3" style="color:white;">Restaurant</h1>
+        <h1 class="mb-3" style="color:white;">{{category|upper}}</h1>
         <h4 class="mb-3">Partagez vos meilleurs moments gourmets</h4>
         <form method="get" action="{% url 'search_posts' %}">
             {% csrf_token %}
@@ -379,7 +380,7 @@ a.dropdown-item:hover {
                         <div class="col-md-8">
                             <div class="search">
                                 <i class="fa fa-search"></i>
-                                <input type="text" name="q" class="form-control" placeholder="Trouvez votre restaurant">
+                                <input type="text" name="q" class="form-control" placeholder="Trouvez votre {{category}}">
                                 <input type="hidden" name="category" value="restaurant">
                                 <button class="my-button">Recherche</button>
                            </div>
@@ -396,7 +397,7 @@ a.dropdown-item:hover {
     <div class="row">
         <div class="col-md-12 mt-4">
             <div class="title">
-            <h3 class="text-start" style="color:#072D60; ">Categorie Restaurants</h3>
+            <h3 class="text-start" style="color:#072D60; ">CATEGORIE : {{category|upper}}</h3>
                 <p>{{ category_count }} publications</p>
                 </div>
            </div>
@@ -441,6 +442,7 @@ a.dropdown-item:hover {
             </div>
             <div class="col mb-5"></div>
         </div>
+
         {% endfor %}
             {% else %}
         <div class="container text-center mt-5 mb-5 custom-border">

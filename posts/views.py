@@ -2,7 +2,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.db.models import Avg, Q, Sum
 from django.http import HttpResponseForbidden, Http404
 from django.shortcuts import render, redirect, get_object_or_404
-from django.template.defaultfilters import slugify, title
+from django.template.defaultfilters import slugify
 from .models import Posts, Comment, Rating
 from .forms import PostForm, CommentForm, PostRatingForm
 from django.urls import reverse
@@ -311,7 +311,7 @@ def tourisme(request):
 
 
 def nightClubs(request):
-    category = 'nigthClubs'
+    category = 'nightClubs'
     category_param = request.GET.get('category')
 
     if category_param:
