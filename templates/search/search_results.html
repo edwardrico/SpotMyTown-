@@ -158,9 +158,32 @@ a.dropdown-item:hover {
 }
 
 
+
+.social-icons {
+    list-style: none;
+    padding: 0;
+    }
+
+.social-icons li {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+.social-icons i {
+    border: 1px solid ;
+    padding: 5px;
+    border-radius: 25%;
+     color:#CB6CE6;
+}
+
+.social-icons i:hover {
+	color: #fff;
+	background-color: #CB6CE6;
+}
+
 .footer-basic {
   padding:40px 0;
-  background-color:#072D60;
+  background-color: #072D60;
   color:#4b4c4d;
 }
 
@@ -216,29 +239,6 @@ a.dropdown-item:hover {
   font-size:13px;
   color:#CB6CE6;
   margin-bottom:0;
-}
-
-.social-icons {
-    list-style: none;
-    padding: 0;
-
-    }
-
-.social-icons li {
-    display: inline-block;
-    margin-right: 20px;
-}
-
-.social-icons i {
-    border: 1px solid ;
-    padding: 5px;
-    border-radius: 25%;
-     color:#CB6CE6;
-}
-
-.social-icons i:hover {
-	color: #fff;
-	background-color: #CB6CE6;
 }
 
 
@@ -409,10 +409,10 @@ a.dropdown-item:hover {
                         <h3 class="mb-2 text-grey" style="font-size: 1.5rem;">Laissez votre publication de {{category}}</h3>
                         <h5>Faite un publication sur {{ query }} pour le référencier .</h5>
                         {% if user.is_authenticated %}
-                        <a id="changeSmileyButton" href="{% url 'formPost' %}" class="btn btn the-button">Créer une publication</a>
+                        <a id="changeSmileyButton" href="{% url 'formPost' %}" class="btn btn the-button"  style="margin-top: 10px;">Créer une publication</a>
                         {% else %}
                         <p class="text-center">Vous devez être connecté pour créer une publication</p>
-                        <a id="changeSmileyButton" href ="{% url 'login' %}" class="btn btn the-button">Conectez-vous </a>
+                        <a id="changeSmileyButton" href ="{% url 'login' %}" class="btn btn the-button" style="margin-top: 10px;">Conectez-vous </a>
                         {% endif %}
                     </div>
                 </div>
@@ -439,7 +439,7 @@ a.dropdown-item:hover {
                 </ul>
             </div> <!-- /.col-lg-4 -->
 
-            <div class="col-12 text-center">
+            <div class="col-12 text-center" >
                 <img src="{% static 'logo/spotmytown1.png' %}" alt="Logo" style="max-width: 300px;">
             </div>
         </div> <!-- /.row -->

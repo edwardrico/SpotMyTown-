@@ -78,3 +78,6 @@ pip~=22.3.1
 decouple~=0.0.7
 PyYAML~=6.0.1
 Jinja2~=3.1.2
+cryptography~=41.0.5
+setuptools~=68.2.2
+django-allauth~=0.58.1
