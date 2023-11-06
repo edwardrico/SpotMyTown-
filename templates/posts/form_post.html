@@ -29,7 +29,7 @@
     flex-direction: column;
   }
 
-   .custom-input, .custom-textarea {
+   .custom-input, .custom-textarea, .form-control {
     border: 1px solid #ccc;
     border-radius: 5px;
     padding: 10px;
@@ -84,7 +84,9 @@
         </div>
       </div>
     {% endfor %}
-    <button type="submit" class="btn btn my-button">Créer le post</button>
+     <div class="d-grid">
+       <button type="submit" class="btn my-button btn-lg me-sm-2 mb-2 mb-sm-0">Cree un publication</button>
+     </div>
   </form>
 </div>
 
