@@ -1,49 +1,39 @@
-{% extends 'main/main_categorie.html' %}
+{% extends 'main/main_form_post.html' %}
 {% load static %}
 {% block content %}
 
 <style>
   body {
-    background: #072D60; /* Cambia el color de fondo del body */
+    background: #072D60;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
   }
 
   .custom-section {
     background: white;
-    max-width: 600px;
+    max-width: 700px;
     padding: 20px;
     border-radius: 10px;
-    margin: 20px auto;
-    border: 1px solid;
 
   }
 
   .custom-form {
-    max-width: 500px;
-    margin: 0 auto;
     border-radius: 5px;
-
   }
-
-
 
   .form-group {
     display: flex;
     flex-direction: column;
-
-
-
   }
 
-
-
-  .custom-button {
-    background-color: #007BFF;
-    border-color: #007BFF;
-  }
-
-  .custom-button:hover {
-    background-color: #0056b3;
-    border-color: #0056b3;
+   .custom-input, .custom-textarea {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    width: 100%;
   }
 
   .my-button {
@@ -81,27 +71,21 @@
   <div class="site-mobile-menu-body"></div>
 </div>
 
-<div class="container">
-  <div class="row justify-content-center">
-    <div class="col-md-6">
-      <section class="custom-section p-2" >
-        <div class="logo-container text-center mb-4" style="padding: 5px;">
-          <img src="{% static 'logo/spotmytown4.png' %}" alt="spotmytown" width="300">
-        </div>
-        <form method="post" enctype="multipart/form-data" class="custom-form">
-          {% csrf_token %}
-          {% for field in form %}
-            <div class="mb-2 custom-field">
-              <div class="form-group">
-
-                {{ field }}
-              </div>
-            </div>
-          {% endfor %}
-          <button type="submit" class="btn btn my-button">Créer le post</button>
-        </form>
-      </section>
-    </div>
+<div class="custom-section p-3">
+  <div class="logo-container text-center mb-4" style="padding: 5px;">
+    <img src="{% static 'logo/spotmytown4.png' %}" alt="spotmytown" width="300">
   </div>
+  <form method="post" enctype="multipart/form-data" class="custom-form mx-auto">
+    {% csrf_token %}
+    {% for field in form %}
+      <div class="mb-3 custom-field">
+        <div class="form-group">
+          {{ field }}
+        </div>
+      </div>
+    {% endfor %}
+    <button type="submit" class="btn btn my-button">Créer le post</button>
+  </form>
 </div>
+
 {% endblock content %}

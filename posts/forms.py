@@ -11,13 +11,10 @@ class PostForm(forms.ModelForm):
         model = Posts
         fields = ['title', 'subtitle', 'description', 'imagen_posts', 'categorie']
         widgets = {
-            'title': forms.TextInput(attrs={'placeholder': "Nom de l'établissement"}),
-            'subtitle': forms.TextInput(attrs={'placeholder': 'Titre'}),
-            'description': forms.Textarea(attrs={'placeholder': 'Description'}),
+            'title': forms.TextInput(attrs={'placeholder': "Nom de l'établissement", 'class': 'custom-input'}),
+            'subtitle': forms.TextInput(attrs={'placeholder': 'Titre', 'class': 'custom-input'}),
+            'description': forms.Textarea(attrs={'placeholder': 'Description', 'class': 'custom-textarea'}),
             'categorie': forms.Select(choices=Posts.CATEGORIE_CHOICES, attrs={'class': 'form-control'}),
-        }
-        labels = {
-            'categorie': 'Catégorie',
         }
 
 
