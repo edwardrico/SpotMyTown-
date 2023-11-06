@@ -2,33 +2,39 @@
 {% load static %}
 {% block content %}
 
-
 <style>
-  .custom-form-container {
-    background: linear-gradient(45deg, #E0E0E0, #F0F0F0);
+  body {
+    background: #072D60; /* Cambia el color de fondo del body */
+  }
+
+  .custom-section {
+    background: white;
+    max-width: 600px;
     padding: 20px;
     border-radius: 10px;
-    margin-top: 130px;
-    border: 1px solid #007BFF;
+    margin: 20px auto;
+    border: 1px solid;
+
   }
 
   .custom-form {
     max-width: 500px;
     margin: 0 auto;
+    border-radius: 5px;
+
   }
 
-  .custom-field {
-    margin-bottom: 20px;
-  }
+
 
   .form-group {
     display: flex;
     flex-direction: column;
+
+
+
   }
 
-  .form-group label {
-    margin-bottom: 5px;
-  }
+
 
   .custom-button {
     background-color: #007BFF;
@@ -40,130 +46,61 @@
     border-color: #0056b3;
   }
 
-  .site-nav {
-        position: fixed;
-        z-index: 1000;
-        width: 100%;
-        background-color: rgba(0, 0, 0, 0.4);
-        color: black;
-        text-align: center;
-        padding: 10px 0;
-        transition: background-color 0.3s ease;
-    }
+  .my-button {
+    background-color: #072D60;
+    color: white;
+    transition: background-color 0.3s;
+    font-size: 0.8rem;
+    transition: transform 0.2s;
+  }
 
-    .site-nav a {
-        text-shadow: rgba(0, 0, 0, 0.6);
-        font-size: 25px;
-        transition: color 0.3s ease;
-    }
+  .my-button:hover {
+    background-color: #CB6CE6;
+    color: white;
+    transform: scale(0.9);
+  }
 
-    .site-nav ul:hover {
-        color: #214252;
-    }
-
-
-
-    .user-profile span {
-    font-weight: bold; /* Mettre en gras le message de bienvenue */
-    color: #fff; /* Couleur du texte en blanc */
-}
-
-/* Styles pour la photo de profil */
-.user-profile img {
-    border: 0.5px solid #fff;
-
-}
-@media screen and (max-width: 768px) {
-.user-profile span {
-	color:black;
-
- }
-}
+  .my-button::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 0;
+    left: 0;
+    bottom: 0;
+    background-color: #007BFF;
+    transition: height 0.2s;
+  }
 </style>
 
 <div class="site-mobile-menu site-navbar-target">
-    <div class="site-mobile-menu-header">
-        <div class="site-mobile-menu-close">
-            <span class="icofont-close js-menu-toggle"></span>
-        </div>
+  <div class="site-mobile-menu-header">
+    <div class="site-mobile-menu-close">
+      <span class="icofont-close js-menu-toggle"></span>
     </div>
-    <div class="site-mobile-menu-body"></div>
+  </div>
+  <div class="site-mobile-menu-body"></div>
 </div>
-<nav class="site-nav">
-    <div class="container">
-        <div class="menu-bg-wrap">
-            <div class="site-navigation">
-                <div class="row g-0 align-items-center">
-                    <div class="col-2">
-                        <a href="{% url 'home'%}" class="logo m-0 float-start">Petit glouton<span class="text-primary"></span></a>
-                    </div>
-                    <div class="col-8 text-center">
-                        <ul class="js-clone-nav d-none d-lg-inline-block text-start site-menu mx-auto">
-                            <li class="active"><a href="{% url 'home'%}">Home</a></li>
-                            <li class="has-children">
-                                <a href="{% url 'home' %}">Pages</a>
-                                <ul class="dropdown">
-                                    <li><a href="blog.html">Article</a></li>
-                                    <li><a href="single.html">Evenement</a></li>
-                                    <li><a href="category.html">Culture</a></li>
-                                    <li><a href="about.html">Top posts</a></li>
-                                    <li class="has-children">
-                                        <a href="#">Categorie</a>
-                                        <ul class="dropdown">
-                                            <li><a href="{% url 'restaurant'%}">Restaurat</a></li>
-                                            <li><a href="{% url 'bar'%}">Bar</a></li>
-                                            <li><a href="{% url 'tourisme'%}">Tourisme</a></li>
-                                            <li><a href="{% url 'nightClubs'%}">Night clubs</a></li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li><a href="category.html">About</a></li>
-                            <li><a href="{% url 'formPost' %}">Posts</a></li>
-							{% if user.is_authenticated %}
-							<li><a href="{% url 'logout'%}">Déconnexion</a></li>
-							<li class="user-profile end ">
-								<a href="{% url 'logout'%}"></a>
-									<a href="{% url 'view_profile' %}">
-        					<img src="{{ user.userprofile.profile_pic.url }}" alt="Photo de profil" class="rounded-circle" width="30" height="30">
-    						</a>
-								<span>{{ user.username }}</span>
-								</li>
-									{% else %}
-							<li><a href="{% url 'login'%}">Connexion</a></li>
-							{% endif %}
-                        </ul>
-                    </div>
-                    <div class="col-2 text-end">
-							<a href="#" class="burger ms-auto float-end site-menu-toggle js-menu-toggle d-inline-block d-lg-none light">
-								<span></span>
-                            </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</nav>
-
 
 <div class="container">
   <div class="row justify-content-center">
-    <div class="col-md-8">
-      <div class="custom-form-container">
-        <h2 class="text-center mb-4">Petit Glouton</h2>
+    <div class="col-md-6">
+      <section class="custom-section p-2" >
+        <div class="logo-container text-center mb-4" style="padding: 5px;">
+          <img src="{% static 'logo/spotmytown4.png' %}" alt="spotmytown" width="300">
+        </div>
         <form method="post" enctype="multipart/form-data" class="custom-form">
           {% csrf_token %}
           {% for field in form %}
-            <div class="mb-3 custom-field">
-                <div class="form-group">
-                    <label for="{{ field.id_for_label }}">{{ field.label_tag }}</label>
-                    {{ field }}
-                </div>
+            <div class="mb-2 custom-field">
+              <div class="form-group">
+
+                {{ field }}
+              </div>
             </div>
-            {% endfor %}
-            <button type="submit" class="btn btn-primary custom-button">Créer le post</button>
+          {% endfor %}
+          <button type="submit" class="btn btn my-button">Créer le post</button>
         </form>
-      </div>
+      </section>
     </div>
   </div>
 </div>

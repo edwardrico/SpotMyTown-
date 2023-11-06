@@ -4,16 +4,20 @@ from .models import Posts, Comment
 
 
 # Formulaire pour la création de publication
+
+
 class PostForm(forms.ModelForm):
     class Meta:
         model = Posts
         fields = ['title', 'subtitle', 'description', 'imagen_posts', 'categorie']
+        widgets = {
+            'title': forms.TextInput(attrs={'placeholder': "Nom de l'établissement"}),
+            'subtitle': forms.TextInput(attrs={'placeholder': 'Titre'}),
+            'description': forms.Textarea(attrs={'placeholder': 'Description'}),
+            'categorie': forms.Select(choices=Posts.CATEGORIE_CHOICES, attrs={'class': 'form-control'}),
+        }
         labels = {
-            'title': "Nom de l'établissement",  # Étiquette personnalisée pour le champ "title"
-            'subtitle': 'Titre',  # Étiquette personnalisée pour le champ "subtitle"
-            'description': 'Description',  # Étiquette personnalisée pour le champ "description"
-            'imagen_posts': 'Image',  # Étiquette personnalisée pour le champ "imagen_posts"
-            'categorie': 'Catégorie',  # Étiquette personnalisée pour le champ "categorie"
+            'categorie': 'Catégorie',
         }
 
 
