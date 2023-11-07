@@ -14,7 +14,7 @@ class Posts(models.Model):
     subtitle = models.CharField(max_length=100, blank=False, null=True)  # Sous-titre de la publication (optionnel)
     description = models.TextField(max_length=700, blank=False,
                                    null=True)  # Description de la publication (optionnelle)
-    imagen_posts = models.ImageField(blank=True, null=True,
+    imagen_posts = models.ImageField(blank=False, null=False,
                                      default="default_image.png")  # Image associée à la publication
     image_width = models.PositiveIntegerField(default=350)  # Largeur souhaitée de l'image
     image_height = models.PositiveIntegerField(default=320)  # Hauteur souhaitée de l'image

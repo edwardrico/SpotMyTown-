@@ -77,14 +77,14 @@
   <form method="post" enctype="multipart/form-data" >
     {% csrf_token %}
     {% for field in form %}
-      <div class="mb-3 custom-field">
+      <div class="mb-2 custom-field">
         <div class="form-group">
           {{ field }}
         </div>
       </div>
     {% endfor %}
      <div class="d-grid">
-       <button type="submit" class="btn my-button btn-lg me-sm-2 mb-2 mb-sm-0">Cree un publication</button>
+       <button type="submit" class="btn my-button btn-lg me-sm-0 mb-0 mb-sm-0">Cree un publication</button>
      </div>
   </form>
 </div>
