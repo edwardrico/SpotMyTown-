@@ -67,9 +67,12 @@ class Posts(models.Model):
             self.meta_description = self.description
 
         if self.imagen_posts:
-            image = Image.open(self.imagen_posts)
-            image = image.resize((self.image_width, self.image_height), Image.ANTIALIAS)
-            image.save(self.imagen_posts.path, 'JPEG', quality=90, optimize=True)
+            try:
+                image = Image.open(self.imagen_posts.path)
+                image = image.resize((self.image_width, self.image_height), Image.ANTIALIAS)
+                image.save(self.imagen_posts.path, 'JPEG', quality=90, optimize=True)
+            except Exception as e:
+                print(f"Error resizing image: {str(e)}")
 
         if not self.slug:
             self.slug = slugify(self.title)

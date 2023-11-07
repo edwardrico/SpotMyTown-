@@ -17,6 +17,12 @@ class PostForm(forms.ModelForm):
             'categorie': forms.Select(choices=Posts.CATEGORIE_CHOICES, attrs={'class': 'form-control'}),
         }
 
+    def clean_imagen_posts(self):
+        imagen_posts = self.cleaned_data['imagen_posts']
+        if not imagen_posts:
+            raise forms.ValidationError("Este campo es obligatorio. Debe proporcionar una imagen.")
+        return imagen_posts
+
 
 # Formulaire pour les commentaires
 class CommentForm(forms.ModelForm):
