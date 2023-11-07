@@ -12,10 +12,10 @@
     margin: 0;
   }
 
+
   .custom-section {
     background: white;
-    max-width: 700px;
-    padding: 20px;
+    padding: 10px;
     border-radius: 10px;
 
   }
@@ -70,12 +70,11 @@
   </div>
   <div class="site-mobile-menu-body"></div>
 </div>
-
 <div class="custom-section p-3">
   <div class="logo-container text-center mb-4" style="padding: 5px;">
     <img src="{% static 'logo/spotmytown4.png' %}" alt="spotmytown" width="300">
   </div>
-  <form method="post" enctype="multipart/form-data" class="custom-form mx-auto">
+  <form method="post" enctype="multipart/form-data" >
     {% csrf_token %}
     {% for field in form %}
       <div class="mb-3 custom-field">
@@ -89,5 +88,4 @@
      </div>
   </form>
 </div>
-
 {% endblock content %}
