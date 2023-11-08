@@ -415,7 +415,7 @@ a.dropdown-item:hover {
             </div>
         {% endif %}
         <div class="col mb-4">
-            <div class="col-sm-6">
+            <div class="col-sm-13">
                 <h2 class="posts-entry-title">{{ post.title }}</h2>
             </div>
             <div class="blog-entry">
@@ -437,7 +437,7 @@ a.dropdown-item:hover {
                     <span class="username">{{ post.user.username }}</span>
                 </p>
                 </a>
-                <h2><a href="{% url 'post' post.id %}">{{ post.subtitle }}</a></h2>
+                <h3><a href="{% url 'post' post.id %}">{{ post.subtitle }}</a></h3>
                 <p><a href="{% url 'post' post.id %}" class="btn btn-sm btn-outline my-button">Lire</a></p>
             </div>
             <div class="col mb-5"></div>
