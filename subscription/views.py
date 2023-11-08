@@ -1,11 +1,10 @@
 from channels.auth import login
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
-from posts.models import UserProfile
+from user_profile.models import UserProfile
 from subscription.forms import CustomRegistrationForm
 
 
-# Create your views here.
 # views confirmation de l'inscription
 def register_success(request):
     return render(request, 'register/register_success.html')

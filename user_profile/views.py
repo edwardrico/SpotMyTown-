@@ -3,11 +3,8 @@ from user_profile.forms import UserProfileForm
 from user_profile.models import UserProfile
 
 
-# Create your views here.
-
 # Vue pour afficher le profil de l'utilisateur
 def view_profile(request):
-
     # Récupère le profil de l'utilisateur actuellement connecté
     user_profile = UserProfile.objects.get(user=request.user)
     if request.method == 'POST':
