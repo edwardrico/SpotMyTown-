@@ -403,8 +403,9 @@ text-transform: uppercase;
                         <p class="lead">{{ post.description }}</p>
                     </div>
                     <div class="pt-5">
-                        <p>Categories: {{ post.categorie }}</p>
-                    </div>
+
+                            <p>Categories: {{ post.categorie }}</p>
+                        </div>
 
                    <div class="pt-5 comment-wrap">
                         <div class="texte">
@@ -536,7 +537,7 @@ text-transform: uppercase;
                 <h4 class="mt-1">Evalouer posts</h4>
                 <form method="post" action="{% url 'post_rating' post.id %}" >
                          {% csrf_token %}
-                     <fieldset class="rating">
+                     <fieldset class="rating ">
                          <input type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="Awesome - 5 stars"></label>
                          <input type="radio" id="star4half" name="rating" value="4.5" /><label class="half" for="star4half" title="Pretty good - 4.5 stars"></label>
                          <input type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4" title="Pretty good - 4 stars"></label>

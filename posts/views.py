@@ -7,6 +7,7 @@ from .models import Posts, Comment, Rating
 from .forms import PostForm, CommentForm, PostRatingForm
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
+import requests
 
 
 # Vue pour afficher une publication individuelle
@@ -104,12 +105,12 @@ def search_posts(request):
 
     if query and category:
         results = Posts.objects.filter(
-            Q(title__iexact=query) & Q(categorie=category))
+            Q(title__icontains=query) & Q(categorie=category))
         title = f"Résultats pour {query} dans la catégorie {category}"
 
     elif query:
         results = Posts.objects.filter(
-            Q(title__iexact=query))
+            Q(title__icontains=query))
         title = f"Resultats pour {query}"
 
     elif category:
@@ -144,11 +145,26 @@ def search_posts(request):
 
     }
 
-    print(f'context: {context}')
     return render(request, 'search/search_results.html', context)
 
 
 # Vues pour les commentaries
+def get_place_details_from_title(title):
+    # Utilisez le titre pour effectuer une recherche avec l'API Google Places
+    api_key = 'AIzaSyBVIR2qvE8Qtf0KEvyd1Zg_hAagLNRfMpI'
+    url = f'https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input={title}&inputtype=textquery&fields=formatted_address,opening_hours&key={api_key}'
+    response = requests.get(url)
+
+    if response.status_code == 200:
+        result = response.json()
+        if 'candidates' in result and result['candidates']:
+            place = result['candidates'][0]
+            address = place.get('formatted_address', '')
+            opening_hours = place.get('opening_hours', {})
+            return address, opening_hours
+    return '', {}
+
+
 @login_required
 def commentaire(request, pk):
     post = Posts.objects.get(id=pk)
@@ -162,6 +178,7 @@ def commentaire(request, pk):
             comment.post = post
             if parent_comment:
                 comment.parent_comment = parent_comment  # Liez la réponse au commentaire parent
+
             comment.save()
             return redirect('post', pk=pk)
 
@@ -183,6 +200,7 @@ def formulaire(request):
             post.slug = generate_unique_slug(post.title, Posts)
             categorie = post.categorie
             post.save()
+
             # Rediriger l'utilisateur vers la page de la catégorie appropriée
             return redirect(reverse(categorie))
 
