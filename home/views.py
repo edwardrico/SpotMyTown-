@@ -9,3 +9,7 @@ def home(request):
     posts = Posts.objects.all().order_by('-created_at')
     context = {'posts': posts}
     return render(request, 'home/home.html', context)
+
+
+def about(request):
+    return render(request, 'about/about.html')

@@ -233,7 +233,7 @@
               </ul>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">About</a>
+               <a class="nav-link" href="{% url 'about' %}">About</a>
             </li>
             <li class="nav-item">
                 {% if not user.is_authenticated %}
@@ -367,7 +367,7 @@
 				<div class="col-sm-6">
 					<h2 class="posts-entry-title">A la une</h2>
 				</div>
-				<div class="col-sm-6 text-sm-end"><a href="category.html" class="read-more">View All</a></div>
+
 			</div>
 			<div class="row g-3">
 				<div class="col-md-9">
@@ -530,7 +530,7 @@
 				<div class="col-sm-6">
 					<h2 class="posts-entry-title">évenements</h2>
 				</div>
-				<div class="col-sm-6 text-sm-end"><a href="category.html" class="read-more">View All</a></div>
+
 			</div>
 			<div class="row">
 				<div class="col-lg-4 mb-4">
@@ -732,7 +732,6 @@
 				<div class="col-sm-6">
 					<h2 class="posts-entry-title">Travel</h2>
 				</div>
-				<div class="col-sm-6 text-sm-end"><a href="category.html" class="read-more">View All</a></div>
 			</div>
 			<div class="row align-items-stretch retro-layout-alt">
 				<div class="col-md-5 order-md-2">
