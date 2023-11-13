@@ -5,6 +5,8 @@ from django.contrib.auth.models import User
 from django.template.defaultfilters import slugify
 from django.urls import reverse
 from user_profile.models import UserProfile
+from django.utils import timezone
+
 
 
 # Modèle pour stocker les publications
@@ -87,12 +89,13 @@ class Posts(models.Model):
 class Comment(models.Model):
     objects = None
     user = models.ForeignKey(User,
-                             on_delete=models.CASCADE)  # Relation plusieurs à un avec le modèle User (auteur du commentaire)
-    post = models.ForeignKey(Posts, on_delete=models.CASCADE)  # Relation plusieurs à un avec la publication associée
+                             on_delete=models.CASCADE, default=1)  # Relation plusieurs à un avec le modèle User (auteur du commentaire)
+    post = models.ForeignKey(Posts, on_delete=models.CASCADE, default=1)  # Relation plusieurs à un avec la publication associée
     text = models.TextField()  # Contenu du commentaire
     created_at = models.DateTimeField(auto_now_add=True)  # Date de création du commentaire
     parent_comment = models.ForeignKey('self', null=True, blank=True,
                                        on_delete=models.CASCADE)  # Relation un à plusieurs pour les commentaires parentaux (réponses)
+
 
     def __str__(self):
         if self.user:

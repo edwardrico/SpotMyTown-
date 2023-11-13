@@ -1,7 +1,10 @@
-from django.contrib.auth import login, logout
+from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.views import PasswordResetView
 from django.shortcuts import render, redirect
+from django.contrib import messages
+from user_profile.models import UserProfile
+
 
 
 def error_login(request):
@@ -13,9 +16,23 @@ def custom_login(request):
     if request.method == "POST":
         form = AuthenticationForm(data=request.POST)
         if form.is_valid():
-            user = form.get_user()
-            login(request, user)
-            return redirect('home')
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+
+            user = authenticate(request, username=username, password=password)
+
+            if user is not None:
+                user_profile = UserProfile.objects.filter(user=user).first()
+
+                if user_profile and user_profile.subscription.email_verified:
+                    login(request, user)
+                    return redirect('home')
+                elif user_profile and not user_profile.subscription.email_verified:
+                    messages.error(request, 'Veuillez vérifier votre email avant de vous connecter.')
+                else:
+                    messages.error(request, 'Profil non trouvé pour cet utilisateur.')
+            else:
+                messages.error(request, 'Nom d\'utilisateur ou mot de passe incorrect.')
     else:
         form = AuthenticationForm()
 
@@ -24,9 +41,7 @@ def custom_login(request):
     else:
         message = None
 
-    return render(request, 'login/login.html', {'form': form})
-
-
+    return render(request, 'login/login.html', {'form': form, 'message': message})
 # Vue pour la déconnexion de l'utilisateur
 def custom_logout(request):
     logout(request)

@@ -509,13 +509,16 @@ text-transform: uppercase;
 
                 <div class="sidebar-box">
                     <div class="bio text-center">
+                        {% if post.user.userprofile %}
                         <img src="{{ post.user.userprofile.profile_pic.url }}" alt="{{post.user.username}}" class="rounded-circle" width="150" height="150" >
                         <div class="bio-body">
                             <h2 class = "mb-2" style="margin-top: 20px;">{{ post.user.username }}</h2>
                             <p class="mb-4">{{ post.user.userprofile.bio }}</p>
                             <p><a href="{% url 'view_profile' %}" class="btn btn-primary btn-sm rounded px-2 py-2">Read my bio</a></p>
-
                         </div>
+                        {% else %}
+                        <p>Profil utilisateur non disponible.</p>
+                        {% endif %}
                     </div>
                 </div>
 
