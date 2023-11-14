@@ -13,13 +13,13 @@
 }
 
 .dropdown-menu {
-    background:#03727d
+    background:#072D60;
 }
 a.dropdown-toggle {
     color:#dfdfdf !important
 }
 a.dropdown-item:hover {
-    color:#03727d !important
+    color:#CB6CE6!important
 }
 .nav-item a{
     color:#dfdfdf;
@@ -202,12 +202,12 @@ a.dropdown-item:hover {
     border: 1px solid #072D60;
     border-radius: 15px;
     background-color: #F5F5F5;
-    width: 70%;
+    width: 65%;
     animation: borderGlow 2s infinite;
 }
 
 
-}
+
 
 .footer-basic {
   padding:40px 0;
@@ -381,8 +381,8 @@ a.dropdown-item:hover {
   >
   <div class="d-flex justify-content-center align-items-center h-100">
     <div class="text-white">
-        <h1 class="mb-3" style="color:white;">{{category|upper}}</h1>
-        <h4 class="mb-3">Partagez vos meilleurs moments gourmets</h4>
+        <h1 class="mb-3" style="color: white; text-shadow: 0 0 15px rgba(255, 255, 255, 0.9);">{{category|upper}}</h1>
+        <h4 class="mb-3" style="color: white; text-shadow: 0 0 15px rgba(255, 255, 255, 0.9);">Partagez vos meilleurs moments gourmets</h4>
         <form method="get" action="{% url 'search_posts' %}">
             {% csrf_token %}
             <div class="container d-flex justify-content-center">
@@ -455,9 +455,10 @@ a.dropdown-item:hover {
         </div>
         {% endfor %}
             {% else %}
-        <div class="container text-center mt-5 mb-5 custom-border">
+
+            <div class="container text-center mt-5 mb-5 custom-border">
             <div class="row">
-                <div class="col-md-12 mt-4 d-flex flex-column align-items-center justify-content-center" style="min-height: 70vh;">
+                <div class="col-md-12 mt-4 d-flex flex-column align-items-center justify-content-center" style="min-height: 60vh;">
                     <div class="title">
                         <h1 class="mb-4 text-center smile-icon fa fa-frown" style="color:#CB6CE6; font-size: 6rem;"></h1>
                         <h1 class="text mb-4 " style="color:#072D60; font-size: 2rem;">Pas de publications dans cette catégorie</h1>
@@ -494,7 +495,7 @@ a.dropdown-item:hover {
             </div> <!-- /.col-lg-4 -->
 
             <div class="col-12 text-center">
-                <img src="{% static 'logo/spotmytown1.png' %}" alt="Logo" style="max-width: 300px;">
+                <img src="{% static 'logo/spotmytown1.png' %}" alt="Logo spotmytown" style="max-width: 300px;">
             </div>
         </div> <!-- /.row -->
 

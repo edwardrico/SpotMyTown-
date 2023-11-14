@@ -12,13 +12,13 @@
 }
 
 .dropdown-menu {
-    background:#03727d
+    background:#072D60;
 }
 a.dropdown-toggle {
     color:#dfdfdf !important
 }
 a.dropdown-item:hover {
-    color:#03727d !important
+    color:#CB6CE6!important
 }
 .nav-item a{
     color:#dfdfdf;
@@ -148,13 +148,9 @@ a.dropdown-item:hover {
 .custom-border {
     border: 1px solid #072D60;
     border-radius: 15px;
-    background-color: #F5F5F5; /* Couleur de fond pour un contraste visuel */
-    padding: 0px; /* Espace interne pour aérer le contenu */
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    background-color: #F5F5F5;
     width: 70%;
-
-
-    }
+    animation: borderGlow 2s infinite;
 }
 
 
@@ -402,7 +398,7 @@ a.dropdown-item:hover {
 
      <div class="container text-center mt-5 mb-5 custom-border">
        <div class="row">
-                <div class="col-md-12 mt-4 d-flex flex-column align-items-center justify-content-center" style="min-height: 70vh;">
+                <div class="col-md-12 mt-4 d-flex flex-column align-items-center justify-content-center" style="min-height: 60vh;">
                     <div class="title">
                         <h1 class="mb-4 text-center smile-icon fa fa-frown" style="color:#CB6CE6; font-size: 6rem;"></h1>
                         <h1 class="text mb-3" style="color:#072D60; font-size: 2rem;">Aucun {{title}}</h1>
@@ -443,7 +439,7 @@ a.dropdown-item:hover {
             </div> <!-- /.col-lg-4 -->
 
             <div class="col-12 text-center" >
-                <img src="{% static 'logo/spotmytown1.png' %}" alt="Logo" style="max-width: 300px;">
+                <img src="{% static 'logo/spotmytown1.png' %}" alt="Logo spotmytown" style="max-width: 300px;">
             </div>
         </div> <!-- /.row -->
 
