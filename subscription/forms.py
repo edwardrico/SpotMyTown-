@@ -19,7 +19,7 @@ class CustomRegistrationForm(UserCreationForm):
             'password1': 'Mot de passe',  # Étiquette personnalisée pour le champ "password1"
             'password2': 'Confirmation du mot de passe',  # Étiquette personnalisée pour le champ "password2"
         }
-""""
+
     def clean_prenom(self):
         prenom = self.cleaned_data['prenom']
         if not prenom.isalpha():
@@ -42,4 +42,3 @@ class CustomRegistrationForm(UserCreationForm):
         #if User.objects.filter(email=email).exists():
             #raise forms.ValidationError("Un utilisateur avec cette adresse e-mail existe déjà.")
         #return email
-"""

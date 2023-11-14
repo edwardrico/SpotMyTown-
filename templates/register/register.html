@@ -58,39 +58,38 @@
     <div class="container h-100">
       <div class="row d-flex justify-content-center align-items-center h-100">
         <div class="col-12 col-md-9 col-lg-7 col-xl-6">
-            <div class="card my-4" style="border-radius: 15px;">
-            <div class="card-body p-2">
+            <div class="card my-2" style="border-radius: 15px;">
+            <div class="card-body p-3">
              <div class="logo-container text-center d-flex align-items-center justify-content-center mb-4" style="padding: 5px;">
-
-                <img src="{% static 'logo/spotmytown4.png' %}" alt="Logo de l'entreprise" width="300">
+                 <img src="{% static 'logo/spotmytown4.png' %}" alt="Logo de l'entreprise" width="300">
               </div>
                 <div class = "text-center">
-                  <h5 class="mb-4 text-primary">S'inscrire</h5>
+                  <h5 class="mb-3 text-primary">S'inscrire</h5>
                 </div>
                 <form method="post" >
                 {% csrf_token %}
-                {% if form.errors%}
-                <div class="mb-4">
-                  {{form.errors}}
-                </div>
+                {% if form.errors %}
+                  <div class="mb-3">
+                    {{form.errors}}
+                  </div>
                 {% endif %}
 
-                <div class="mb-2">
+                <div class="mb-2 ">
                   <input type="text" class="form-control" id="{{ form.prenom.id_for_label }}"
                          name="{{ form.prenom.name }}" placeholder="{{ form.prenom.label }}">
                   </div>
 
-                 <div class="mb-2">
+                 <div class="mb-2 ">
                   <input type="text" class="form-control" id="{{ form.nom.id_for_label }}"
                          name="{{ form.nom.name }}" placeholder="{{ form.nom.label }}">
                   </div>
 
-                <div class="mb-2">
+                <div class="mb-2 ">
                   <input type="text" class="form-control" id="{{ form.username.id_for_label }}"
                          name="{{ form.username.name }}" placeholder="{{ form.username.label }}">
                 </div>
 
-                <div class="mb-2">
+                <div class="mb-2 ">
                   <input type="email" class="form-control" id="{{ form.email.id_for_label }}"
                          name="{{ form.email.name }}" placeholder="{{ form.email.label }}">
                 </div>
