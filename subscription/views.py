@@ -1,5 +1,5 @@
 from django.contrib import messages
-from django.contrib.auth import login
+from django.contrib.auth import login,authenticate
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect, get_object_or_404
 from user_profile.models import UserProfile
@@ -36,7 +36,7 @@ def verify_email(request, user_id, token):
     return render(request, 'register/verification_failure.html')
 
 
-from django.contrib.auth import authenticate
+
 
 def register(request):
     if request.method == 'POST':
@@ -50,13 +50,8 @@ def register(request):
 
             user = User.objects.create_user(first_name=prenom, last_name=nom, username=username, email=email,
                                             password=password)
-
-
             user_profile = UserProfile.objects.create(user=user, prenom=prenom, nom=nom)
-
-
             subscription = Subscription.objects.create(user=user_profile.user, first_name=prenom, last_name=nom)
-
 
             user_profile.subscription = subscription
             user_profile.save()

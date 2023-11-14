@@ -186,13 +186,25 @@ a.dropdown-item:hover {
     }
 }
 
+@keyframes borderGlow {
+    0% {
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    }
+    50% {
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+    }
+    100% {
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    }
+}
+
 .custom-border {
     border: 1px solid #072D60;
     border-radius: 15px;
-    background-color: #F5F5F5; /* Couleur de fond pour un contraste visuel */
-    padding: 0px; /* Espace interne pour aérer le contenu */
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    background-color: #F5F5F5;
     width: 70%;
+    animation: borderGlow 2s infinite;
+}
 
 
 }
@@ -295,7 +307,6 @@ a.dropdown-item:hover {
     }
 }
 
-
 </style>
 
 
@@ -381,7 +392,7 @@ a.dropdown-item:hover {
                             <div class="search">
                                 <i class="fa fa-search"></i>
                                 <input type="text" name="q" class="form-control" placeholder="Trouvez votre {{category}}">
-                                <input type="hidden" name="category" value="restaurant">
+                                <input type="hidden" name="category" value="nightClubs">
                                 <button class="my-button">Recherche</button>
                            </div>
                         </div>
@@ -405,7 +416,7 @@ a.dropdown-item:hover {
     </div>
 
 <div class="container">
-    <div class="row row-cols-1 row-cols-md-3 g-4" >
+    <div class="row row-cols-1 row-cols-md-3 g-4">
         {% for post in posts %}
         {% if forloop.counter0|divisibleby:3 %}
         </div>
@@ -414,8 +425,8 @@ a.dropdown-item:hover {
                 <hr class="my-4">
             </div>
         {% endif %}
-        <div class="col mb-4" >
-            <div class="col-sm-12">
+        <div class="col mb-4">
+            <div class="col-sm-6">
                 <h2 class="posts-entry-title">{{ post.title }}</h2>
             </div>
             <div class="blog-entry">
@@ -437,24 +448,26 @@ a.dropdown-item:hover {
                     <span class="username">{{ post.user.username }}</span>
                 </p>
                 </a>
-                <h3><a href="{% url 'post' post.id %}">{{ post.subtitle }}</a></h3>
+                <h2><a href="{% url 'post' post.id %}">{{ post.subtitle }}</a></h2>
                 <p><a href="{% url 'post' post.id %}" class="btn btn-sm btn-outline my-button">Lire</a></p>
             </div>
             <div class="col mb-5"></div>
         </div>
-
         {% endfor %}
             {% else %}
         <div class="container text-center mt-5 mb-5 custom-border">
             <div class="row">
                 <div class="col-md-12 mt-4 d-flex flex-column align-items-center justify-content-center" style="min-height: 70vh;">
                     <div class="title">
-                        <h1 class="mb-3 text-center smile-icon fa fa-frown" style="color:#CB6CE6; font-size: 6rem;"></h1>
-                        <h1 class="text" style="color:#072D60; font-size: 2rem;">Pas de publications dans cette catégorie</h1>
-                        <h3 class="mb-4 text-grey" style="font-size: 1.5rem;">Laissez votre publication de restaurant</h3>
+                        <h1 class="mb-4 text-center smile-icon fa fa-frown" style="color:#CB6CE6; font-size: 6rem;"></h1>
+                        <h1 class="text mb-4 " style="color:#072D60; font-size: 2rem;">Pas de publications dans cette catégorie</h1>
+                        <h3 class="mb-3 text-grey" style="font-size: 1.5rem;">Laissez votre publication {{category}}</h3>
                         {% if not user.is_authenticated %}
-                        <p class="w-sm-80 mx-auto mb-4 text-black">Pour realiser cette action vous devrais etre connecter.</p>
-                        <a id="changeSmileyButton" href="{% url 'login' %}" class="btn btn the-button" style="font-size: 0.8rem;">Conectez-vous</a>
+                      <div class="w-sm-80 mx-auto mb-4 text-black">
+                            <p style="margin-bottom: 0;">Pour réaliser cette action, vous devez être connecté.</p>
+                            <p style="margin-top: 0;">Si vous n'avez pas de compte, cliquez sur le bouton pour créer votre compte.</p>
+                        </div>
+                        <a id="changeSmileyButton" href="{% url 'login' %}" class="btn btn the-button" style="font-size: 0.8rem;">Conectez vous</a>
                         {%else%}
                         <a id="changeSmileyButton" href="{% url 'formPost' %}" class="btn btn the-button" style="font-size: 0.8rem;">Créer une publication</a>
                         {% endif %}

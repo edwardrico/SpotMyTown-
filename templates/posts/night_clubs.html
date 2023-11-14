@@ -459,12 +459,15 @@ a.dropdown-item:hover {
             <div class="row">
                 <div class="col-md-12 mt-4 d-flex flex-column align-items-center justify-content-center" style="min-height: 70vh;">
                     <div class="title">
-                        <h1 class="mb-3 text-center smile-icon fa fa-frown" style="color:#CB6CE6; font-size: 6rem;"></h1>
-                        <h1 class="text" style="color:#072D60; font-size: 2rem;">Pas de publications dans cette catégorie</h1>
-                        <h3 class="mb-4 text-grey" style="font-size: 1.5rem;">Laissez votre publication de restaurant</h3>
+                        <h1 class="mb-4 text-center smile-icon fa fa-frown" style="color:#CB6CE6; font-size: 6rem;"></h1>
+                        <h1 class="text mb-4 " style="color:#072D60; font-size: 2rem;">Pas de publications dans cette catégorie</h1>
+                        <h3 class="mb-3 text-grey" style="font-size: 1.5rem;">Laissez votre publication {{category}}</h3>
                         {% if not user.is_authenticated %}
-                        <p class="w-sm-80 mx-auto mb-4 text-black">Pour realiser cette action vous devrais etre connecter.</p>
-                        <a id="changeSmileyButton" href="{% url 'login' %}" class="btn btn the-button" style="font-size: 0.8rem;">Conectez-vous</a>
+                      <div class="w-sm-80 mx-auto mb-4 text-black">
+                            <p style="margin-bottom: 0;">Pour réaliser cette action, vous devez être connecté.</p>
+                            <p style="margin-top: 0;">Si vous n'avez pas de compte, cliquez sur le bouton pour créer votre compte.</p>
+                        </div>
+                        <a id="changeSmileyButton" href="{% url 'login' %}" class="btn btn the-button" style="font-size: 0.8rem;">Conectez vous</a>
                         {%else%}
                         <a id="changeSmileyButton" href="{% url 'formPost' %}" class="btn btn the-button" style="font-size: 0.8rem;">Créer une publication</a>
                         {% endif %}
