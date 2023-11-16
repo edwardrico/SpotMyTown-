@@ -75,32 +75,32 @@
 
                 <div class="mb-2 ">
                   <input type="text" class="form-control" id="{{ form.prenom.id_for_label }}"
-                         name="{{ form.prenom.name }}" placeholder="{{ form.prenom.label }}">
+                         name="{{ form.prenom.name }}" placeholder="{{ form.prenom.label }}" autocomplete="prenom">
                   </div>
 
                  <div class="mb-2 ">
                   <input type="text" class="form-control" id="{{ form.nom.id_for_label }}"
-                         name="{{ form.nom.name }}" placeholder="{{ form.nom.label }}">
+                         name="{{ form.nom.name }}" placeholder="{{ form.nom.label }}" autocomplete="nom">
                   </div>
 
                 <div class="mb-2 ">
                   <input type="text" class="form-control" id="{{ form.username.id_for_label }}"
-                         name="{{ form.username.name }}" placeholder="{{ form.username.label }}">
+                         name="{{ form.username.name }}" placeholder="{{ form.username.label }}" autocomplete="username">
                 </div>
 
                 <div class="mb-2 ">
                   <input type="email" class="form-control" id="{{ form.email.id_for_label }}"
-                         name="{{ form.email.name }}" placeholder="{{ form.email.label }}">
+                         name="{{ form.email.name }}" placeholder="{{ form.email.label }}" autocomplete="email">
                 </div>
 
                 <div class="mb-2">
                   <input type="password" class="form-control" id="{{ form.password1.id_for_label }}"
-                         name="{{ form.password1.name }}" placeholder="{{ form.password1.label }}">
+                         name="{{ form.password1.name }}" placeholder="{{ form.password1.label }}" autocomplete="new-password">
                 </div>
 
                 <div class="mb-2">
                   <input type="password" class="form-control" id="{{ form.password2.id_for_label }}"
-                         name="{{ form.password2.name }}" placeholder="{{ form.password2.label }}">
+                         name="{{ form.password2.name }}" placeholder="{{ form.password2.label }}" autocomplete="new-password">
                 </div>
 
                 <div class="mb-2 form-check d-flex justify-content-center">
@@ -122,11 +122,11 @@
     </div>
   </div>
 </section>
-
+  {% if form.errors  %}
 <div class="modal" tabindex="-1" role="dialog" id="errorModal">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
-      <div class="modal-header">
+        <div class="modal-header">
           <div class = "text-end" >
           <i class="fas fa-exclamation-circle fa-3x animate__animated animate__tada" style="color:#CB6CE6; margin-bottom: 10px;"></i>
         </div>
@@ -145,14 +145,17 @@
         </ul>
       </div>
     </div>
+      {% endif %}
   </div>
 </div>
 
-<!-- Ajoutez cette section où vous voulez que la popup apparaisse -->
+
 <div class="modal" tabindex="-1" role="dialog" id="infoModal">
   <div class="modal-dialog modal-dialog-centered" role="document">
+
     <div class="modal-content">
       <div class="modal-header">
+
         <h5 class="modal-title">Informations sur l'inscription</h5>
         <button type="button" class="close my-button" style="border-radius:5px;" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>

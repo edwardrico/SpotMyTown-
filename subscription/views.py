@@ -58,6 +58,9 @@ def register(request):
 
 
             return redirect('register_verification')
+        else:
+
+            messages.error(request, 'Veuillez corriger les erreurs dans le formulaire.')
 
     else:
         form = CustomRegistrationForm()

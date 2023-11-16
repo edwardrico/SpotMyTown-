@@ -102,6 +102,7 @@
     </div>
   </div>
 </section>
+{% if form.errors %}
 <div class="modal" tabindex="-1" role="dialog" id="errorPopup">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
@@ -125,6 +126,7 @@
           </ul>
       </div>
     </div>
+    {% endif %}
   </div>
 </div>
 
