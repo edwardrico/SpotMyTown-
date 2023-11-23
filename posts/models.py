@@ -1,4 +1,5 @@
 import uuid
+from django.db import models
 from PIL import Image
 from django.db import models
 from django.contrib.auth.models import User
@@ -22,7 +23,8 @@ class Posts(models.Model):
     image_height = models.PositiveIntegerField(default=320)  # Hauteur souhaitée de l'image
     id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)  # ID unique
     created_at = models.DateTimeField(auto_now_add=True)  # Date de création de la publication
-    address = models.CharField(max_length=200, blank=True, null=True)
+    city = models.CharField(max_length=200, blank=True, null=True)
+
 
     # Ajoutez ces champs
     slug = models.SlugField(unique=True, max_length=255, blank=True, null=True)
@@ -42,7 +44,7 @@ class Posts(models.Model):
     comments = models.ManyToManyField('Comment',
                                       related_name='post_comments')  # Relation plusieurs à plusieurs avec les commentaires associés
     user_profile = models.ForeignKey(UserProfile, on_delete=models.CASCADE, related_name='user_posts', null=True,
-                                     blank=True)  # Relation plusieurs à un avec le profil utilisateur associé
+                                     blank=True)
     ratings = models.ManyToManyField(User, through='Rating',
                                      related_name='post_rating')  # Relation plusieurs à plusieurs avec les évaluations associées
     objects = models.Manager()

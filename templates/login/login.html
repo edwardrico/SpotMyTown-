@@ -2,55 +2,6 @@
 {% load static %}
 {% block content %}
 
-<style>
-.start {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-  }
-.start i {
-    margin: 10px;
-    border: 1px solid transparent;
-    border-radius: 20%;
-    transition: border 0.3s;
-    padding: 6px;
-  }
-
-  .start:hover i {
-    border: 1px solid #CB6CE6;
-    border-radius: 20%;
-  }
-
-  .my-button {
-    background-color:#072D60;
-    color: white;
-    transition: background-color 0.3s;
-    font-size: 0.8rem;
-    transition: transform 0.2s;
-
-}
-
-.my-button:hover {
-    background-color: #CB6CE6;
-    color: white;
-    transform: scale(0.9);
-}
-
-.my-button::after {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 0;
-            left: 0;
-            bottom: 0;
-            background-color: #007bff;
-            transition: height 0.2s;
-}
-
-.visible {
-  display: block !important;
-}
-</style>
 
 <section class="vh-100 bg-image" style="background-color:#072D60">
   <div class="mask d-flex align-items-center h-100 gradient-custom-3">
@@ -112,7 +63,7 @@
           <i class="fas fa-exclamation-circle fa-3x animate__animated animate__tada" style="color:#CB6CE6; margin-bottom: 10px;"></i>
         </div>
         <h5 class="modal-title">Erreur de connexion</h5>
-        <button type="button " class="close  my-button" style="border-radius:5px;" data-dismiss="modal" aria-label="Close">
+        <button type="button " class="close my-button" style="border-radius:5px;" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -126,9 +77,9 @@
           </ul>
       </div>
     </div>
-    {% endif %}
   </div>
 </div>
+  {% endif %}
 
 <div class="modal" tabindex="-1" role="dialog" id="infoModal">
   <div class="modal-dialog modal-dialog-centered" role="document">
@@ -144,7 +95,7 @@
         <ul>
           <li>Le mot de passe doit contenir au moins 8 caractères.</li>
           <li>Il doit contenir au moins une lettre majuscule ou un caractère spécial.</li>
-          <!-- Ajoutez d'autres règles si nécessaire -->
+
         </ul>
       </div>
     </div>

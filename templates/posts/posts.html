@@ -2,302 +2,8 @@
 {% load static %}
 {% block content %}
 
-<style>
- @import url(https://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
-    @import url(http://fonts.googleapis.com/css?family=Calibri:400,300,700);
 
-#mainNavigation a {
-      font-family: 'Cabin', sans-serif;
-      font-size:14px;
-      text-transform:uppercase;
-      letter-spacing:2px;
-      text-shadow:1px 1px 2px rgba(0,0,0,0.6)
-
-}
-
-.dropdown-menu {
-    background:#072D60;
-}
-a.dropdown-toggle {
-    color:#dfdfdf !important
-}
-a.dropdown-item:hover {
-    color:#CB6CE6!important
-}
-.nav-item a{
-    color:#dfdfdf;
-}
-.nav-item a:hover {
-    color:#fff
-}
-.nav-item{
-   min-width:12vw;
-}
-#mainNavigation {
-   position:fixed;
-   top:0;
-   left:0;
-   width:100%;
-   z-index:123;
-   padding-bottom:120px;
-
-
-      /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#000000+0,000000+100&0.65+0,0+100;Neutral+Density */
-    background: -moz-linear-gradient(top,  rgba(0,0,0,0.65) 0%, rgba(0,0,0,0) 100%); /* FF3.6-15 */
-    background: -webkit-linear-gradient(top,  rgba(0,0,0,0.65) 0%,rgba(0,0,0,0) 100%); /* Chrome10-25,Safari5.1-6 */
-    background: linear-gradient(to bottom,  rgba(0,0,0,0.65) 0%,rgba(0,0,0,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a6000000', endColorstr='#00000000',GradientType=0 ); /* IE6-9 */
-    }
-    #navbarNavDropdown.collapsing .navbar-nav,
-    #navbarNavDropdown.show .navbar-nav{
-      background:#037582;
-      padding:12px;
-    }
-
-}
-
-.user-profile span {
-   font-family: 'Cabin', sans-serif;
-   letter-spacing:2px;
-   font-weight: bold;
-   margin-top: 10px;
-   color: #fff;
-
-}
-
-.user-profile {
-   position: absolute;
-   top: 0;
-   right: 0;
-   margin-right: 32px;
-   margin-top: 20px;
-   display: flex;
-   align-items: center;
-   justify-content: center;
-   flex-direction: column;
-   text-align: center;
-   cursor: pointer;
-}
-
-.user-profile span {
-    font-family: 'Cabin', sans-serif;
-    letter-spacing:1px;
-    margin-top: 5px;
-    color: #fff;
-
-}
-
-.user-profile img {
-   border: 0.5px solid ;
-}
-
-.user-posts{
-   margin-top: 10px;
-}
-
-.comment-list {
-   margin-top: 20px;
-}
-
-.rating {
-      border: none;
-      margin-right:32px;
-}
-.myratings{
-
-  font-size: 85px;
-  color: ##214252;
-}
-
-.rating > [id^="star"] { display: none; }
-.rating > label:before {
-  margin: 5px;
-  font-size: 2em;
-  font-family: FontAwesome;
-  display: inline-block;
-  content: "\f005";
-}
-
-.rating > .half:before {
-  content: "\f089";
-  position: absolute;
-}
-
-.rating > label {
-  color: #ddd;
- float: right;
-}
-
-/***** CSS Magic to Highlight Stars on Hover *****/
-
-.rating > [id^="star"]:checked ~ label, /* show gold star when clicked */
-.rating:not(:checked) > label:hover, /* hover current star */
-.rating:not(:checked) > label:hover ~ label { color: #FFD700;  } /* hover previous stars in list */
-
-.rating > [id^="star"]:checked + label:hover, /* hover current star when changing rating */
-.rating > [id^="star"]:checked ~ label:hover,
-.rating > label:hover ~ [id^="star"]:checked ~ label, /* lighten current selection */
-.rating > [id^="star"]:checked ~ label:hover ~ label { color: #FFED85;  }
-
-.reset-option {
-display: none;
-}
-
-.reset-button {
-margin: 6px 12px;
-background-color: #214252;
-text-transform: uppercase;
-
-}
-
-
-
-.mt-100 {
-     margin-top: 100px
- }
-
- .card {
-     position: relative;
-     display: flex;
-     width: 400px;
-     flex-direction: column;
-     min-width: 0;
-     word-wrap: break-word;
-     background-color: #fff;
-     background-clip: border-box;
-     border: 1px solid #d2d2dc;
-     border-radius: 11px;
-     -webkit-box-shadow: 0px 5px 0px rgb(249, 249, 250);
-     -moz-box-shadow: 0px 0px 5px 0px rgba(212, 182, 212, 1);
-     box-shadow: 0px 0px 5px 0px rgb(161, 163, 164)
- }
-
- .card .card-body {
-     padding: 1rem 1rem
- }
-
- .card-body {
-     flex: 1 1 auto;
-     padding: 1.25rem
- }
-
- p {
-     font-size: 14px
- }
-
- h4 {
-     margin-top: 18px
- }
-
- .fa-star-filled {
-    color:#FFD700 ;
-  }
-
-.votes {
-    margin-left: 20px;
-}
-
-.user{
-    margin-top: -20px;
-}
-
-.social-icons {
-    list-style: none;
-    padding: 0;
-    }
-
-.social-icons li {
-    display: inline-block;
-    margin-right: 20px;
-}
-
-.social-icons i {
-    border: 1px solid ;
-    padding: 5px;
-    border-radius: 25%;
-    color:#CB6CE6;
-}
-
-.social-icons i:hover {
-	color: #fff;
-	background-color: #CB6CE6;
-}
-
-.with-border {
-    border: 1px solid;
-    border-radius: 20%;
-    padding: 8px;
-}
-
-.with-border:hover {
-    background-color: #214252;
-    color: white;
-}
-
-.footer-basic {
-  padding:40px 0;
-  background-color:#072D60;
-  color:#4b4c4d;
-}
-
-.footer-basic ul {
-  padding:0;
-  list-style:none;
-  text-align:center;
-  font-size:18px;
-  line-height:1.6;
-  margin-bottom:0;
-}
-
-.footer-basic li {
-  padding:0 10px;
-}
-
-.footer-basic ul a {
-  color:white;
-  text-decoration:none;
-  opacity:0.8;
-}
-
-.footer-basic ul a:hover {
-  opacity:3;
-}
-
-.footer-basic .social {
-  text-align:center;
-  padding-bottom:25px;
-}
-
-.footer-basic .social > a {
-  font-size:24px;
-  width:40px;
-  height:40px;
-  line-height:40px;
-  display:inline-block;
-  text-align:center;
-  border-radius:50%;
-  border:1px solid #ccc;
-  margin:0 8px;
-  color:inherit;
-  opacity:0.75;
-}
-
-.footer-basic .social > a:hover {
-  opacity:0.9;
-}
-
-.footer-basic .copyright {
-  margin-top:15px;
-  text-align:center;
-  font-size:13px;
-  color:#CB6CE6;
-  margin-bottom:0;
-}
-
-
-</style>
-
-<div id="mainNavigation">
+<div id="mainNavigation" class="sticky-navbar">
       <nav role="navigation">
         <div class="py-3 text-center border-bottom">
            <img src="{% static 'logo/spotmytown.png' %}" alt="" class="invert" style="width:250px;">
@@ -342,7 +48,7 @@ text-transform: uppercase;
                 <li class="user-profile end ">
 								<a href="{% url 'logout'%}"></a>
 									<a href="{% url 'view_profile' %}">
-        					<img src="{{ user.userprofile.profile_pic.url }}" alt="Photo de profil" class="rounded-circle" width="30" height="30">
+        					<img src="{{ user.userprofile.profile_pic.url }}" alt="{{ user.profile.username}}" class="rounded-circle" width="30" height="30">
     						</a>
 								<span>{{ user.username }}</span>
 
@@ -405,6 +111,7 @@ text-transform: uppercase;
                     <div class="pt-5">
 
                             <p>Categories: {{ post.categorie }}</p>
+
                         </div>
 
                    <div class="pt-5 comment-wrap">
@@ -444,6 +151,7 @@ text-transform: uppercase;
                                                 {% else %}
                                                 <input type="submit" value="Poste une réponse" class="btn btn-primary">
                                                 {% endif %}
+
                                             </div>
                                         </form>
                                     </div>

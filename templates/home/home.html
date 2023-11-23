@@ -19,7 +19,49 @@
       letter-spacing:2px;
       text-shadow:1px 1px 2px rgba(0,0,0,0.6)
 
+
     }
+
+#mainNavigation.sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    animation: fadeInDown 0.5s;
+    z-index: 1000;
+  }
+
+   #mainNavigation {
+    transition: transform 0.5s ease-in-out, box-shadow 0.5s ease-in-out;
+
+  }
+
+  @keyframes fadeInDown {
+    from {
+      opacity: 0;
+      transform: translateY(-50px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  #mainNavigation.hidden {
+    animation: fadeOutUp 0.5s;
+    transform: translateY(-100%);
+    box-shadow: none;
+  }
+
+  @keyframes fadeOutUp {
+    from {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    to {
+      opacity: 0;
+      transform: translateY(-50px);
+    }
+  }
 
    .dropdown-menu {
     background:#072D60;
@@ -49,9 +91,9 @@ a.dropdown-item:hover {
 
 
 
-    background: -moz-linear-gradient(top,  rgba(0,0,0,0.65) 0%, rgba(0,0,0,0) 100%); /* FF3.6-15 */
-    background: -webkit-linear-gradient(top,  rgba(0,0,0,0.65) 0%,rgba(0,0,0,0) 100%); /* Chrome10-25,Safari5.1-6 */
-    background: linear-gradient(to bottom,  rgba(0,0,0,0.65) 0%,rgba(0,0,0,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    background: -moz-linear-gradient(top,  rgba(0,0,0,0.80) 0%, rgba(0,0,0,0) 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top,  rgba(0,0,0,0.80) 0%,rgba(0,0,0,0) 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom,  rgba(0,0,0,0.80) 0%,rgba(0,0,0,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a6000000', endColorstr='#00000000',GradientType=0 ); /* IE6-9 */
     }
     #navbarNavDropdown.collapsing .navbar-nav,
@@ -61,6 +103,8 @@ a.dropdown-item:hover {
     }
 
 }
+
+
 
 
 
@@ -204,7 +248,7 @@ a.dropdown-item:hover {
 }
 </style>
 
-<div id="mainNavigation">
+<div id="mainNavigation" class="sticky-navbar">
       <nav role="navigation">
         <div class=" py-3 text-center border-bottom">
           <img src="{% static 'logo/spotmytown.png' %}" alt="" class="invert" style="width:250px;">
@@ -225,12 +269,12 @@ a.dropdown-item:hover {
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Categories
               </a>
-              <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <li><a class="dropdown-item" href="{% url 'restaurant' %}">Restaurant</a></li>
-                <li><a class="dropdown-item" href="{% url 'bar'%}">Bar</a></li>
-                <li><a class="dropdown-item" href="{% url 'tourisme' %}">Tourisme</a></li>
-                <li><a class="dropdown-item" href="{% url 'nightClubs'%}">Nigh Clubs</a></li>
-              </ul>
+             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+				<li><a class="dropdown-item" href="{% url 'restaurant' %}"><i class="fas fa-utensils " ></i> Restaurant</a></li>
+				<li><a class="dropdown-item" href="{% url 'bar'%}"><i class="fas fa-glass-martini "></i> Bar</a></li>
+				<li><a class="dropdown-item" href="{% url 'tourisme' %}"><i class="fas fa-map-marked-alt "></i> Tourisme</a></li>
+				<li><a class="dropdown-item" href="{% url 'nightClubs'%}"><i class="fas fa-music "></i> Night Clubs</a></li>
+			</ul>
             </li>
             <li class="nav-item">
                <a class="nav-link" href="{% url 'about' %}">About</a>
@@ -763,6 +807,7 @@ a.dropdown-item:hover {
 							<div class="text text-sm">
 								<span>February 12, 2019</span>
 								<h2>Startup vs corporate: What job suits you best?</h2>
+
 							</div>
 						</a>
 					</div>

@@ -1,0 +1,47 @@
+.start {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+  }
+.start i {
+    margin: 10px;
+    border: 1px solid transparent;
+    border-radius: 20%;
+    transition: border 0.3s;
+    padding: 6px;
+  }
+
+  .start:hover i {
+    border: 1px solid #CB6CE6;
+    border-radius: 20%;
+  }
+
+  .my-button {
+    background-color:#072D60;
+    color: white;
+    transition: background-color 0.3s;
+    font-size: 0.8rem;
+    transition: transform 0.2s;
+
+}
+
+.my-button:hover {
+    background-color: #CB6CE6;
+    color: white;
+    transform: scale(0.9);
+}
+
+.my-button::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 0;
+            left: 0;
+            bottom: 0;
+            background-color: #007bff;
+            transition: height 0.2s;
+}
+
+.visible {
+  display: block !important;
+}

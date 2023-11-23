@@ -23,6 +23,15 @@ class CustomRegistrationForm(UserCreationForm):
             'password2': 'Confirmation du mot de passe',  # Étiquette personnalisée pour le champ "password2"
         }
 
+    def save(self, commit=True):
+        user = super().save(commit=False)
+        user.save()
+
+        # Créez automatiquement le profil utilisateur associé
+        UserProfile.objects.create(user=user)
+
+        return user
+
     def clean_prenom(self):
         prenom = self.cleaned_data['prenom']
         if not prenom.isalpha():

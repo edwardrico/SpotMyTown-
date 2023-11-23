@@ -41,3 +41,7 @@
             background-color: #007bff;
             transition: height 0.2s;
 }
+
+.hidden {
+    display: none !important;
+  }

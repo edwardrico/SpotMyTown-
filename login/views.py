@@ -4,7 +4,7 @@ from django.contrib.auth.views import PasswordResetView
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from user_profile.models import UserProfile
-
+from .forms import CustomAuthenticationForm
 
 
 def error_login(request):
@@ -12,7 +12,6 @@ def error_login(request):
 
 
 
-# Vue pour la connexion de l'utilisateur
 # Vue pour la connexion de l'utilisateur
 def custom_login(request):
     if request.method == "POST":
